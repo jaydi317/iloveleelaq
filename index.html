@@ -721,6 +721,9 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
+window.openModal = openModal;
+window.closeModal = closeModal;
+
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 
