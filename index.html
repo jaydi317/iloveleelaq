@@ -3,709 +3,711 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I Love LeelaQ — 1,673 Experiments and Counting</title>
+<title>I Love LeelaQ — 1,096 Community Experiments</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+*{margin:0;padding:0;box-sizing:border-box}
 :root{
---cream:#FAF6F0;--white:#fff;--sage:#4A7C59;--sage-light:#E8F0E4;--sage-dark:#3A6347;
---coral:#D4725B;--coral-light:#FAEAE6;--sand:#E8DDD0;--charcoal:#2C2C2C;
---text:#3A3632;--text-light:#7A756E;--text-lighter:#A8A29E;
---radius:16px;--radius-sm:10px;--radius-xs:6px;
---shadow:0 2px 20px rgba(0,0,0,0.06);--shadow-hover:0 8px 40px rgba(0,0,0,0.12);
---font-display:'Fraunces',serif;--font-body:'DM Sans',sans-serif;
+  --bg:#ffffff;--bg-warm:#faf8f5;--bg-off:#f4f2ed;--bg-section:#f9f7f3;
+  --text:#1a1a1a;--text-mid:#555;--text-light:#999;--text-faint:#bbb;
+  --green:#2d6b4f;--green-light:#e8f0eb;--green-dark:#1a4030;--green-dim:rgba(45,107,79,.08);
+  --amber:#c97d28;--amber-light:#fdf5eb;
+  --red:#c0392b;
+  --card-bg:#faf8f5;--card-shadow:0 2px 16px rgba(0,0,0,.05);--card-hover:0 8px 32px rgba(0,0,0,.1);
+  --font-display:'Fraunces',serif;--font-body:'Outfit',sans-serif;--font-mono:'JetBrains Mono',monospace;
+  --max-w:1360px;
 }
 html{scroll-behavior:smooth}
-body{font-family:var(--font-body);background:var(--cream);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.6;overflow-x:hidden}
 
-/* ===== HERO ===== */
-.hero{position:relative;min-height:90vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:60px 24px;overflow:hidden;background:linear-gradient(170deg,#E8F0E4 0%,#FAF6F0 40%,#FAEAE6 100%)}
-.hero::before{content:'';position:absolute;top:-120px;right:-120px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(74,124,89,0.08),transparent 70%)}
-.hero::after{content:'';position:absolute;bottom:-80px;left:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(212,114,91,0.08),transparent 70%)}
-.hero-content{position:relative;z-index:2;max-width:800px}
-.hero-counter{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1.5px solid var(--sage);border-radius:50px;padding:10px 24px;font-size:14px;font-weight:600;color:var(--sage);letter-spacing:0.5px;margin-bottom:32px;box-shadow:var(--shadow)}
-.hero-counter .dot{width:8px;height:8px;background:var(--coral);border-radius:50%;animation:pulse 2s ease infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
-.hero h1{font-family:var(--font-display);font-size:clamp(2.5rem,6vw,4.5rem);font-weight:700;line-height:1.1;color:var(--charcoal);margin-bottom:20px}
-.hero h1 em{font-style:italic;font-weight:400;color:var(--sage)}
-.hero p{font-size:clamp(1rem,2vw,1.25rem);color:var(--text-light);max-width:600px;margin:0 auto 40px;line-height:1.7}
-.hero-cta{display:inline-flex;gap:16px;flex-wrap:wrap;justify-content:center}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:16px 36px;border-radius:50px;font-family:var(--font-body);font-size:16px;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all 0.3s ease}
-.btn-primary{background:var(--sage);color:#fff;box-shadow:0 4px 20px rgba(74,124,89,0.3)}
-.btn-primary:hover{background:var(--sage-dark);transform:translateY(-2px);box-shadow:0 6px 30px rgba(74,124,89,0.4)}
-.btn-secondary{background:var(--white);color:var(--sage);border:2px solid var(--sage)}
-.btn-secondary:hover{background:var(--sage-light);transform:translateY(-2px)}
+/* ============ PROOF NAV BAR ============ */
+.proof-nav{background:#0c0c0e;display:flex;justify-content:space-between;align-items:center;padding:.45rem 1.5rem;font-family:var(--font-mono);font-size:.65rem;letter-spacing:.03em;position:relative;z-index:200;gap:.5rem}
+.proof-nav-links{display:flex;gap:.2rem;align-items:center}
+.proof-nav a{color:rgba(255,255,255,.5);text-decoration:none;padding:.3rem .7rem;border-radius:4px;transition:all .2s;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+.proof-nav a:hover{color:rgba(255,255,255,.85)}
+.proof-nav a.active{color:white;background:rgba(255,255,255,.1)}
+.proof-nav .nav-count{font-size:.55rem;opacity:.5}
+.proof-nav-ctas{display:flex;gap:.4rem;align-items:center}
+.proof-nav .nav-cta{color:rgba(255,255,255,.6);text-decoration:none;padding:.3rem .7rem;border-radius:4px;white-space:nowrap;transition:all .2s;font-size:.6rem}
+.proof-nav .nav-cta:hover{color:white}
+.proof-nav .nav-cta-primary{background:var(--green);color:white;padding:.3rem .9rem;border-radius:99px}
+.proof-nav .nav-cta-primary:hover{background:#37845f}
+.proof-nav .nav-sep{width:1px;height:14px;background:rgba(255,255,255,.12);margin:0 .2rem}
+@media(max-width:768px){
+  .proof-nav{font-size:.55rem;padding:.4rem .8rem}
+  .proof-nav a{padding:.25rem .5rem;gap:3px}
+  .proof-nav .nav-count{display:none}
+  .proof-nav .nav-cta{font-size:.55rem;padding:.25rem .5rem}
+  .proof-nav .nav-cta-primary{padding:.25rem .7rem}
+  .proof-nav .nav-sep{display:none}
+}
 
-/* ===== FILTER BAR ===== */
-.filter-section{position:sticky;top:0;z-index:100;background:rgba(250,246,240,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.06);padding:16px 24px}
-.filter-inner{max-width:1200px;margin:0 auto;display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;justify-content:center;flex-wrap:wrap}
-.filter-inner::-webkit-scrollbar{display:none}
-.filter-pill{padding:10px 22px;border-radius:50px;font-size:14px;font-weight:500;border:1.5px solid var(--sand);background:var(--white);color:var(--text-light);cursor:pointer;transition:all 0.25s ease;white-space:nowrap;font-family:var(--font-body)}
-.filter-pill:hover{border-color:var(--sage);color:var(--sage)}
-.filter-pill.active{background:var(--sage);color:#fff;border-color:var(--sage)}
-.filter-pill[data-cat="Plants"].active{background:#4A7C59}
-.filter-pill[data-cat="Water"].active{background:#4A90A4}
-.filter-pill[data-cat="Pets"].active{background:#C4784A}
-.filter-pill[data-cat="Science"].active{background:#6B5B95}
-.filter-pill[data-cat="Health"].active{background:#D4725B}
-.filter-pill[data-cat="Creative"].active{background:#8B7355}
+/* ============ CROSS-LINKS ============ */
+.cross-links{max-width:700px;margin:0 auto;padding:3rem 2rem 0;text-align:center}
+.cross-link{display:block;padding:.7rem 0;font-size:.9rem;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;border-bottom:1px solid rgba(255,255,255,.06);font-weight:300}
+.cross-link:last-child{border-bottom:none}
+.cross-link:hover{color:white}
+.cross-link span{font-weight:500;color:rgba(255,255,255,.85)}
 
-/* ===== EXPERIMENT GRID ===== */
-.grid-section{max-width:1300px;margin:0 auto;padding:40px 24px 80px}
-.masonry{columns:3;column-gap:24px}
-@media(max-width:900px){.masonry{columns:2}}
+/* ============ DISCLAIMER BAR ============ */
+.disclaimer-bar{background:#1a1a1a;color:rgba(255,255,255,.6);text-align:center;padding:.6rem 1.5rem;font-size:.68rem;font-weight:300;line-height:1.5;letter-spacing:.01em}
+
+/* ============ HERO HEADLINE ============ */
+.hero-headline{min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;background:var(--bg-warm);position:relative}
+.hero-headline-inner{max-width:800px}
+.hero-eyebrow{font-family:var(--font-mono);font-size:.65rem;font-weight:500;letter-spacing:.35em;text-transform:uppercase;color:var(--green);margin-bottom:1.5rem}
+.hero-headline h1{font-family:var(--font-display);font-size:clamp(2.8rem,7vw,5.5rem);font-weight:700;line-height:1.05;color:var(--text);margin-bottom:1.5rem}
+.hero-headline h1 em{font-style:italic;color:var(--green)}
+.hero-tagline{font-size:1.1rem;color:var(--text-mid);font-weight:300;max-width:580px;margin:0 auto;line-height:1.7}
+.hero-scroll-hint{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;color:var(--text-faint);margin-top:2.5rem;animation:bob 2s ease infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* ============ HERO CAROUSEL ============ */
+.hero-carousel{position:relative;background:white;overflow:hidden;min-height:70vh;display:flex;align-items:center;border-bottom:1px solid rgba(0,0,0,.06)}
+.hero-slide{position:absolute;inset:0;display:flex;align-items:center;opacity:0;transition:opacity .8s ease;padding:3rem}
+.hero-slide.active{opacity:1;position:relative}
+.hero-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;width:100%}
+.hero-img-wrap{position:relative;border-radius:16px;overflow:hidden;background:var(--bg-off);aspect-ratio:4/3;box-shadow:0 12px 40px rgba(0,0,0,.1)}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover}
+.hero-img-wrap .placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:.75rem;color:var(--text-light)}
+.hero-badge-row{position:absolute;top:16px;left:16px;display:flex;gap:8px}
+.hero-badge{font-family:var(--font-mono);font-size:.6rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:99px;color:white}
+.hero-badge.ba{background:var(--amber)}
+.hero-badge.sci{background:var(--green)}
+.hero-content h2{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3rem);font-weight:600;line-height:1.15;color:var(--text);margin-bottom:1rem}
+.hero-content .caption{font-size:1rem;color:var(--text-mid);font-weight:300;line-height:1.6;margin-bottom:1.5rem}
+.hero-content .brass-quote{font-family:var(--font-display);font-size:1.1rem;font-weight:600;font-style:italic;color:var(--green);padding-left:1rem;border-left:3px solid var(--green)}
+.hero-dots{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:10}
+.hero-dot{width:10px;height:10px;border-radius:50%;background:rgba(0,0,0,.15);cursor:pointer;transition:all .3s}
+.hero-dot.active{background:var(--green);width:28px;border-radius:5px}
+.hero-counter{position:absolute;top:2rem;right:3rem;font-family:var(--font-mono);font-size:.7rem;color:var(--text-light);letter-spacing:.1em}
+
+/* ============ STAT BAR ============ */
+.stat-bar{display:flex;justify-content:center;gap:3rem;padding:2.5rem 2rem;border-bottom:1px solid rgba(0,0,0,.06);flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-family:var(--font-display);font-size:2.2rem;font-weight:700;color:var(--text)}
+.stat-label{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-light);margin-top:.15rem}
+
+/* ============ BRASS BALLS ============ */
+.brass{text-align:center;padding:3.5rem 2rem;font-family:var(--font-display);font-size:clamp(1.2rem,2.5vw,1.7rem);font-weight:600;font-style:italic;color:var(--green)}
+.brass-dark{background:var(--green-dark);color:white;padding:4rem 2rem}
+
+/* ============ SECTION HEADERS ============ */
+.section{max-width:var(--max-w);margin:0 auto;padding:4rem 2rem 2rem}
+.section-eyebrow{font-family:var(--font-mono);font-size:.65rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--green);margin-bottom:.6rem}
+.section-title{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:var(--text);line-height:1.15}
+.section-sub{font-size:1rem;color:var(--text-mid);font-weight:300;margin-top:.7rem;max-width:600px}
+
+/* ============ SCIENCE GRID ============ */
+.science-wrap{max-width:var(--max-w);margin:0 auto;padding:0 2rem 3rem}
+.science-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem}
+.sci-card{background:#f5f7f6;border-radius:12px;overflow:hidden;cursor:pointer;transition:all .3s;box-shadow:var(--card-shadow);border:1px solid rgba(45,107,79,.1);border-left:3px solid var(--green)}
+.sci-card:hover{transform:translateY(-3px);box-shadow:var(--card-hover)}
+.sci-card-img{width:100%;height:180px;background:var(--bg-off);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.sci-card-img img{width:100%;height:100%;object-fit:cover}
+.sci-card-img .placeholder{font-family:var(--font-mono);font-size:.65rem;color:var(--text-light)}
+.sci-card-overlay{position:absolute;bottom:0;left:0;right:0;padding:8px 12px;background:linear-gradient(transparent,rgba(0,0,0,.45));display:flex;gap:5px}
+.sci-pill{font-family:var(--font-mono);font-size:.5rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:99px;color:white;background:var(--green)}
+.sci-pill.ba{background:var(--amber)}
+.sci-card-body{padding:1rem 1.1rem 1.2rem}
+.sci-card-name{font-weight:500;font-size:.8rem;color:var(--text);margin-bottom:.3rem}
+.sci-card-summary{font-size:.8rem;color:var(--text-mid);font-weight:300;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.sci-card-link{font-size:.7rem;color:var(--green);font-weight:500;margin-top:.5rem;display:inline-flex;align-items:center;gap:4px}
+
+/* ============ FILTERS ============ */
+.filters{padding:1rem 2rem;display:flex;gap:.45rem;flex-wrap:wrap;justify-content:center;position:sticky;top:0;z-index:100;background:rgba(255,255,255,.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,0,0,.05)}
+.filter-btn{font-family:var(--font-body);font-size:.78rem;font-weight:400;padding:.4rem 1rem;border:none;background:transparent;color:var(--text-light);border-radius:99px;cursor:pointer;transition:all .2s}
+.filter-btn:hover{color:var(--text);background:var(--bg-off)}
+.filter-btn.active{background:var(--green);color:white;font-weight:500}
+
+/* ============ MASONRY GALLERY ============ */
+.masonry-wrap{max-width:var(--max-w);margin:0 auto;padding:2rem}
+.gallery-status{font-family:var(--font-mono);font-size:.7rem;color:var(--text-light);letter-spacing:.08em;margin-bottom:1rem;padding-left:.3rem}
+.masonry{columns:3;column-gap:1.3rem}
+@media(max-width:960px){.masonry{columns:2}}
 @media(max-width:560px){.masonry{columns:1}}
+.load-more-wrap{text-align:center;padding:2rem 0 1rem}
+.load-more-btn{font-family:var(--font-body);font-size:.88rem;font-weight:600;padding:.8rem 2.5rem;background:white;color:var(--green);border:2px solid var(--green);border-radius:99px;cursor:pointer;transition:all .3s}
+.load-more-btn:hover{background:var(--green);color:white;transform:translateY(-1px)}
 
-/* ===== EXPERIMENT CARDS ===== */
-.card{break-inside:avoid;margin-bottom:24px;background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:all 0.35s ease;opacity:0;transform:translateY(30px);animation:fadeUp 0.6s ease forwards}
-.card:hover{box-shadow:var(--shadow-hover);transform:translateY(-4px)}
-.card.hidden{display:none}
-.card-img-wrap{position:relative;overflow:hidden;cursor:pointer}
-.card-img-wrap img{width:100%;display:block;transition:transform 0.5s ease}
-.card:hover .card-img-wrap img{transform:scale(1.03)}
-.card-gallery-badge{position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,0.65);color:#fff;font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px;backdrop-filter:blur(4px)}
-.card-body{padding:20px}
-.card-category{display:inline-block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.2px;padding:4px 12px;border-radius:20px;margin-bottom:12px}
-.cat-Plants{background:#E8F0E4;color:#4A7C59}
-.cat-Water{background:#E4F0F4;color:#4A90A4}
-.cat-Pets{background:#F4EDE4;color:#C4784A}
-.cat-Science{background:#EDEBF4;color:#6B5B95}
-.cat-Health{background:#FAEAE6;color:#D4725B}
-.cat-Creative{background:#F0EBE4;color:#8B7355}
-.card-result{font-family:var(--font-display);font-size:18px;font-weight:500;line-height:1.35;margin-bottom:10px;color:var(--charcoal)}
-.card-story{font-size:14px;color:var(--text-light);line-height:1.65;margin-bottom:14px}
-.card-meta{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid rgba(0,0,0,0.05)}
-.card-name{font-size:13px;font-weight:600;color:var(--text)}
-.card-product{font-size:12px;color:var(--text-lighter);font-style:italic}
+/* ============ GALLERY CARD ============ */
+.card{break-inside:avoid;margin-bottom:1.3rem;background:var(--card-bg);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .3s;box-shadow:var(--card-shadow);border:1px solid rgba(0,0,0,.03)}
+.card:hover{transform:translateY(-3px);box-shadow:var(--card-hover)}
+.card-img{width:100%;background:var(--bg-off);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.card-img.h-sm{min-height:180px}
+.card-img.h-md{min-height:240px}
+.card-img.h-lg{min-height:300px}
+.card-img img{width:100%;height:100%;object-fit:cover}
+.card-img .placeholder{font-family:var(--font-mono);font-size:.7rem;color:var(--text-light);padding:3rem}
+.card-pills{position:absolute;bottom:10px;left:10px;display:flex;gap:5px}
+.pill{font-family:var(--font-mono);font-size:.5rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:99px;color:white}
+.pill-cat{background:rgba(0,0,0,.35);backdrop-filter:blur(6px)}
+.pill-ba{background:var(--amber)}
+.pill-sci{background:var(--green)}
+.card-body{padding:1.1rem 1.2rem 1.3rem}
+.card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem}
+.card-name{font-weight:500;font-size:.82rem;color:var(--text)}
+.card-score{font-family:var(--font-mono);font-size:.6rem;color:var(--text-faint)}
+.card-summary{font-size:.85rem;color:var(--text-mid);font-weight:300;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card-read{font-size:.75rem;color:var(--green);font-weight:500;margin-top:.6rem;display:flex;align-items:center;gap:4px}
+.founder-tag{display:inline-flex;align-items:center;gap:4px;font-family:var(--font-mono);font-size:.55rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:4px;background:var(--green-light);color:var(--green);border:1px solid rgba(45,107,79,.15);margin-bottom:.4rem}
+.founder-tag::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:var(--green)}
 
-@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
-.card:nth-child(1){animation-delay:0.05s}.card:nth-child(2){animation-delay:0.1s}.card:nth-child(3){animation-delay:0.15s}
-.card:nth-child(4){animation-delay:0.2s}.card:nth-child(5){animation-delay:0.25s}.card:nth-child(6){animation-delay:0.3s}
+/* ============ SCROLL DEPTH REMINDER ============ */
+.depth-reminder{break-inside:avoid;margin-bottom:1.3rem;background:var(--green-dim);border-radius:14px;padding:2rem;text-align:center}
+.depth-reminder p{font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--green);margin-bottom:.8rem}
+.depth-bar{width:100%;height:4px;background:rgba(45,107,79,.12);border-radius:2px;overflow:hidden}
+.depth-fill{height:100%;background:var(--green);border-radius:2px;transition:width .5s}
 
-/* ===== BRASS BALLS STATEMENTS ===== */
-.brass{break-inside:avoid;margin-bottom:24px;padding:48px 32px;text-align:center;border-radius:var(--radius);background:linear-gradient(135deg,var(--sage-light) 0%,#f0ebe4 100%);position:relative;overflow:hidden}
-.brass::before{content:'❝';position:absolute;top:-10px;left:20px;font-size:100px;color:rgba(74,124,89,0.08);font-family:var(--font-display)}
-.brass p{font-family:var(--font-display);font-style:italic;font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:400;color:var(--sage-dark);line-height:1.4;max-width:500px;margin:0 auto;position:relative;z-index:1}
+/* ============ MODAL ============ */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(6px);z-index:1000;display:none;align-items:center;justify-content:center;padding:1.5rem}
+.overlay.open{display:flex}
+.modal{background:white;border-radius:20px;max-width:720px;width:100%;max-height:88vh;overflow-y:auto;position:relative}
+.modal-close{position:sticky;top:0;text-align:right;padding:.8rem 1rem 0;z-index:2;background:linear-gradient(white 70%,transparent)}
+.modal-close button{background:var(--bg-off);border:none;color:var(--text-mid);font-size:.8rem;padding:.4rem 1rem;border-radius:99px;cursor:pointer;font-family:var(--font-body)}
+.modal-close button:hover{background:var(--green-light);color:var(--green)}
+.modal-img{width:100%;max-height:420px;object-fit:contain;background:var(--bg-off);display:block}
+.modal-body{padding:1.5rem 2rem 2.5rem}
+.modal-pill{display:inline-block;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:99px;background:var(--green-light);color:var(--green);margin-bottom:.6rem}
+.modal-name{font-family:var(--font-display);font-size:1.4rem;font-weight:600;color:var(--text);margin-bottom:.2rem}
+.modal-stamp{font-size:.75rem;color:var(--text-light);font-style:italic;margin-bottom:1rem}
+.modal-divider{height:1px;background:var(--bg-off);margin-bottom:1.2rem}
+.modal-label{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-light);margin-bottom:.6rem}
+.modal-raw{font-size:.9rem;color:var(--text);line-height:1.8;white-space:pre-wrap;word-break:break-word;font-weight:300}
+.modal-products{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--bg-off)}
+.modal-products span{font-size:.7rem;padding:4px 10px;background:var(--bg-off);border-radius:99px;color:var(--text-mid)}
 
-/* ===== SUBMIT SECTION ===== */
-.submit-section{background:linear-gradient(170deg,#E8F0E4,#FAF6F0);padding:80px 24px;text-align:center}
-.submit-inner{max-width:600px;margin:0 auto}
-.submit-section h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--charcoal);margin-bottom:16px}
-.submit-section p{color:var(--text-light);font-size:1.1rem;margin-bottom:40px}
-.form-group{margin-bottom:20px;text-align:left}
-.form-group label{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;letter-spacing:0.5px}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:14px 18px;border:1.5px solid var(--sand);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:15px;background:var(--white);transition:border-color 0.3s;color:var(--text)}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--sage)}
-.form-group textarea{height:120px;resize:vertical}
+/* ============ TRY IT YOURSELF ============ */
+.try-section{background:var(--bg-section);padding:4rem 0}
+.try-grid{max-width:var(--max-w);margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+.try-card{background:white;border-radius:16px;padding:2rem;box-shadow:var(--card-shadow)}
+.try-num{font-family:var(--font-display);font-size:3rem;font-weight:700;color:var(--green-light);line-height:1;margin-bottom:.5rem}
+.try-title{font-family:var(--font-display);font-size:1.3rem;font-weight:600;color:var(--text);margin-bottom:.6rem}
+.try-desc{font-size:.88rem;color:var(--text-mid);font-weight:300;margin-bottom:1rem;line-height:1.6}
+.try-steps{list-style:none;counter-reset:step}
+.try-steps li{counter-increment:step;font-size:.85rem;color:var(--text);padding:.5rem 0;border-bottom:1px solid var(--bg-off);display:flex;gap:.7rem;font-weight:300}
+.try-steps li::before{content:counter(step);font-family:var(--font-mono);font-size:.65rem;font-weight:500;width:22px;height:22px;background:var(--green-light);color:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.try-note{font-size:.75rem;color:var(--green);font-weight:500;margin-top:1rem;font-style:italic}
 
-/* ===== CTA SECTION ===== */
-.cta-section{padding:80px 24px;text-align:center;background:var(--sage);color:#fff;position:relative;overflow:hidden}
-.cta-section::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,0.05)}
-.cta-section h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:700;margin-bottom:16px;position:relative}
-.cta-section p{font-size:1.1rem;opacity:0.85;margin-bottom:36px;max-width:500px;margin-left:auto;margin-right:auto;position:relative}
-.btn-white{background:#fff;color:var(--sage);font-weight:700;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
-.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.2)}
+/* ============ SUBMIT FORM ============ */
+.submit-section{max-width:680px;margin:0 auto;padding:4rem 2rem}
+.submit-form{background:var(--card-bg);border-radius:16px;padding:2.5rem;box-shadow:var(--card-shadow)}
+.form-group{margin-bottom:1.3rem}
+.form-label{font-size:.8rem;font-weight:500;color:var(--text);margin-bottom:.4rem;display:block}
+.form-input,.form-select,.form-textarea{width:100%;padding:.7rem 1rem;border:1px solid rgba(0,0,0,.1);border-radius:10px;font-family:var(--font-body);font-size:.88rem;background:white;color:var(--text);outline:none;transition:border .2s}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--green)}
+.form-textarea{min-height:120px;resize:vertical}
+.form-radio-group{display:flex;gap:1rem;margin-top:.3rem}
+.form-radio{display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:var(--text-mid);cursor:pointer}
+.form-radio input{accent-color:var(--green)}
+.form-upload{border:2px dashed rgba(0,0,0,.1);border-radius:10px;padding:2rem;text-align:center;color:var(--text-light);font-size:.85rem;cursor:pointer;transition:all .2s}
+.form-upload:hover{border-color:var(--green);color:var(--green);background:var(--green-dim)}
+.form-note{font-size:.75rem;color:var(--text-light);font-style:italic;margin-top:1.5rem}
+.form-btn{display:block;width:100%;padding:.85rem;background:var(--green);color:white;border:none;border-radius:10px;font-family:var(--font-body);font-size:.9rem;font-weight:600;cursor:pointer;margin-top:1.5rem;transition:all .3s}
+.form-btn:hover{background:var(--green-dark);transform:translateY(-1px)}
 
-/* ===== LIGHTBOX ===== */
-.lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999;align-items:center;justify-content:center;padding:20px}
-.lightbox.active{display:flex}
-.lightbox img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:8px}
-.lightbox-close{position:absolute;top:20px;right:24px;color:#fff;font-size:32px;cursor:pointer;width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.1);transition:background 0.3s}
-.lightbox-close:hover{background:rgba(255,255,255,0.2)}
-.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:28px;cursor:pointer;width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.1);transition:background 0.3s;border:none;font-family:var(--font-body)}
-.lightbox-nav:hover{background:rgba(255,255,255,0.2)}
-.lightbox-prev{left:20px}
-.lightbox-next{right:20px}
-.lightbox-counter{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.7);font-size:14px}
+/* ============ CTA ============ */
+.cta{text-align:center;padding:5rem 2rem;background:var(--green-dark);color:white}
+.cta h2{font-family:var(--font-display);font-size:clamp(1.5rem,3.5vw,2.5rem);font-weight:700;margin-bottom:.5rem}
+.cta p{font-weight:300;opacity:.8;margin-bottom:2rem;font-size:1rem}
+.cta-btn{display:inline-block;font-family:var(--font-body);font-weight:600;font-size:.9rem;padding:.9rem 2.5rem;background:white;color:var(--green-dark);border-radius:99px;text-decoration:none;transition:all .3s}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.2)}
 
-/* ===== FOOTER ===== */
-footer{padding:40px 24px;text-align:center;background:var(--cream);border-top:1px solid var(--sand)}
-footer p{font-size:13px;color:var(--text-lighter)}
+.footer{text-align:center;padding:2rem;font-size:.7rem;color:var(--text-light)}
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:700px){
-.hero{min-height:80vh;padding:40px 20px}
-.brass{padding:36px 24px}
-.card-body{padding:16px}
-.card-result{font-size:16px}
+@media(max-width:768px){
+  .hero-inner{grid-template-columns:1fr;gap:2rem;padding:0}
+  .hero-content{order:-1;text-align:center}
+  .hero-slide{padding:2rem 1.5rem}
+  .stat-bar{gap:1.5rem}
+  .try-grid{grid-template-columns:1fr}
+  .filters{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:1rem 1rem}
+  .filters::-webkit-scrollbar{display:none}
+  .filter-btn{white-space:nowrap;flex-shrink:0}
 }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
-<section class="hero">
-<div class="hero-content">
-<div class="hero-counter"><span class="dot"></span> 1,673 experiments and counting</div>
-<h1>Real People.<br><em>Real Experiments.</em><br>Real Results.</h1>
-<p>No scripts. No paid testimonials. Just a global community of curious humans running their own experiments with quantum energy — and sharing what happened.</p>
-<div class="hero-cta">
-<a href="#experiments" class="btn btn-primary">See the Experiments ↓</a>
-<a href="#submit" class="btn btn-secondary">Submit Yours</a>
-</div>
-</div>
-</section>
-
-<!-- FILTER BAR -->
-<nav class="filter-section" id="experiments">
-<div class="filter-inner">
-<button class="filter-pill active" data-cat="All" onclick="filterCards('All')">All Experiments</button>
-<button class="filter-pill" data-cat="Plants" onclick="filterCards('Plants')">🌱 Plants</button>
-<button class="filter-pill" data-cat="Water" onclick="filterCards('Water')">💧 Water</button>
-<button class="filter-pill" data-cat="Pets" onclick="filterCards('Pets')">🐾 Pets</button>
-<button class="filter-pill" data-cat="Science" onclick="filterCards('Science')">🔬 Science</button>
-<button class="filter-pill" data-cat="Health" onclick="filterCards('Health')">❤️ Health</button>
-<button class="filter-pill" data-cat="Creative" onclick="filterCards('Creative')">✨ Creative Uses</button>
-</div>
+<!-- ======== PROOF NAV BAR ======== -->
+<nav class="proof-nav">
+  <div class="proof-nav-links">
+    <a href="https://wedidthescience.com">📊 The Science <span class="nav-count">· 59 studies</span></a>
+    <a href="https://iloveleelaq.com" class="active">📸 The Experiments</a>
+    <a href="https://thankyouleelaq.com">💬 The Testimonials <span class="nav-count">· 19,023</span></a>
+  </div>
+  <div class="proof-nav-ctas">
+    <a href="https://quantumupgrade.io" class="nav-cta nav-cta-primary">Try Quantum Upgrade Free →</a>
+    <span class="nav-sep"></span>
+    <a href="https://leelaq.com" class="nav-cta">Shop Products →</a>
+  </div>
 </nav>
 
-<!-- GRID -->
-<section class="grid-section">
-<div class="masonry" id="grid">
+<!-- ======== DISCLAIMER ======== -->
+<div class="disclaimer-bar">These are individual experiences shared by community members. Results vary. Leela Quantum Tech products are not intended to diagnose, treat, cure, or prevent any disease.</div>
 
-<!-- EXP 1 — Plants -->
-<div class="card" data-category="Plants">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_134_02-04-2021_13-42-23.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_134_02-04-2021_13-42-23.jpg" alt="Charged seeds experiment" loading="lazy">
-</div>
-<div class="card-body">
-<span class="card-category cat-Plants">Plants</span>
-<div class="card-result">Charged seeds grew dramatically faster than uncharged seeds</div>
-<p class="card-story">Used charged water with the plant card for nutrient tea and foliar spray. Brother charged seeds separately — all charged seeds vastly outperformed controls. Results were off the charts compared to previous year.</p>
-<div class="card-meta"><span class="card-name">Community Member</span><span class="card-product">Quantum Bloc + Plant Card</span></div>
-</div>
-</div>
-
-<!-- EXP 2 — Plants -->
-<div class="card" data-category="Plants">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2377_22-01-2026_15-41-04.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2378_22-01-2026_15-41-04.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2379_22-01-2026_15-41-04.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2377_22-01-2026_15-41-04.jpg" alt="Bonsai sprouting new leaves" loading="lazy">
-<span class="card-gallery-badge">1 / 3</span>
-</div>
-<div class="card-body">
-<span class="card-category cat-Plants">Plants</span>
-<div class="card-result">Bonsai trees sprouted new leaves in 24 hours</div>
-<p class="card-story">Three struggling plants were placed in the Super Bloc for only 30–45 seconds each. In less than 24 hours both bonsais sprouted all new leaves. 48 hours later the leaves were already huge.</p>
-<div class="card-meta"><span class="card-name">David P</span><span class="card-product">Super Bloc</span></div>
-</div>
-</div>
-
-<!-- BRASS 1 -->
-<div class="brass"><p>Plants can't be placebo'd.</p></div>
-
-<!-- EXP 3 — Plants -->
-<div class="card" data-category="Plants">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_227_20-07-2021_21-41-41.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_228_20-07-2021_21-41-41.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_229_20-07-2021_21-41-41.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_230_20-07-2021_21-42-03.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_231_20-07-2021_21-42-03.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_227_20-07-2021_21-41-41.jpg" alt="First-ever apricots and plums" loading="lazy">
-<span class="card-gallery-badge">1 / 5</span>
-</div>
-<div class="card-body">
-<span class="card-category cat-Plants">Plants</span>
-<div class="card-result">Garden produced apricots and plums for the FIRST TIME EVER</div>
-<p class="card-story">Never had plums or apricots despite having these fruit trees for years. After 10 months supported by the Infinity Bloc, this summer produced apricots (lots of them) and plums for the first time.</p>
-<div class="card-meta"><span class="card-name">Philipp (Founder)</span><span class="card-product">Infinity Bloc</span></div>
-</div>
-</div>
-
-<!-- EXP 11 — Water -->
-<div class="card" data-category="Water">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1157_02-01-2023_11-06-59.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1158_02-01-2023_11-06-59.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1159_02-01-2023_11-06-59.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1157_02-01-2023_11-06-59.jpg" alt="Charged water bubbles" loading="lazy">
-<span class="card-gallery-badge">1 / 3</span>
-</div>
-<div class="card-body">
-<span class="card-category cat-Water">Water</span>
-<div class="card-result">Charged water formed visible bubbles — uncharged had zero</div>
-<p class="card-story">Poured identical filtered water into same glasses. Left capsule by one for 20 minutes, other glass 10 feet away. Charged water developed tiny bubbles. Uncharged had zero. Visible difference before even tasting.</p>
-<div class="card-meta"><span class="card-name">Brent</span><span class="card-product">HEAL Capsule</span></div>
-</div>
-</div>
-
-<!-- EXP 4 — Plants -->
-<div class="card" data-category="Plants">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1409_13-07-2023_15-12-54.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1410_13-07-2023_15-15-03.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1409_13-07-2023_15-12-54.jpg" alt="Near-dead plant revival" loading="lazy">
-<span class="card-gallery-badge">1 / 2</span>
-</div>
-<div class="card-body">
-<span class="card-category cat-Plants">Plants</span>
-<div class="card-result">Near-dead plant came back to life and grew massive</div>
-<p class="card-story">A plant that had almost completely died with not a single green leaf left was revived with quantum energy. It grew so large they joked about needing to add an additional story to the house.</p>
-<div class="card-meta"><span class="card-name">Philipp (Founder)</span><span class="card-product">Quantum Energy</span></div>
-</div>
-</div>
-
-<!-- EXP 15 — Pets -->
-<div class="card" data-category="Pets">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_361_06-12-2021_04-12-50.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_361_06-12-2021_04-12-50.jpg" alt="Cat Pixie with collar" loading="lazy">
-</div>
-<div class="card-body">
-<span class="card-category cat-Pets">Pets</span>
-<div class="card-result">14-year-old cat became more energetic, affectionate, and fluffy</div>
-<p class="card-story">Cat Pixie is 14 and wasn't very active due to age. Since getting the cat collar and charged water, she plays with toys regularly, is more affectionate, looks fluffier, and has a beautiful shine to her coat.</p>
-<div class="card-meta"><span class="card-name">Andy</span><span class="card-product">Cat Collar + Charged Water</span></div>
-</div>
-</div>
-
-<!-- EXP 5 — Plants -->
-<div class="card" data-category="Plants">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_154_07-05-2021_23-27-36.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_155_07-05-2021_23-27-36.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_156_07-05-2021_23-27-36.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_154_07-05-2021_23-27-36.jpg" alt="13-year-old science project" loading="lazy">
-<span class="card-gallery-badge">1 / 3</span>
-</div>
-<div class="card-body">
-<span class="card-category cat-Plants">Plants</span>
-<div class="card-result">13-year-old's science project — charged seeds germinated faster</div>
-<p class="card-story">A parent and their 13-year-old daughter experimented to see if quantum energy in the titanium spheres would impact flower seed germination. It did.</p>
-<div class="card-meta"><span class="card-name">Community Member</span><span class="card-product">HEAL Capsule</span></div>
-</div>
-</div>
-
-<!-- BRASS 2 -->
-<div class="brass"><p>Dogs don't read marketing materials.</p></div>
-
-<!-- EXP 19 — Science -->
-<div class="card" data-category="Science">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_431_17-01-2022_19-02-04.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_432_17-01-2022_19-02-15.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_433_17-01-2022_19-04-55.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_433_17-01-2022_19-04-55.jpg" alt="Blood microscopy study" loading="lazy">
-<span class="card-gallery-badge">1 / 3</span>
-</div>
-<div class="card-body">
-<span class="card-category cat-Science">Science</span>
-<div class="card-result">Blood microscopy confirmed — WiFi radiation effects reversed</div>
-<p class="card-story">Dr. Beverly Rubik completed a randomized, sham-controlled study confirming that the Quantum Bloc reverses the effects of WiFi radiation on blood cells. Dark field microscopy images show clear before/after improvement.</p>
-<div class="card-meta"><span class="card-name">Philipp (Founder) sharing Dr. Rubik's results</span><span class="card-product">Quantum Bloc</span></div>
-</div>
-</div>
-
-<!-- EXP 12 — Water -->
-<div class="card" data-category="Water">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2407_22-02-2026_13-07-44.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2407_22-02-2026_13-07-44.jpg" alt="Water crystals from Emoto Institute" loading="lazy">
-</div>
-<div class="card-body">
-<span class="card-category cat-Water">Water</span>
-<div class="card-result">Beautiful coherent water crystals formed in 10 minutes</div>
-<p class="card-story">Distilled water after 10 minutes in a LeelaQ water bottle, photographed by the Masaru Emoto Institute. Crystal structure was perfectly coherent and symmetrical.</p>
-<div class="card-meta"><span class="card-name">K. Elmer (sharing Emoto Institute results)</span><span class="card-product">LeelaQ Water Bottle</span></div>
-</div>
-</div>
-
-<!-- EXP 6 — Plants -->
-<div class="card" data-category="Plants">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1322_29-04-2023_11-33-04.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1323_29-04-2023_11-33-09.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1322_29-04-2023_11-33-04.jpg" alt="Dead flowers revived" loading="lazy">
-<span class="card-gallery-badge">1 / 2</span>
-</div>
-<div class="card-body">
-<span class="card-category cat-Plants">Plants</span>
-<div class="card-result">Dead flowers came back to life overnight</div>
-<p class="card-story">"I had a couple of flowers that were just about dead. I put a healing bead in there yesterday. I'm not making up these results. I have no affiliation with LeelaQ."</p>
-<div class="card-meta"><span class="card-name">Ian</span><span class="card-product">HEAL Capsule</span></div>
-</div>
-</div>
-
-<!-- EXP 17 — Pets -->
-<div class="card" data-category="Pets">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_224_17-07-2021_23-57-07.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_224_17-07-2021_23-57-07.jpg" alt="Dogs and toad" loading="lazy">
-</div>
-<div class="card-body">
-<span class="card-category cat-Pets">Pets</span>
-<div class="card-result">Dogs recovered quickly from toad poisoning</div>
-<p class="card-story">Dogs found a toad causing profuse foaming and drooling. Used quantum energy to support recovery. Dogs bounced back quickly.</p>
-<div class="card-meta"><span class="card-name">Deanna F</span><span class="card-product">Quantum Bloc</span></div>
-</div>
-</div>
-
-<!-- BRASS 3 -->
-<div class="brass"><p>Water doesn't have beliefs.</p></div>
-
-<!-- EXP 7 — Plants -->
-<div class="card" data-category="Plants">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1848_10-09-2024_04-34-43.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1848_10-09-2024_04-34-43.jpg" alt="Broccoli sprouts" loading="lazy">
-</div>
-<div class="card-body">
-<span class="card-category cat-Plants">Plants</span>
-<div class="card-result">Broccoli sprouts completed in 4 days with charged water</div>
-<p class="card-story">Sprouts grew 2–3 inches in 4–4.5 days with charged water. Did a 50/50 test — charged vs uncharged — after 1 day there was a vast difference.</p>
-<div class="card-meta"><span class="card-name">Mason Smith</span><span class="card-product">Quantum Bloc</span></div>
-</div>
-</div>
-
-<!-- EXP 8 — Plants -->
-<div class="card" data-category="Plants">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_597_23-03-2022_17-02-27.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_597_23-03-2022_17-02-27.jpg" alt="Plants charging under pots" loading="lazy">
-</div>
-<div class="card-body">
-<span class="card-category cat-Plants">Plants</span>
-<div class="card-result">All house plants thriving after charging metal under pots</div>
-<p class="card-story">Used old cat food containers, charged them with heal-for-plant frequency, and put them under all plant pots. All plants became amazingly healthy and blooming.</p>
-<div class="card-meta"><span class="card-name">Ziva Jelnikar</span><span class="card-product">Quantum Bloc + Plant Frequency</span></div>
-</div>
-</div>
-
-<!-- EXP 22 — Health -->
-<div class="card" data-category="Health">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1733_08-06-2024_10-47-33.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1733_08-06-2024_10-47-33.jpg" alt="Health recovery" loading="lazy">
-</div>
-<div class="card-body">
-<span class="card-category cat-Health">Health</span>
-<div class="card-result">Husband gained 15 lbs and recovered from mold/Lyme/Bartonella</div>
-<p class="card-story">Husband gained 15 pounds, regained energy, can digest food, enjoy wider variety of foods, has clear mind, and returned to his happy peaceful personality after suffering from toxic mold illness, Lyme disease, and Bartonella infection.</p>
-<div class="card-meta"><span class="card-name">Amy</span><span class="card-product">LeelaQ Products</span></div>
-</div>
-</div>
-
-<!-- EXP 9 — Plants -->
-<div class="card" data-category="Plants">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_598_23-03-2022_17-28-23.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_599_23-03-2022_17-28-40.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_600_23-03-2022_17-29-03.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_598_23-03-2022_17-28-23.jpg" alt="Plant revival before and after" loading="lazy">
-<span class="card-gallery-badge">1 / 3</span>
-</div>
-<div class="card-body">
-<span class="card-category cat-Plants">Plants</span>
-<div class="card-result">Dying outdoor plants revived — before and after photos</div>
-<p class="card-story">Plants outside didn't hold up after wind and cold weather. Documented the before state, applied quantum energy, and was able to repeat the revival and photograph the results.</p>
-<div class="card-meta"><span class="card-name">C</span><span class="card-product">Quantum Energy</span></div>
-</div>
-</div>
-
-<!-- BRASS 4 -->
-<div class="brass"><p>1,673 experiments. Zero paid actors.</p></div>
-
-<!-- EXP 13 — Water -->
-<div class="card" data-category="Water">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1127_08-12-2022_12-58-33.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1127_08-12-2022_12-58-33.jpg" alt="Flower water test" loading="lazy">
-</div>
-<div class="card-body">
-<span class="card-category cat-Water">Water</span>
-<div class="card-result">Different waters tested in flowers — charged water won</div>
-<p class="card-story">Tested multiple water types in flowers. Best performing was filtered well water. Could feel the energy even while holding the water bottle.</p>
-<div class="card-meta"><span class="card-name">Community Member</span><span class="card-product">LeelaQ Water Bottle</span></div>
-</div>
-</div>
-
-<!-- EXP 16 — Pets -->
-<div class="card" data-category="Pets">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1974_15-01-2025_12-25-08.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1974_15-01-2025_12-25-08.jpg" alt="Dog cancer recovery" loading="lazy">
-</div>
-<div class="card-body">
-<span class="card-category cat-Pets">Pets</span>
-<div class="card-result">Dog recovering from cancer surgery — vet says no visible metastases</div>
-<p class="card-story">Dog had a Sertoli cell tumor requiring surgery. With quantum support during recovery, the vet confirmed bloodwork suggests no visible metastases. Dog recovering well.</p>
-<div class="card-meta"><span class="card-name">Isabelle Gloria</span><span class="card-product">Quantum Upgrade</span></div>
-</div>
-</div>
-
-<!-- EXP 26 — Creative -->
-<div class="card" data-category="Creative">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_44_23-01-2021_18-06-31.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_44_23-01-2021_18-06-31.jpg" alt="DIY power capsule" loading="lazy">
-</div>
-<div class="card-body">
-<span class="card-category cat-Creative">Creative Uses</span>
-<div class="card-result">Built a custom DIY "power capsule" with stacked frequencies</div>
-<p class="card-story">Made his own power capsule using a cube, stacking Leela frequency card, prosperity card, HEAL frequency set, and other healing frequencies together.</p>
-<div class="card-meta"><span class="card-name">Trevor Raymond</span><span class="card-product">Quantum Bloc + Multiple Frequencies</span></div>
-</div>
-</div>
-
-<!-- EXP 10 — Plants -->
-<div class="card" data-category="Plants">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1772_24-06-2024_15-23-18.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1772_24-06-2024_15-23-18.jpg" alt="Mosquito frequency notes" loading="lazy">
-</div>
-<div class="card-body">
-<span class="card-category cat-Plants">Plants</span>
-<div class="card-result">No mosquitoes on patio after frequency test</div>
-<p class="card-story">"The test was conclusive: no mosquitoes on the patio!" Inspired by K. Elmer's Quantum Garden video. Waiting for more sunny days to continue testing.</p>
-<div class="card-meta"><span class="card-name">Syl_Cha</span><span class="card-product">Frequency Card</span></div>
-</div>
-</div>
-
-<!-- BRASS 5 -->
-<div class="brass"><p>Cells don't have opinions. They just heal — or they don't.</p></div>
-
-<!-- EXP 20 — Science -->
-<div class="card" data-category="Science">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1238_05-03-2023_21-00-44.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1239_05-03-2023_21-00-50.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1240_05-03-2023_21-01-35.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1238_05-03-2023_21-00-44.jpg" alt="7-day dry fast blood measurements" loading="lazy">
-<span class="card-gallery-badge">1 / 3</span>
-</div>
-<div class="card-body">
-<span class="card-category cat-Science">Science</span>
-<div class="card-result">7-day dry fast with daily blood measurements</div>
-<p class="card-story">Started a structured 7-day dry fast while measuring blood daily to track how Leela products affect blood markers. Documented results throughout with photos.</p>
-<div class="card-meta"><span class="card-name">Ascension</span><span class="card-product">LeelaQ Products</span></div>
-</div>
-</div>
-
-<!-- EXP 14 — Water -->
-<div class="card" data-category="Water">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2405_15-02-2026_13-27-38.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2406_15-02-2026_13-27-38.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2405_15-02-2026_13-27-38.jpg" alt="Multi-pitcher water charging" loading="lazy">
-<span class="card-gallery-badge">1 / 2</span>
-</div>
-<div class="card-body">
-<span class="card-category cat-Water">Water</span>
-<div class="card-result">Multi-pitcher water charging setup — daily routine for 2–3 years</div>
-<p class="card-story">Has had Infinity Bloc separated on the mantel for 2–3 years. Charges multiple pitchers of water simultaneously as part of daily routine.</p>
-<div class="card-meta"><span class="card-name">Kent Voigtschild</span><span class="card-product">Infinity Bloc</span></div>
-</div>
-</div>
-
-<!-- EXP 18 — Pets -->
-<div class="card" data-category="Pets">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_875_14-07-2022_18-57-04.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_875_14-07-2022_18-57-04.jpg" alt="Dog water bowl with frequency" loading="lazy">
-</div>
-<div class="card-body">
-<span class="card-category cat-Pets">Pets</span>
-<div class="card-result">Charged water bowl setup — frequency holds in water</div>
-<p class="card-story">Copied HEAL for Dogs frequency and taped to water bowls. Energy tested and confirmed water holds the frequency. Dogs drink charged water every day.</p>
-<div class="card-meta"><span class="card-name">Nora V</span><span class="card-product">HEAL for Dogs Frequency</span></div>
-</div>
-</div>
-
-<!-- EXP 29 — Creative -->
-<div class="card" data-category="Creative">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_259_31-08-2021_23-13-36.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_260_31-08-2021_23-13-36.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_261_31-08-2021_23-13-36.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_259_31-08-2021_23-13-36.jpg" alt="Geodesic dome greenhouse" loading="lazy">
-<span class="card-gallery-badge">1 / 3</span>
-</div>
-<div class="card-body">
-<span class="card-category cat-Creative">Creative Uses</span>
-<div class="card-result">Greenhouse with Infinity Bloc inside — epic growth results</div>
-<p class="card-story">Combined a geodesic dome greenhouse with an Infinity Bloc inside. Results were so dramatic Philipp said "I almost can't believe the results we're seeing."</p>
-<div class="card-meta"><span class="card-name">Philipp (Founder)</span><span class="card-product">Infinity Bloc + Geodesic Dome</span></div>
-</div>
-</div>
-
-<!-- EXP 23 — Health -->
-<div class="card" data-category="Health">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_280_05-10-2021_14-14-27.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_280_05-10-2021_14-14-27.jpg" alt="DNA cell protector card" loading="lazy">
-</div>
-<div class="card-body">
-<span class="card-category cat-Health">Health</span>
-<div class="card-result">Touching the card eliminated nausea every time</div>
-<p class="card-story">A customer reported that touching the DNA &amp; cell protector card eliminated nausea each time. Even Philipp was surprised — they hadn't explored this use case yet but committed to researching it.</p>
-<div class="card-meta"><span class="card-name">Philipp (Founder)</span><span class="card-product">DNA &amp; Cell Protection Card</span></div>
-</div>
-</div>
-
-<!-- EXP 21 — Science -->
-<div class="card" data-category="Science">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2396_08-02-2026_10-36-49.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2397_08-02-2026_10-37-23.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2396_08-02-2026_10-36-49.jpg" alt="Science Spotlight series" loading="lazy">
-<span class="card-gallery-badge">1 / 2</span>
-</div>
-<div class="card-body">
-<span class="card-category cat-Science">Science</span>
-<div class="card-result">Weekly Science Spotlight series sharing study results</div>
-<p class="card-story">Started a weekly series sharing studies commissioned by Leela Quantum Tech, starting with the most recent and going backwards. Includes visual study summaries.</p>
-<div class="card-meta"><span class="card-name">K. Elmer</span><span class="card-product">LeelaQ Research</span></div>
-</div>
-</div>
-
-<!-- EXP 25 — Creative -->
-<div class="card" data-category="Creative">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2375_22-01-2026_09-38-02.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2375_22-01-2026_09-38-02.jpg" alt="Titanium camping teapot" loading="lazy">
-</div>
-<div class="card-body">
-<span class="card-category cat-Creative">Creative Uses</span>
-<div class="card-result">Titanium camping teapot charged for outdoor use</div>
-<p class="card-story">Charged a 5oz titanium camping teapot in the Infinity Bloc. Creative way to bring quantum energy into outdoor activities and camping.</p>
-<div class="card-meta"><span class="card-name">Jack Asher</span><span class="card-product">Infinity Bloc</span></div>
-</div>
-</div>
-
-<!-- EXP 24 — Health -->
-<div class="card" data-category="Health">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2416_01-03-2026_08-55-11.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2425_08-03-2026_08-18-27.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2416_01-03-2026_08-55-11.jpg" alt="Skin healing protocol" loading="lazy">
-<span class="card-gallery-badge">1 / 2</span>
-</div>
-<div class="card-body">
-<span class="card-category cat-Health">Health</span>
-<div class="card-result">Skin healing protocol — before and after documentation</div>
-<p class="card-story">Detailed protocol using frequencies to support the body's natural response to toxins and skin irritation. Before and after photos show visible improvement.</p>
-<div class="card-meta"><span class="card-name">K. Elmer</span><span class="card-product">Frequency Cards</span></div>
-</div>
-</div>
-
-<!-- EXP 27 — Creative -->
-<div class="card" data-category="Creative">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2249_21-09-2025_14-25-14.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2250_21-09-2025_14-28-15.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_2249_21-09-2025_14-25-14.jpg" alt="Titanium plate for phone" loading="lazy">
-<span class="card-gallery-badge">1 / 2</span>
-</div>
-<div class="card-body">
-<span class="card-category cat-Creative">Creative Uses</span>
-<div class="card-result">Titanium plate for mobile phone EMF — portable restaurant use</div>
-<p class="card-story">Charged a 4x6 inch titanium plate to carry with mobile phone. Uses it in restaurants to structure water or place under food plates. Broadcasts multiple frequencies.</p>
-<div class="card-meta"><span class="card-name">Ray B</span><span class="card-product">Infinity Bloc</span></div>
-</div>
-</div>
-
-<!-- EXP 28 — Creative -->
-<div class="card" data-category="Creative">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1187_04-02-2023_12-30-27.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1188_04-02-2023_12-32-16.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1189_04-02-2023_12-32-16.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1187_04-02-2023_12-30-27.jpg" alt="Separated bloc plates" loading="lazy">
-<span class="card-gallery-badge">1 / 3</span>
-</div>
-<div class="card-body">
-<span class="card-category cat-Creative">Creative Uses</span>
-<div class="card-result">Separated bloc plates to charge large items, meals, and dog bowls</div>
-<p class="card-story">Showed how to separate the QB to charge large items and full meals. Also tests foods for glyphosate levels — even organic items test positive, but charging reduces it.</p>
-<div class="card-meta"><span class="card-name">Nora V</span><span class="card-product">Quantum Bloc + Infinity Bloc</span></div>
-</div>
-</div>
-
-<!-- EXP 30 — Creative -->
-<div class="card" data-category="Creative">
-<div class="card-img-wrap" onclick="openLightbox(['https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1382_11-06-2023_16-35-46.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1383_11-06-2023_16-35-53.jpg','https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1384_11-06-2023_16-35-58.jpg'],0)">
-<img src="https://ineedjimmy.com/leelaresults/iloveLeelaq-images/photo_1382_11-06-2023_16-35-46.jpg" alt="Capsule cleaning before/after" loading="lazy">
-<span class="card-gallery-badge">1 / 3</span>
-</div>
-<div class="card-body">
-<span class="card-category cat-Creative">Creative Uses</span>
-<div class="card-result">Capsule cleaning — before/after shine restoration with white clay</div>
-<p class="card-story">After wearing the capsule for days it becomes dark. Uses natural white clay product to restore the shine. Before and after photos show the transformation.</p>
-<div class="card-meta"><span class="card-name">MNSR</span><span class="card-product">HEAL Capsule</span></div>
-</div>
-</div>
-
-</div><!-- end masonry -->
+<!-- ======== HERO HEADLINE ======== -->
+<section class="hero-headline">
+  <div class="hero-headline-inner">
+    <div class="hero-eyebrow">Community Experiment Gallery</div>
+    <h1>1,096 Things That<br><em>Shouldn't Be Possible</em></h1>
+    <p class="hero-tagline">Real photos. Real people. Real results from the LeelaQ community — unedited, unfiltered, and unexplainable by anyone who hasn't seen the evidence.</p>
+    <div class="hero-scroll-hint">↓ See the evidence</div>
+  </div>
 </section>
 
-<!-- SUBMIT SECTION -->
-<section class="submit-section" id="submit">
-<div class="submit-inner">
-<h2>Submit Your Experiment</h2>
-<p>Ran your own test? We want to see it. Share your results with the community.</p>
-<div class="form-group">
-<label>Your Name (or initials)</label>
-<input type="text" placeholder="e.g. Sarah M.">
-</div>
-<div class="form-group">
-<label>Which product did you use?</label>
-<select>
-<option value="">Select a product...</option>
-<option>Quantum Bloc</option>
-<option>Infinity Bloc</option>
-<option>Super Bloc</option>
-<option>HEAL Capsule</option>
-<option>Frequency Card</option>
-<option>LeelaQ Water Bottle</option>
-<option>Quantum Upgrade (subscription)</option>
-<option>Other</option>
-</select>
-</div>
-<div class="form-group">
-<label>Category</label>
-<select>
-<option value="">Select a category...</option>
-<option>Plants</option>
-<option>Water</option>
-<option>Pets</option>
-<option>Science</option>
-<option>Health</option>
-<option>Creative Uses</option>
-</select>
-</div>
-<div class="form-group">
-<label>What happened?</label>
-<textarea placeholder="Describe your experiment and the results you observed..."></textarea>
-</div>
-<button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px">Submit My Experiment →</button>
-</div>
+<!-- ======== HERO CAROUSEL ======== -->
+<section class="hero-carousel" id="heroCarousel">
+  <div class="hero-counter"><span id="heroIdx">01</span> / 05</div>
+  <div id="heroSlides"></div>
+  <div class="hero-dots" id="heroDots"></div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
-<h2>See for yourself.</h2>
-<p>Try Quantum Upgrade free for 7 days. No credit card. No commitment. Just curiosity.</p>
-<a href="#" class="btn btn-white">Start Your Free Trial →</a>
+<!-- ======== STAT BAR ======== -->
+<div class="stat-bar">
+  <div class="stat"><div class="stat-num" data-count="1096">0</div><div class="stat-label">Experiments</div></div>
+  <div class="stat"><div class="stat-num" data-count="200">0</div><div class="stat-label">Water Tests</div></div>
+  <div class="stat"><div class="stat-num" data-count="159">0</div><div class="stat-label">Pet Results</div></div>
+  <div class="stat"><div class="stat-num" data-count="102">0</div><div class="stat-label">Plant Studies</div></div>
+  <div class="stat"><div class="stat-num" data-count="34">0</div><div class="stat-label">Blood Analyses</div></div>
+  <div class="stat"><div class="stat-num" data-count="0">0</div><div class="stat-label">Paid Actors</div></div>
+</div>
+
+<!-- ======== BRASS ======== -->
+<div class="brass">"Plants can't be placebo'd."</div>
+
+<!-- ======== THE SCIENCE ======== -->
+<div class="section">
+  <div class="section-eyebrow">The Science</div>
+  <div class="section-title">54 Experiments Under Scientific Methodology</div>
+  <div class="section-sub">Blood microscopy, dark field analysis, and controlled studies — conducted by doctors, researchers, and meticulous community members.</div>
+</div>
+<div class="science-wrap">
+  <div class="science-grid" id="scienceGrid"></div>
+</div>
+
+<!-- ======== BRASS ======== -->
+<div class="brass">"Cells don't have opinions. They just heal — or they don't."</div>
+
+<!-- ======== COMMUNITY GALLERY ======== -->
+<div class="section">
+  <div class="section-eyebrow">The Community Proves It</div>
+  <div class="section-title">1,096 Experiments. Every Photo Real.</div>
+  <div class="section-sub">Click any card to read the original, unedited community post — typos, emoji, and all.</div>
+</div>
+
+<div class="filters" id="filters"></div>
+
+<div class="masonry-wrap">
+  <div class="gallery-status" id="galleryStatus"></div>
+  <div class="masonry" id="grid"></div>
+  <div class="load-more-wrap" id="loadMoreWrap" style="display:none">
+    <button class="load-more-btn" id="loadMoreBtn">Load More Experiments</button>
+  </div>
+</div>
+
+<!-- ======== BRASS ======== -->
+<div class="brass">"Dogs don't read marketing materials."</div>
+
+<!-- ======== TRY IT YOURSELF ======== -->
+<section class="try-section">
+  <div class="section" style="padding-bottom:1.5rem">
+    <div class="section-eyebrow">Try It Yourself</div>
+    <div class="section-title">3 Experiments Anyone Can Run at Home</div>
+    <div class="section-sub">No lab required. Just curiosity and a willingness to be surprised.</div>
+  </div>
+  <div class="try-grid">
+    <div class="try-card">
+      <div class="try-num">01</div>
+      <div class="try-title">Seed Germination</div>
+      <div class="try-desc">The simplest controlled experiment. Seeds don't have beliefs, expectations, or placebo responses. They either grow — or they don't.</div>
+      <ol class="try-steps">
+        <li>Get two paper towels and dampen both equally</li>
+        <li>Place identical seeds on each (same packet, same count)</li>
+        <li>Charge water in the Bloc for one group</li>
+        <li>Water both daily with their respective water</li>
+        <li>Photograph daily. Compare at Day 5</li>
+      </ol>
+      <div class="try-note">Community average: charged seeds sprout 1–3 days faster</div>
+    </div>
+    <div class="try-card">
+      <div class="try-num">02</div>
+      <div class="try-title">Flower Longevity</div>
+      <div class="try-desc">Buy two identical flowers from the same bunch. One gets regular water. One gets Bloc-charged water. Watch what happens over 5 days.</div>
+      <ol class="try-steps">
+        <li>Buy two identical cut flowers from the same bunch</li>
+        <li>Place in identical vases with equal water</li>
+        <li>Charge one vase's water in the Bloc for 4 minutes</li>
+        <li>Keep both in the same location, same light</li>
+        <li>Photograph daily. Compare at Day 5</li>
+      </ol>
+      <div class="try-note">Community reports: charged flowers lasting 2–5 days longer on average</div>
+    </div>
+    <div class="try-card">
+      <div class="try-num">03</div>
+      <div class="try-title">Water Taste Test</div>
+      <div class="try-desc">The quickest experiment. Takes 5 minutes. Bring a friend — do it blind. The water speaks for itself.</div>
+      <ol class="try-steps">
+        <li>Fill two identical glasses with the same water</li>
+        <li>Charge one glass in the Bloc for 4 minutes</li>
+        <li>Have someone else label them A and B (you don't look)</li>
+        <li>Taste both. Note which feels smoother, softer</li>
+        <li>Reveal which was charged</li>
+      </ol>
+      <div class="try-note">Philipp says: "About 80% of people can tell the difference immediately"</div>
+    </div>
+  </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-<p>ILoveLeelaQ.com — A community-powered experiment library. Not medical advice. Individual results vary.</p>
-<p style="margin-top:12px;font-size:12px;">Mockup designed by <a href="https://ineedjimmy.com" target="_blank" style="color:var(--sage);text-decoration:underline;">Jimmy Davis</a></p>
-</footer>
+<!-- ======== BRASS ======== -->
+<div class="brass">"Water doesn't have beliefs."</div>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-<div class="lightbox-close" onclick="closeLightbox(event)">✕</div>
-<button class="lightbox-nav lightbox-prev" onclick="event.stopPropagation();navLightbox(-1)">‹</button>
-<img id="lightbox-img" src="" alt="Experiment photo">
-<button class="lightbox-nav lightbox-next" onclick="event.stopPropagation();navLightbox(1)">›</button>
-<div class="lightbox-counter" id="lightbox-counter"></div>
+<!-- ======== SUBMIT YOUR EXPERIMENT ======== -->
+<div class="submit-section">
+  <div class="section" style="padding:0 0 1.5rem;text-align:center">
+    <div class="section-eyebrow">Join the Archive</div>
+    <div class="section-title">Submit Your Experiment</div>
+    <div class="section-sub" style="margin:0.5rem auto 0">Run your own test and share it with the community.</div>
+  </div>
+  <div class="submit-form">
+    <div class="form-group">
+      <label class="form-label">Your Name (or initials)</label>
+      <input type="text" class="form-input" placeholder="How should we credit you?">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Product(s) Used</label>
+      <select class="form-select">
+        <option value="">Select a product…</option>
+        <option>Quantum Bloc</option>
+        <option>Infinity Bloc</option>
+        <option>HEAL Capsule</option>
+        <option>Frequency Cards</option>
+        <option>Clothing & Wearables</option>
+        <option>Water Bottle</option>
+        <option>Quantum Upgrade (subscription)</option>
+        <option>Travel Bloc</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Experiment Type</label>
+      <select class="form-select">
+        <option value="">What did you test?</option>
+        <option>Plant / Seed Growth</option>
+        <option>Water / Taste Test</option>
+        <option>Pet Health</option>
+        <option>Personal Health</option>
+        <option>Blood / Microscopy</option>
+        <option>Food / Wine Charging</option>
+        <option>EMF Protection</option>
+        <option>Spiritual / Energy</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Describe Your Experiment</label>
+      <textarea class="form-textarea" placeholder="What did you do? What happened? Don't hold back — we never edit your words."></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Photos</label>
+      <div class="form-upload">📷 Click to upload photos of your experiment<br><span style="font-size:.7rem;color:var(--text-faint)">Before/after photos are especially powerful</span></div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Were you skeptical before trying?</label>
+      <div class="form-radio-group">
+        <label class="form-radio"><input type="radio" name="skeptic" value="yes"> Yes, very</label>
+        <label class="form-radio"><input type="radio" name="skeptic" value="somewhat"> Somewhat</label>
+        <label class="form-radio"><input type="radio" name="skeptic" value="no"> Not really</label>
+      </div>
+    </div>
+    <button class="form-btn">Submit My Experiment</button>
+    <p class="form-note">Your experiment may appear on this page after review. We never edit your words.</p>
+  </div>
+</div>
+
+<!-- ======== CROSS-LINKS + CTA ======== -->
+<section class="cta">
+  <div class="cross-links">
+    <a href="https://wedidthescience.com" class="cross-link">Want the hardcore science? → <span>59 double-blind studies at WeDidTheScience.com</span></a>
+    <a href="https://thankyouleelaq.com" class="cross-link">Want to read personal stories? → <span>19,023 experiences at ThankYouLeelaQ.com</span></a>
+    <a href="https://leelaq.com" class="cross-link">Want to try the physical products? → <span>Shop LeelaQ.com</span></a>
+  </div>
+  <div style="padding:3.5rem 0 0">
+    <h2>Ready to run experiment #1,097?</h2>
+    <p>Try Quantum Upgrade free for 7 days — no credit card required.</p>
+    <a href="https://quantumupgrade.io" class="cta-btn">Start Your Free Trial</a>
+  </div>
+</section>
+
+<div class="footer">
+  ILoveLeelaQ.com — A community experiment archive. These are individual experiences shared voluntarily. Results vary. This page is not medical advice and makes no medical claims. Products referenced are manufactured by Leela Quantum Tech (leelaq.com).
+  <br><a href="https://ineedjimmy.com" style="color:inherit;opacity:.5;text-decoration:none" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='.5'">Built with ❤️ by INeedJimmy.com</a>
+</div>
+
+<!-- ======== MODAL ======== -->
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modal"></div>
 </div>
 
 <script>
-// Filter
-function filterCards(cat){
-document.querySelectorAll('.filter-pill').forEach(p=>{p.classList.remove('active')});
-document.querySelector(`.filter-pill[data-cat="${cat}"]`).classList.add('active');
-document.querySelectorAll('.card').forEach(c=>{
-if(cat==='All'||c.dataset.category===cat){c.classList.remove('hidden');c.style.animation='fadeUp 0.5s ease forwards'}
-else{c.classList.add('hidden')}
+// ============ DATA ============
+const HERO = [{"id": 25, "name": "Philipp Samor von Holtzendorff", "cat": "Blood / Microscopy", "score": 8, "summary": "Happy New Year! 🎊 Hopefully everyone’s having a great time!Check out the below pictures. A third testing institute together with a specialized Doctor ...", "raw": "Happy New Year! 🎊 Hopefully everyone’s having a great time!Check out the below pictures. A third testing institute together with a specialized Doctor have just been doing a blood analysis with dark field microscopy to check on what the Leela Quantum T-Shirt does. The blood of the wearer truly has a nice new year 🥳💚🤗The 1st picture shows the blood BEFORE wearing the Leela Quantum T-Shirt.The 2nd picture shows the blood AFTER wearing it for only 5 minutes. Absolutely fantastic results. That is very fast, and we know that with increasing time of wearing it, it gets even better.", "photo": "photo_39@31-12-2020_20-37-57.jpg", "photos": ["photo_39@31-12-2020_20-37-57.jpg", "photo_40@31-12-2020_20-38-05.jpg"], "nPhotos": 2, "ba": true, "sci": true, "founder": true, "products": ["Clothing & Wearables"], "desc": "T-shirt blood microscopy before/after - dramatic rouleaux to separated cells in 5 minutes"}, {"id": 259, "name": "Philipp Samor von Holtzendorff", "cat": "Blood / Microscopy", "score": 9, "summary": "I want to share some great news, @everyone. We just heard from highly regarded Dr. Beverly Rubik in the US that she finished another randomized, sham-...", "raw": "I want to share some great news, @everyone. We just heard from highly regarded Dr. Beverly Rubik in the US that she finished another randomized, sham-controlled study to further validate the results of the randomized double-blind study she performed about half a year ago. It was now confirmed and verified - with statistical significance - that the Quantum Bloc was able to neutralize ALL negative effects of EMF on the blood IN 100% of the test persons, in only 10 minutes. Dr. Rubik called the results IMPRESSIVE, and they surely are. We’re very happy to share this further significant evidence with you. PLEASE NOTE that on top of it, Dr. Rubik again observed and now validated that white blood cell activity and motility increased because of the Quantum Bloc, and that the “quasi paralyzation of white blood cells due to EMF” was reversed. This clearly indicates a strongly and rapidly increased", "photo": "photo_431@17-01-2022_19-02-04.jpg", "photos": ["photo_431@17-01-2022_19-02-04.jpg", "photo_432@17-01-2022_19-02-15.jpg", "photo_433@17-01-2022_19-04-55.jpg"], "nPhotos": 3, "ba": true, "sci": true, "founder": true, "products": ["Quantum Bloc"], "desc": "Dr. Beverly Rubik study charts + blood microscopy composite - Wi-Fi vs Quantum Bloc data"}, {"id": 81, "name": "Philipp Samor von Holtzendorff", "cat": "Blood / Microscopy", "score": 8, "summary": "So cute and so blissful 🤗 🐱 Yes please do, good luck with the figs!! 🤗☀️ so glad to have you! Our “faraday clothing” is advanced in a sense that it in...", "raw": "So cute and so blissful 🤗 🐱 Yes please do, good luck with the figs!! 🤗☀️ so glad to have you! Our “faraday clothing” is advanced in a sense that it indeed contains pure quantum energy which transmits to the body and energetic system. Especially ideal for very emf sensitive people. In case you hadn’t seen the other dark field microscopy pictures, here are a few (for various products): (Reposting these for the ones new in the group. I posted the German version. The first one is before, the second one the same person’s blood after wearing the leela quantum t-shirt for 5 minutes. Quantum Bloc (before/after putting hands inside for 5 min) Quantum Jacket (before/after wearing for 15 min)", "photo": "photo_136@03-04-2021_18-54-24.jpg", "photos": ["photo_136@03-04-2021_18-54-24.jpg", "photo_137@03-04-2021_18-54-24.jpg", "photo_138@03-04-2021_18-56-56.jpg", "photo_139@03-04-2021_18-56-56.jpg"], "nPhotos": 6, "ba": true, "sci": false, "founder": true, "products": ["Quantum Bloc", "Clothing & Wearables"], "desc": ""}, {"id": 89, "name": "Deleted Account", "cat": "Seed Germination", "score": 8, "summary": "I love the interesting conversations and descriptions I’m reading. I’ll add my own experience to the mix. I’ve had the HEAL capsules for a few weeks n...", "raw": "I love the interesting conversations and descriptions I’m reading. I’ll add my own experience to the mix. I’ve had the HEAL capsules for a few weeks now. My 13 yo daughter and I did a little experiment to see how or if the purported quantum energy in the titanium spheres might impact the germination of some flower seeds she wanted to plant. So we placed the seeds on three separate plates all under the same conditions of light, temperature and moisture. In one plate she also placed one titanium sphere wrapped in foil; in another plate she placed three spheres. These are the pictures of the seeds after one week. Now, one can create many scientific and rational explanations as to why these plates of seeds look the way they do now. All I can say is that it is obvious that the sprouts that were germinated in close proximity to the titanium spheres are much more vibrant and healthy. What does ", "photo": "photo_154@07-05-2021_23-27-36.jpg", "photos": ["photo_154@07-05-2021_23-27-36.jpg", "photo_155@07-05-2021_23-27-36.jpg", "photo_156@07-05-2021_23-27-36.jpg"], "nPhotos": 3, "ba": true, "sci": false, "founder": false, "products": ["HEAL Capsule", "Titanium Spheres"], "desc": "Seed germination labeled control vs charged - dramatic sprout size difference on paper towels"}, {"id": 48, "name": "Rochelle aronson", "cat": "Plant Growth / Revival", "score": 6, "summary": "Here’s a test that I did with flowers using the QBloc. The N vase and flower was not charged, but the Q one was charged in its vase with the water. Yo...", "raw": "Here’s a test that I did with flowers using the QBloc. The N vase and flower was not charged, but the Q one was charged in its vase with the water. You can see the difference from Day 1 to Day 5.", "photo": "photo_84@24-02-2021_11-53-22.jpg", "photos": ["photo_84@24-02-2021_11-53-22.jpg", "photo_85@24-02-2021_11-53-47.jpg"], "nPhotos": 2, "ba": true, "sci": false, "founder": false, "products": ["Quantum Bloc"], "desc": "Flower comparison N vs Q Day 5 - pink flowers labeled, Q flower noticeably more upright"}];
+const SCIENCE = [{"id": 797, "name": "Ascension", "cat": "Blood / Microscopy", "score": 10, "summary": "I have eaten my last meal a little over an hour ago. I chose to eat a 15 egg omelette concoction (spices). My 7 day dry fast has officially started as...", "raw": "I have eaten my last meal a little over an hour ago. I chose to eat a 15 egg omelette concoction (spices). My 7 day dry fast has officially started as of 20:00 EST. I will measure my blood every day and find out how the Leela products affect me. Once my fast is complete, I will share my results with the group. For individuals that are not familiar with how dry fasting works, I will not eat or drink anything for the duration of the fast, period. In this moment, I anticipate the Leela products to enhance and amplify the autophagy process.My starting weight will be 223.2 lb as of 3/5/23. I typically lose about ~20 lb for this duration of a dry fast. I also want to share an interesting result of measuring blood from inducing psilocybin. Today, I tested out 10g of White Teacher. I measured my blood before inducing, and one hour post induction. It is extremely curious how my ketone levels rose", "photo": "photo_1238@05-03-2023_21-00-44.jpg", "photos": ["photo_1238@05-03-2023_21-00-44.jpg", "photo_1239@05-03-2023_21-00-50.jpg", "photo_1240@05-03-2023_21-01-35.jpg"], "nPhotos": 3, "ba": true, "sci": true, "founder": false, "products": ["Travel Bloc", "HEAL Capsule"], "desc": "Keto-Mojo glucose and ketone readings - scientific biometric screenshots"}, {"id": 259, "name": "Philipp Samor von Holtzendorff", "cat": "Blood / Microscopy", "score": 9, "summary": "I want to share some great news, @everyone. We just heard from highly regarded Dr. Beverly Rubik in the US that she finished another randomized, sham-...", "raw": "I want to share some great news, @everyone. We just heard from highly regarded Dr. Beverly Rubik in the US that she finished another randomized, sham-controlled study to further validate the results of the randomized double-blind study she performed about half a year ago. It was now confirmed and verified - with statistical significance - that the Quantum Bloc was able to neutralize ALL negative effects of EMF on the blood IN 100% of the test persons, in only 10 minutes. Dr. Rubik called the results IMPRESSIVE, and they surely are. We’re very happy to share this further significant evidence with you. PLEASE NOTE that on top of it, Dr. Rubik again observed and now validated that white blood cell activity and motility increased because of the Quantum Bloc, and that the “quasi paralyzation of white blood cells due to EMF” was reversed. This clearly indicates a strongly and rapidly increased", "photo": "photo_431@17-01-2022_19-02-04.jpg", "photos": ["photo_431@17-01-2022_19-02-04.jpg", "photo_432@17-01-2022_19-02-15.jpg", "photo_433@17-01-2022_19-04-55.jpg"], "nPhotos": 3, "ba": true, "sci": true, "founder": true, "products": ["Quantum Bloc"], "desc": "Dr. Beverly Rubik study charts + blood microscopy composite - Wi-Fi vs Quantum Bloc data"}, {"id": 1654, "name": "K. Elmer", "cat": "Health / Healing", "score": 9, "summary": "While the provided sources do not specifically mention Poison Oak or Urushiol, they offer a clear protocol and several targeted frequencies designed t...", "raw": "While the provided sources do not specifically mention Poison Oak or Urushiol, they offer a clear protocol and several targeted frequencies designed to support the body’s natural response to toxins, skin irritation, and systemic inflammation. These frequencies are wellness tools and are not intended to diagnose, treat, cure, or prevent any disease.For managing the body’s reaction to an environmental irritant like Poison Oak, the following approach is recommended:### 1. Initial Energetic ResetFor any significant health-related shift or acute reaction, the sources suggest starting with a biofield reset to establish a stable energetic foundation.* Universal Power Frequency: Run this for 24 to 48 hours to help your system \\\"kick out\\\" harmful foreign substances while reinforcing your essential power. * Recommended Settings: Use 700 on the Hawkins scale during the day and 500 at night.### 2. Ta", "photo": "photo_2416@01-03-2026_08-55-11.jpg", "photos": ["photo_2416@01-03-2026_08-55-11.jpg", "photo_2425@08-03-2026_08-18-27.jpg"], "nPhotos": 2, "ba": true, "sci": true, "founder": false, "products": ["HEAL Capsule"], "desc": ""}, {"id": 25, "name": "Philipp Samor von Holtzendorff", "cat": "Blood / Microscopy", "score": 8, "summary": "Happy New Year! 🎊 Hopefully everyone’s having a great time!Check out the below pictures. A third testing institute together with a specialized Doctor ...", "raw": "Happy New Year! 🎊 Hopefully everyone’s having a great time!Check out the below pictures. A third testing institute together with a specialized Doctor have just been doing a blood analysis with dark field microscopy to check on what the Leela Quantum T-Shirt does. The blood of the wearer truly has a nice new year 🥳💚🤗The 1st picture shows the blood BEFORE wearing the Leela Quantum T-Shirt.The 2nd picture shows the blood AFTER wearing it for only 5 minutes. Absolutely fantastic results. That is very fast, and we know that with increasing time of wearing it, it gets even better.", "photo": "photo_39@31-12-2020_20-37-57.jpg", "photos": ["photo_39@31-12-2020_20-37-57.jpg", "photo_40@31-12-2020_20-38-05.jpg"], "nPhotos": 2, "ba": true, "sci": true, "founder": true, "products": ["Clothing & Wearables"], "desc": "T-shirt blood microscopy before/after - dramatic rouleaux to separated cells in 5 minutes"}, {"id": 37, "name": "Philipp Samor von Holtzendorff", "cat": "Blood / Microscopy", "score": 8, "summary": "Yes absolutely you can do that. Already after 1 minute the product will be harmonized, energetically enhanced, and the magnetic brute force will have ...", "raw": "Yes absolutely you can do that. Already after 1 minute the product will be harmonized, energetically enhanced, and the magnetic brute force will have disappeared, including the polarity. We suggest 1-3 minutes charging for that. It will be fairly noticeable afterwards. A great test is if you have two such products, to not charge them together, so you can see and feel the difference even more obvious. Great news. We just got the pictures back from the dark field microscopy tests that a Doctor’s office took together with a testing institute.The first picture shows the status of the patient’s blood BEFORE.The second picture shows the patient’s blood AFTER having had one hand in the Leela Quantum Bloc for only 5 minutes.The result and improvement is literally AMAZING. We knew it would be much better, but we honestly didn’t expect it to be so rapid and significant at the same time. For anyone", "photo": "photo_59@04-02-2021_14-16-55.jpg", "photos": ["photo_59@04-02-2021_14-16-55.jpg", "photo_60@04-02-2021_14-17-01.jpg"], "nPhotos": 2, "ba": true, "sci": true, "founder": true, "products": ["Quantum Bloc"], "desc": ""}, {"id": 41, "name": "Philipp Samor von Holtzendorff", "cat": "Blood / Microscopy", "score": 8, "summary": "There’s no impact on strength or charging time of the Quantum Bloc as long as the distance is not more than 5 meters. More than 5 meters may actually ...", "raw": "There’s no impact on strength or charging time of the Quantum Bloc as long as the distance is not more than 5 meters. More than 5 meters may actually be possible, but the room we conducted the tests in was only 5 meters long 🤗, and by then we had tested it each 50 centimeters. Energetically we know up to 5 meters the quantum space is exactly as strong and stable as fully assembled. We cannot officially (or unofficially) recommend that. The reason is that in the teeth a lot of us have metals that would usually get permanently charged. That may not be an issue actually (and possibly beneficial), since we don’t use any brute force at all. But we haven’t tested that. Several, including us, have put body parts in which seems to work very well. Just head with metals in the teeth may be problematic. We will however test that though and report the results. We’ve spoken a few times about a large ", "photo": "photo_68@17-02-2021_18-52-02.jpg", "photos": ["photo_68@17-02-2021_18-52-02.jpg", "photo_69@17-02-2021_18-52-11.jpg"], "nPhotos": 2, "ba": true, "sci": true, "founder": true, "products": ["Quantum Bloc"], "desc": ""}, {"id": 42, "name": "Philipp Samor von Holtzendorff", "cat": "Blood / Microscopy", "score": 8, "summary": "Hi Tim,Absolutely. If you get the package, you’ll be able to do these upgrades easily on your own w/o our involvement other than providing guidance (o...", "raw": "Hi Tim,Absolutely. If you get the package, you’ll be able to do these upgrades easily on your own w/o our involvement other than providing guidance (on how to easily do that). Regarding the mandalas: that’s up to you how to have them face, but we intended them to be facing up. That way we feel also it looks nicer visually. But not required to do it that way. Please also see my next post. For @everyone that has watched K. ‘s video regarding the infinity bloc and the test results yesterday already, here are the two dark field microscopy pictures of the cancer patient (before and 15 min after wearing the Leela Quantum Jacket). K and I both realized too late that one of the pictures in the videos (the before picture) was not the correct one. K will check how he can swap it, but for everyone that has watched it already, here’s the actual - very significant!! - change of before/after.(PS: quan", "photo": "photo_70@20-02-2021_17-34-08.jpg", "photos": ["photo_70@20-02-2021_17-34-08.jpg", "photo_71@20-02-2021_17-34-14.jpg"], "nPhotos": 2, "ba": true, "sci": true, "founder": true, "products": ["Infinity Bloc", "Quantum Bloc", "Clothing & Wearables"], "desc": ""}, {"id": 53, "name": "Philipp Samor von Holtzendorff", "cat": "Blood / Microscopy", "score": 8, "summary": "The C disease is a very difficult topic to discuss publicly as you can imagine. We’re not in the medical field and don’t enjoy the options pharma comp...", "raw": "The C disease is a very difficult topic to discuss publicly as you can imagine. We’re not in the medical field and don’t enjoy the options pharma companies have 😉 (we enjoy other things though lol), so you won’t find us making any statements in that regard. We always refer to our disclaimer in that context. However, we can share the following for example which is the blood under dark field microscopy of a 68 yr old patient with a lung carcinoma. A doctor’s office took those two blood samples in collaboration with the BESA Institute. The first picture shows the state of the blood before, and the second the state of the blood after 15 minutes of wearing the Leela Quantum Jacket (more about that in this coming week). We cannot officially/publicly interpret this, but let’s say it that way: anyone who knows only a tiny bit about dark field microscopy can see a huge and very remarkable differe", "photo": "photo_91@05-03-2021_20-08-05.jpg", "photos": ["photo_91@05-03-2021_20-08-05.jpg", "photo_92@05-03-2021_20-08-16.jpg"], "nPhotos": 2, "ba": true, "sci": false, "founder": true, "products": ["Clothing & Wearables"], "desc": "Quantum Jacket dark field microscopy - cancer patient blood improvement in 15 minutes"}, {"id": 79, "name": "Deleted Account", "cat": "Water Charging / Crystals / Taste", "score": 8, "summary": "I’ve been charging water with the plant card and use that water for my nutrient tea and foliar spray. I already had great results with that method las...", "raw": "I’ve been charging water with the plant card and use that water for my nutrient tea and foliar spray. I already had great results with that method last year but now with the charged water its of the charts and spring just only began. Had my brother charge some seeds and all charged seeds do way better. On this pic the right side obviously hasn't been charged. I bought some stainless steel dog food trays and just charged them. Gave em to 4 friends who got dogs. So we had their regular water on the left, food in the middle and the charged tray with water on the right. All dogs went straight for the charged tray and have only been drinking from that one since. Did the charged water vs uncharged water with 20+ people. Many of them were skeptics but unanimously the charged water won. Baffled many of the skeptics minds. One of them my sister in law who is trying to work on her health and lifes", "photo": "photo_134@02-04-2021_13-42-23.jpg", "photos": ["photo_134@02-04-2021_13-42-23.jpg"], "nPhotos": 1, "ba": false, "sci": true, "founder": false, "products": ["Quantum Bloc", "Frequency Cards", "Water Bottle"], "desc": ""}, {"id": 81, "name": "Philipp Samor von Holtzendorff", "cat": "Blood / Microscopy", "score": 8, "summary": "So cute and so blissful 🤗 🐱 Yes please do, good luck with the figs!! 🤗☀️ so glad to have you! Our “faraday clothing” is advanced in a sense that it in...", "raw": "So cute and so blissful 🤗 🐱 Yes please do, good luck with the figs!! 🤗☀️ so glad to have you! Our “faraday clothing” is advanced in a sense that it indeed contains pure quantum energy which transmits to the body and energetic system. Especially ideal for very emf sensitive people. In case you hadn’t seen the other dark field microscopy pictures, here are a few (for various products): (Reposting these for the ones new in the group. I posted the German version. The first one is before, the second one the same person’s blood after wearing the leela quantum t-shirt for 5 minutes. Quantum Bloc (before/after putting hands inside for 5 min) Quantum Jacket (before/after wearing for 15 min)", "photo": "photo_136@03-04-2021_18-54-24.jpg", "photos": ["photo_136@03-04-2021_18-54-24.jpg", "photo_137@03-04-2021_18-54-24.jpg", "photo_138@03-04-2021_18-56-56.jpg", "photo_139@03-04-2021_18-56-56.jpg"], "nPhotos": 6, "ba": true, "sci": false, "founder": true, "products": ["Quantum Bloc", "Clothing & Wearables"], "desc": ""}, {"id": 95, "name": "Philipp Samor von Holtzendorff", "cat": "Blood / Microscopy", "score": 8, "summary": "Ideally we recommend to only wear one at a time. We suggest you feel each day which is the best one for you that day. That further trains the intuitio...", "raw": "Ideally we recommend to only wear one at a time. We suggest you feel each day which is the best one for you that day. That further trains the intuition which is great, and it opens the channel to our inner voice even more which knows what’s good for us. That voice should ideally not come from the head though 😉, but from truly inside. Whether our heart chakra, gut, or just a deep inner knowing. That is where all answers are anyway.After this little sidetrack back to the differences of the capsules. Here’s what is written on the website:The Leela Quantum H.E.A.L. capsule contains the following frequencies:– primal human healing frequencies as well as specific cosmic and Earth healing frequencies – primal water frequency (the original source of the Earth’s healing water springs) – nutritional Biobase frequency (contains almost 100 essential vitamin, mineral and organic plant extract frequen", "photo": "photo_167@14-05-2021_00-16-16.jpg", "photos": ["photo_167@14-05-2021_00-16-16.jpg", "photo_168@14-05-2021_00-16-59.jpg"], "nPhotos": 2, "ba": true, "sci": false, "founder": true, "products": ["Quantum Bloc", "HEAL Capsule"], "desc": "Dark field microscopy Quantum Bloc - professionally captioned green fluorescence images"}, {"id": 599, "name": "Emma", "cat": "Plant Growth / Revival", "score": 8, "summary": "5% EXTRA DISCOUNT ON ALL ITEMS IF YOU PAY VIA GLOBEE WITH BITCOIN, ETHEREUM, RIPPLE OR LITECOIN Q. Has anybody used QB for gardening and growing food?...", "raw": "5% EXTRA DISCOUNT ON ALL ITEMS IF YOU PAY VIA GLOBEE WITH BITCOIN, ETHEREUM, RIPPLE OR LITECOIN Q. Has anybody used QB for gardening and growing food? Could you share your progress and how you used Leelaq frequencies for this purpose? I'm currently in a complex with minimal sunlight and surrounded by towers/EMF. Let's just say my greens have seen better days.A. ( by K Elmer)Tried various approaches with gardening and plants.Charging seeds - 3 different friends in different climates. I sent them heirloom seeds, half we're charged, half we're not. All of them experienced the same results.The plants grown from charged seeds sprouted faster and produced more. Roughly by a third of the plants life cycle compared to the control group.Other approaches that have been tried.Created plant frequency capsules using plant food (before the HEAL for plants frequency was created). Placed a capsule in th", "photo": "photo_937@16-08-2022_14-26-36.jpg", "photos": ["photo_937@16-08-2022_14-26-36.jpg"], "nPhotos": 1, "ba": true, "sci": true, "founder": true, "products": ["Infinity Bloc", "Quantum Bloc", "HEAL Capsule"], "desc": ""}];
+const GALLERY = [{"id": 10, "name": "Deleted Account", "cat": "Pet Health / Behavior", "score": 8, "summary": "Two things to share tonight:First- I’ve been working with my brother for a few months on his chronic constant pain from injuries and surgeries. I’ve b...", "raw": "Two things to share tonight:First- I’ve been working with my brother for a few months on his chronic constant pain from injuries and surgeries. I’ve burned capsules, cards and recently a bracelet so that he might feel some relief. I’m up to the 5G level and he keeps saying that he feels nothing. Finally I told him whether or not he felt anything....it was still working. Today he told me that his wife noticed that he was walking without the limp he developed because of the pain. He called me to thank me and say that he never doubted, however he hadn’t even noticed this major improvement. I suppose since the pain was much less it didn’t enter into his consciousness!Second- I took my dog to the vet today and received disturbing news. This is a new vet for us since we moved and she is an holistic vet. After the diagnosis she did a muscle test to see which medication would work best for him. ", "photo": "photo_16@13-11-2020_20-55-05.jpg", "photos": ["photo_16@13-11-2020_20-55-05.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": false, "products": ["HEAL Capsule"], "desc": "Small elderly dog on couch - companion to chronic pain + vet story"}, {"id": 30, "name": "Rochelle aronson", "cat": "Pet Health / Behavior", "score": 8, "summary": "I have extolled the wonders of the inner peace and sleep cards, as well as the new Brass heal capsule and how much they have helped me over the last s...", "raw": "I have extolled the wonders of the inner peace and sleep cards, as well as the new Brass heal capsule and how much they have helped me over the last several months. I have had access to a friends cube for the last few months, so I’ve been making a blend of the new heal and inner peace frequency cards to gift to friends over the holidays to help with various health issues. I have heard back from each person with incredible results. The best story is I sent a blended card to a very close friend. He took the card out of his pocket after his walk and left it on his bed while he was showering. When he came back it was missing. His older dog had taken it and put it under her bed. Since she kept asking him for it, I had to make a dog heal card for her. She’s been happy with it ever since.", "photo": "photo_47@24-01-2021_17-24-31.jpg", "photos": ["photo_47@24-01-2021_17-24-31.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": false, "products": ["HEAL Capsule", "Frequency Cards"], "desc": "White chihuahua-type dog resting face on frequency card - adorable and shareable"}, {"id": 77, "name": "Philipp Samor von Holtzendorff", "cat": "Spiritual / Energy / Consciousness", "score": 8, "summary": "Hi Renee,K. already answered everything, I only would add that wearing two may be too much. Not necessarily, since it depends on the one wearing it, b...", "raw": "Hi Renee,K. already answered everything, I only would add that wearing two may be too much. Not necessarily, since it depends on the one wearing it, but I would try to really feel how you do with one, and if two may be too much energy. The copper quantum bracelets can create a lot of energetic fire (=action), which is great for action. But not good during the nights (as K mentioned), and we should watch that we don’t take in too much. Hope that helps! Sara provided good recommendations. Here’s what I would add:Besides the sleep & rest card and (as some of us use both the inner peace and sleep card together every now and then) here’s what physically seems to offer a great addition: organic elderberry syrup. Chelated magnesium is also not bad (can even be used together with elderberry syrup), but the syrup may just be enough to accompany the above cards for particularly sleepless nights. K", "photo": "photo_132@30-03-2021_21-06-07.jpg", "photos": ["photo_132@30-03-2021_21-06-07.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": true, "products": ["Frequency Cards"], "desc": ""}, {"id": 132, "name": "Philipp Samor von Holtzendorff", "cat": "Plant Growth / Revival", "score": 8, "summary": "Yes it will provide a much more harmonious and livable environment for the plants. We’ve never had plums nor apricots in our garden coming out despite...", "raw": "Yes it will provide a much more harmonious and livable environment for the plants. We’ve never had plums nor apricots in our garden coming out despite having these fruit trees. After having been supported by the Infinity Bloc energy since almost 10 months, this summer is the first we have apricots (on a fairly big tree) and also plums are all over those small plum trees. We also have an indoor plant which had almost died, and we had gotten it to the point of saving it. Since then it stayed pretty broken though with only very few leaves only on the top of the plant. Since the infinity bloc is in the same room, it has suddenly grown like crazy. It almost looks like a jungle plant now lol. I’ll look for pictures. Saved, but not great shape, and no further progress/stagnant: Now:", "photo": "photo_227@20-07-2021_21-41-41.jpg", "photos": ["photo_227@20-07-2021_21-41-41.jpg", "photo_228@20-07-2021_21-41-41.jpg", "photo_229@20-07-2021_21-41-41.jpg", "photo_230@20-07-2021_21-42-03.jpg"], "nPhotos": 5, "ba": true, "sci": false, "founder": true, "products": ["Infinity Bloc"], "desc": "Tall indoor plant stems - before treatment, showing bare sticks needing revival"}, {"id": 199, "name": "Philipp Samor von Holtzendorff", "cat": "Food Charging", "score": 8, "summary": "The Bloc is very different from a card/capsule in various ways, but the main one is that it contains a concentrated and pure, multidimensional quantum...", "raw": "The Bloc is very different from a card/capsule in various ways, but the main one is that it contains a concentrated and pure, multidimensional quantum energy space which also contains substantial quantum consciousness levels/observer levels. Neither cards nor capsules have that, and are therefore limited to transmitting the stored pure quantum energy (and frequencies). The difference between capsules and cards is only really the strength/size of field. That hasn’t been tested yet. I assume it would be less affected, but whether the negative effect is eliminated, we do not know. In regards to foods, check out these pictures from biohacker Todd: 👆From Todd:Left arm, crab meat was in for 7 minutes under Ibloc. All you can really see is the marks from the derma roller and thumbtack stabs. (Todd is highly allergic to crab meat, honey, and avocado. He can now eat all of these after charging wi", "photo": "photo_336@12-11-2021_15-45-48.jpg", "photos": ["photo_336@12-11-2021_15-45-48.jpg", "photo_337@12-11-2021_15-48-16.jpg", "photo_338@12-11-2021_15-48-16.jpg"], "nPhotos": 3, "ba": true, "sci": false, "founder": true, "products": ["Infinity Bloc", "HEAL Capsule", "Frequency Cards"], "desc": ""}, {"id": 414, "name": "Philipp Samor von Holtzendorff", "cat": "Health / Healing", "score": 8, "summary": "Here are my answers to your questions:1.) somewhat, but it’s not linear. Up to IB3 we measured it should not be more than 3 minutes cumulative. With l...", "raw": "Here are my answers to your questions:1.) somewhat, but it’s not linear. Up to IB3 we measured it should not be more than 3 minutes cumulative. With levels 4-7 I would personally keep it at under 1:30 minutes cumulative. 2.) our cards never come overcharged, so you can use them in the quantum bloc. It just gets tricky with an infinity bloc. In that case just create a large foil once in the ibloc (takes only 10-15 seconds). Then use the foil for frequency transfer moving forward. And use the card for the “regular” use.3.) doesn’t really work4.) nothing really gets close to metals in regards to level of absorption and transmission of quantum energy. There is no “rule” that works for everyone. I personally put my picture inside the IB (currently using 6 or 7 depending on where I’m at) for a few hours every day. That is NOT recommended at all to do in the beginning. It is something to gradua", "photo": "photo_646@21-04-2022_11-15-30.jpg", "photos": ["photo_646@21-04-2022_11-15-30.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": true, "products": ["Infinity Bloc", "Quantum Bloc"], "desc": ""}, {"id": 434, "name": "Emma", "cat": "Spiritual / Energy / Consciousness", "score": 8, "summary": "#repostSince “sleep” issues are so common currently and keep coming up I’m reposting the below for whoever is interested. It does require some “doing”...", "raw": "#repostSince “sleep” issues are so common currently and keep coming up I’m reposting the below for whoever is interested. It does require some “doing” obviously, but it can be a truly amazing experience after practicing this for several days in a row. Ok, following up on the poll results here’s the info about the kundalini “kriya”. It seems like a lot of text and things to do etc. But once you’ve read through it, you’ll notice how simple it is. After doing it once or twice, you will be able to repeat it anywhere without looking at any description. The more it’s practiced, the deeper the results. But it already starts to help with the first time.The connection to quantum energy is that we can have times where we either exposed ourselves to too much quantum energy, or where “stuff” (emotions, stress situations, fears etc.) comes up because of the energy we are surrounded by. If we’re not u", "photo": "photo_680@13-05-2022_12-58-57.jpg", "photos": ["photo_680@13-05-2022_12-58-57.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": true, "products": ["Not specified"], "desc": ""}, {"id": 456, "name": "Emma", "cat": "Spiritual / Energy / Consciousness", "score": 8, "summary": "#repostSince “sleep” issues are so common currently and keep coming up I’m reposting the below for whoever is interested. It does require some “doing”...", "raw": "#repostSince “sleep” issues are so common currently and keep coming up I’m reposting the below for whoever is interested. It does require some “doing” obviously, but it can be a truly amazing experience after practicing this for several days in a row. Ok, following up on the poll results here’s the info about the kundalini “kriya”. It seems like a lot of text and things to do etc. But once you’ve read through it, you’ll notice how simple it is. After doing it once or twice, you will be able to repeat it anywhere without looking at any description. The more it’s practiced, the deeper the results. But it already starts to help with the first time.The connection to quantum energy is that we can have times where we either exposed ourselves to too much quantum energy, or where “stuff” (emotions, stress situations, fears etc.) comes up because of the energy we are surrounded by. If we’re not u", "photo": "photo_714@19-05-2022_20-42-13.jpg", "photos": ["photo_714@19-05-2022_20-42-13.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": true, "products": ["Not specified"], "desc": ""}, {"id": 585, "name": "Philipp Samor von Holtzendorff", "cat": "Creative Use / DIY", "score": 8, "summary": "Yes you can. The paper frequency basically “dissolves”, it has zero impact. You can meditate with this numbers mantra, simply by repeating it for a fe...", "raw": "Yes you can. The paper frequency basically “dissolves”, it has zero impact. You can meditate with this numbers mantra, simply by repeating it for a few minutes (I suggest 3-15 minutes). But in addition or alternatively you can do the “quantum hack” I posted. Here it is again:“As a quantum hack you can place this mantra for the next 10 days in one of your Blocs with the intention to radiate through your whole home. Or in between for a while together with your photo. Or you can add it to the spheres in your capsule.“ Here are some Travel Bloc impressions ❤️👇 Cru is gluten-sensitive, but she was able to eat pizza, bread and pasta pretty much every day. This is NOT a recommendation for anyone to try this. But at the same time we want to share why this little Bloc followed us everywhere 😉 I don’t have any food sensitivities, but any juice, cappuccino or bread also feels better to me and has a", "photo": "photo_905@31-07-2022_18-51-57.jpg", "photos": ["photo_905@31-07-2022_18-51-57.jpg", "photo_906@31-07-2022_18-51-57.jpg", "photo_907@31-07-2022_18-51-57.jpg", "photo_908@31-07-2022_18-51-57.jpg"], "nPhotos": 11, "ba": true, "sci": false, "founder": true, "products": ["Travel Bloc", "HEAL Capsule", "Titanium Spheres"], "desc": ""}, {"id": 600, "name": "K. Elmer", "cat": "Pet Health / Behavior", "score": 8, "summary": "Just sharing a small quantum miracle. My dogs caught a small bird last night. I found it unconscious and seriously did not think it would live. Having...", "raw": "Just sharing a small quantum miracle. My dogs caught a small bird last night. I found it unconscious and seriously did not think it would live. Having no other options, decided to put it in an IB while holding it for a few minutes. I set an intention to lend it my Chi and for it to live. Afterwards, I wrapped it up and put it somewhere safe on top of a heating pad. I truly expected to find it dead this morning, but to my surprise, it was still alive, but very weak and still unable to move. I gave it some water, put it back in the nest I made and placed my other IB plates on each side of it. Same intention.I just checked (6 hrs later) and the bird was standing. I gave it more water and carried it outside. I opened my hand and it flew away. I am literally blown away. ❤️", "photo": "photo_938@17-08-2022_14-54-41.jpg", "photos": ["photo_938@17-08-2022_14-54-41.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": false, "products": ["Infinity Bloc"], "desc": ""}, {"id": 620, "name": "Philipp Samor von Holtzendorff", "cat": "Blood / Microscopy", "score": 8, "summary": "@everyone: we just received the study summary from Dr. Beverly Rubik in regards to the TRAVEL BLOC. It was done randomized, single-blind, and sham-con...", "raw": "@everyone: we just received the study summary from Dr. Beverly Rubik in regards to the TRAVEL BLOC. It was done randomized, single-blind, and sham-controlled. What was tested?- Before- After Wifi exposure- After 10 min of wifi exposure with Travel Bloc several meters away (Blocs were not touched, hands were not put in).Brief summary:“Results show readily observable, substantial changes in live blood morphology from short-term exposure to moderate levels of Wi-Fi radiation exposure in all of the four human subjects. RBC aggregation and stickiness as well as early fibrin were observed in live blood samples following 10 minutes of exposure to microwave radiation. The active Travel Bloc showed a visible reduction in the stickiness of red blood cells with reduced rouleaux formation AND especially reduced non-specific red blood cell aggregates, reduced early fibrin formation, and increased whi", "photo": "photo_966@02-09-2022_22-24-00.jpg", "photos": ["photo_966@02-09-2022_22-24-00.jpg"], "nPhotos": 1, "ba": true, "sci": true, "founder": true, "products": ["Travel Bloc"], "desc": ""}, {"id": 743, "name": "Brent", "cat": "Water Charging / Crystals / Taste", "score": 8, "summary": "Curious if anyone has seen these effects when charging with the HEAL capsule? I poured some filtered water from my fridge into the same glasses, both ...", "raw": "Curious if anyone has seen these effects when charging with the HEAL capsule? I poured some filtered water from my fridge into the same glasses, both room temp and dry, left the capsule by one for about 20 minutes and the other glass 10 foot away. Before doing a taste test I noticed the charged water glass had condensation. About a degree cooler when I tested the two with the thermometer.", "photo": "photo_1157@02-01-2023_11-06-59.jpg", "photos": ["photo_1157@02-01-2023_11-06-59.jpg", "photo_1158@02-01-2023_11-06-59.jpg", "photo_1159@02-01-2023_11-06-59.jpg"], "nPhotos": 3, "ba": true, "sci": false, "founder": false, "products": ["HEAL Capsule"], "desc": ""}, {"id": 928, "name": "Deleted Account", "cat": "Health / Healing", "score": 8, "summary": "I first came across LeelaQ products having seen an interview with Phillip and Dave Asprey, I researched a few more videos and purchased a TB and 4 pac...", "raw": "I first came across LeelaQ products having seen an interview with Phillip and Dave Asprey, I researched a few more videos and purchased a TB and 4 pack HEAL capsules, followed by a couple of frequency cards that arrived exactly 1 week before delivery due date, on my birthday. I already believed in Quantum Entanglement, but since that moment, I don’t think I’ve ever laughed so much in years, I hope I’m not alone in finding far more pros than cons in life with the help of Leela’s Quantum products.I've been healing from major stomach surgery (7 months ago) and 3 years of long c19, I've introduced countless new technologies, foods, supplements and other regimes, equally I've cut out similar amounts, but the single biggest benefit has been from the HEAL capsule and Travel Bloc, not only did they have a massive effect on pain and reduction of inflammation, they seemed to amplify the effects of", "photo": "photo_1427@01-08-2023_10-41-00.jpg", "photos": ["photo_1427@01-08-2023_10-41-00.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": false, "products": ["Travel Bloc", "HEAL Capsule", "Frequency Cards"], "desc": ""}, {"id": 1137, "name": "Amy", "cat": "Pet Health / Behavior", "score": 8, "summary": "My husband has been able to gain 15 pounds, has more energy, can digest his food, enjoy a wider variety of food, a clear mind, and is back to his happ...", "raw": "My husband has been able to gain 15 pounds, has more energy, can digest his food, enjoy a wider variety of food, a clear mind, and is back to his happy, peaceful personality after suffering from an inflamed brain, body, and gut from serious toxic mold illness, Lyme disease, and Bartonella infection for almost a decade.We have a healthy diet, proper supplements, receive biodynamic osteopathy, a rich spiritual life, a soul filling farm that gives horses, goats, cats, dogs, chickens, and a pig a chance to heal and to simply Be who they are❤️ We feel that the Leela products and Quantum Upgrade have been instrumental in helping us to heal. My husband has been able to return to being a competitive athlete, after barely being able to go for a hike last year. He uses the H.E.A.L capsule, Olympic Capsule and now the DNA Cell protector card everyday. He also uses the quantum underwear. He was just", "photo": "photo_1733@08-06-2024_10-47-33.jpg", "photos": ["photo_1733@08-06-2024_10-47-33.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": false, "products": ["HEAL Capsule", "Frequency Cards", "Quantum Upgrade", "Clothing & Wearables"], "desc": ""}, {"id": 1217, "name": "Kia", "cat": "Water Charging / Crystals / Taste", "score": 8, "summary": "I am beyond excited to welcome this cute and powerful first bloc into my life 🤍✨I have been waiting for this day! 🥰 I assembled it today for 6 hours a...", "raw": "I am beyond excited to welcome this cute and powerful first bloc into my life 🤍✨I have been waiting for this day! 🥰 I assembled it today for 6 hours as a start. I could feel it's energy very strongly, very different feeling than the QU. I do have a few practical questions, would love if someone could answer them for me. :)* Does it take 3 hours every time I disassemble and assemble it again? Or just the first time?* As I want to use it for charging bigger things, will leaving it on it's side (picture from the group I think from Mason? as a demonstration) be as potent as having it assembled normally?* Can I charge myself (let's say my leg or even my entire body) in it even though it might not be covering the whole hight? ( I assume it is still in a stronger field?)* Do I need to be careful and go slowly with charging food and water in the bloc? (I already drink structured water) And a few", "photo": "photo_1853@19-09-2024_19-02-55.jpg", "photos": ["photo_1853@19-09-2024_19-02-55.jpg", "photo_1854@19-09-2024_19-06-17.jpg"], "nPhotos": 2, "ba": true, "sci": false, "founder": false, "products": ["Frequency Cards"], "desc": "Gold Bloc held in hand outdoors + food charging between separated plates"}, {"id": 1449, "name": "Mars Malo", "cat": "Plant Growth / Revival", "score": 8, "summary": "1st Time Parents - Giveaway Entry:6 Months Ago we welcomed our beautiful baby girl into the world, and as new parents, creating a calm, supportive env...", "raw": "1st Time Parents - Giveaway Entry:6 Months Ago we welcomed our beautiful baby girl into the world, and as new parents, creating a calm, supportive environment for her development is everything to us. We Decided on a Home Birth, Keeping Everything as natural as possible with the Quantum Bloc alongside our bed throughout the Pregancy and on the day of the birth. We blessed as much of the Equipment for the birth along with her little baby clothes prior to her arrival. The Birth was a tough but magical experience! On Day 2 we decided to place our new born Anya into our Quantum Bloc.As stay at home parents, we make sure to take multiple power naps near the Quantum bloc. We feel more grounded and less overwhelmed—which we believe positively affects her as well. We are eager to include more healing quantum energy into our routine to continue to create a more loving, peaceful space for her to gr", "photo": "photo_2160@05-07-2025_00-06-56.jpg", "photos": ["photo_2160@05-07-2025_00-06-56.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": false, "products": ["Quantum Bloc"], "desc": ""}, {"id": 1498, "name": "Ascension", "cat": "Pet Health / Behavior", "score": 8, "summary": "While the idea of a \\\"Quantumometer\\\" is alluring, I infer that it would be \\\"useless.\\\" I have just upgraded the ten bracelets in IB Gen 100, and the res...", "raw": "While the idea of a \\\"Quantumometer\\\" is alluring, I infer that it would be \\\"useless.\\\" I have just upgraded the ten bracelets in IB Gen 100, and the resonance amplification is felt instantly, even at this point. I still don't believe that there is a ceiling/limit, and our embodiments always acclimate to the energy, without fail. Any quantifiable number from a \\\"Quantumometer\\\" is rendered useless if we always acclimate. I'll observe for a couple of days before I also upgrade the capsules and spheres, as well. The capsules, spheres, and bracelets were previously upgraded in IB Gen 50. I also took some pictures of the skin discoloration, which disappears after a couple of days if left unequipped.", "photo": "photo_2221@31-08-2025_17-14-37.jpg", "photos": ["photo_2221@31-08-2025_17-14-37.jpg", "photo_2222@31-08-2025_17-14-37.jpg", "photo_2223@31-08-2025_17-14-37.jpg"], "nPhotos": 3, "ba": true, "sci": false, "founder": false, "products": ["Infinity Bloc", "HEAL Capsule", "Titanium Spheres"], "desc": ""}, {"id": 1588, "name": "David P", "cat": "Health / Healing", "score": 8, "summary": "Hey all, just wanted to let you guys know that I received my four pack of the MALE capsules about two or three days ago and I must say the energy is o...", "raw": "Hey all, just wanted to let you guys know that I received my four pack of the MALE capsules about two or three days ago and I must say the energy is off the charts! I even feel like I had a slight detox and a major recalibration and it definitely stirred up some stagnant energy in my mind that needed addressing. I believe once I get used to the energy and I'll be able to move forward in many projects in life that I've been keeping on the back burner which have been holding me back from earning income.I assure everyone this is not a placebo effect as I am someone who is familiar with energy. I started off with just one sphere in the necklace and it definitely was throwing me a little bit for a loop, so I'm going to have to wear this for a day or two with just one sphere in it and removing it from my neck when the energy becomes too intense. I also played around with two spheres and I noti", "photo": "photo_2334@25-12-2025_17-26-58.jpg", "photos": ["photo_2334@25-12-2025_17-26-58.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": false, "products": ["HEAL Capsule", "Titanium Spheres"], "desc": ""}, {"id": 1634, "name": "K. Elmer", "cat": "Water Charging / Crystals / Taste", "score": 8, "summary": "Aloha Everyone!I thought I would start a Weekly Science Spotlight to share the amazing studies commissioned by Leela Quantum Tech on the effects of th...", "raw": "Aloha Everyone!I thought I would start a Weekly Science Spotlight to share the amazing studies commissioned by Leela Quantum Tech on the effects of their products and services on people, pets, etc. Starting today, I will post a new study every week starting with the most recent and going backwards in time. I know not everyone is interested in the sciency stuff, so I have condensed each study down to a short 6-7 min explainer video with the help of Google Notebook AI to give you a quick overview. For those who are, links to the study.If you are a customer of LeelaQ, you are part of the most revolutionary rediscovery of the power of quantum energy on the planet. No other company is moving our collective knowledge forward as much as they are and this is an incredible must share moment in history.K- Week 1 - https://drive.google.com/file/d/1dJ4HUsKWVjQm0YVv5dg4q7qChSR2dDm9/view?usp=sharing L", "photo": "photo_2396@08-02-2026_10-36-49.jpg", "photos": ["photo_2396@08-02-2026_10-36-49.jpg", "photo_2397@08-02-2026_10-37-23.jpg"], "nPhotos": 2, "ba": true, "sci": false, "founder": false, "products": ["Super Bloc"], "desc": ""}, {"id": 14, "name": "Philipp Samor von Holtzendorff", "cat": "Pet Health / Behavior", "score": 7, "summary": "Hi Rochelle and Martin the cat collars are currently in production, and should be available some day the week after next. So it won’t be this week. Ho...", "raw": "Hi Rochelle and Martin the cat collars are currently in production, and should be available some day the week after next. So it won’t be this week. However, we’re ok with applying a 15% discount for you and anyone in this group in the first week of its availability because we know you’ve been waiting for it. So whoever would like to get a cat collar, please send me a pm. I’ll then personally make sure you’ll get a special discount code for that product once it launches. Happy Sunday, everyone! Tomorrow the black friday 15% off sale starts sitewide: Just sent you a pm regarding your cat. Hope your cat gets better soon!! 🐈 ☀️ Generally yes if customs check on it. It depends on country, but I know e.g. Germany and Switzerland are very strict. Not sure about NL. Yes that’s correct 👍", "photo": "photo_20@22-11-2020_10-27-00.jpg", "photos": ["photo_20@22-11-2020_10-27-00.jpg", "photo_21@22-11-2020_10-27-48.jpg"], "nPhotos": 2, "ba": true, "sci": false, "founder": true, "products": ["Dog/Cat Collar"], "desc": ""}, {"id": 117, "name": "Trevor Raymond", "cat": "Pet Health / Behavior", "score": 7, "summary": "Hello all. I would like to share a healing experience that happened to my dog Gosh.@Philippvhf @RCH_RomanChristianHafnerCru Gosh is a German Shorthair...", "raw": "Hello all. I would like to share a healing experience that happened to my dog Gosh.@Philippvhf @RCH_RomanChristianHafnerCru Gosh is a German Shorthair Pointer who just turned 11 years old. He has always had the temperament of a puppy. Higher energy levels, easy to excite and play with, and always ready to go for a walk.May 8th, Gosh would not get out of bed. He did not wanted to get into bed the night before either. He seamed to be uncomfortable or in pain. Long story short, we took him to a pet hospital the morning he couldn't get out of bed. We were thinking he was not going to survive this due to his age. After some tests at the pet hospital we found out he had a tumor on his splean. It had been slowly bleading into his abdominal cavity. This explained his bloated appearance the few days before May 8th.As soon as we left the for the pet hospital my Dad put a picture of Gosh in our 1G ", "photo": "photo_201@28-06-2021_11-34-02.jpg", "photos": ["photo_201@28-06-2021_11-34-02.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": false, "products": ["Infinity Bloc"], "desc": ""}, {"id": 196, "name": "Philipp Samor von Holtzendorff", "cat": "Health / Healing", "score": 7, "summary": "I want to share something:Our 14-yr old son loves to dirtbike, and he participates in regional and national races. Today his bike had a defect. He sub...", "raw": "I want to share something:Our 14-yr old son loves to dirtbike, and he participates in regional and national races. Today his bike had a defect. He subsequently fell really bad and broke both of his wrists. As soon as Cru arrived at the hospital he put his wrists in the infinity bloc (4th gen). Cru texted me that within 15 min the swelling was reduced by half! And the healing process was kickstarted, traumatic energetic and physical shock started to already fade. What a blessing.Ups and downs in life…lessons, developments, insights, ways to look at things from a different perspective…all part of life. Life is not about avoiding the risks. It’s certainly also not about just chasing risks. But everyone has a different take on what s/he wants to do and experience in life, and what wants to be learned on the way. In our son’s case he doesn’t take this as an end to his motorbike dream, but as ", "photo": "photo_326@07-11-2021_21-29-52.jpg", "photos": ["photo_326@07-11-2021_21-29-52.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": true, "products": ["Infinity Bloc"], "desc": ""}, {"id": 227, "name": "BeverLi Joi", "cat": "Pet Health / Behavior", "score": 7, "summary": "My cat Raven gets in it every night and I make him get out after 1 minute because I'm worried it's too much. His collar is getting zapped every night....", "raw": "My cat Raven gets in it every night and I make him get out after 1 minute because I'm worried it's too much. His collar is getting zapped every night. Should I try to keep him out? Or does he know what's best for him? It's a second generation Infinity..... He's been with this technology for 8 months", "photo": "photo_379@15-12-2021_00-36-30.jpg", "photos": ["photo_379@15-12-2021_00-36-30.jpg", "photo_380@15-12-2021_00-36-30.jpg", "photo_381@15-12-2021_00-36-30.jpg"], "nPhotos": 3, "ba": true, "sci": false, "founder": false, "products": ["Not specified"], "desc": ""}, {"id": 288, "name": "Justin", "cat": "Health / Healing", "score": 7, "summary": "I love the giveaways! So many awesome experiences to read about.One experience I have is that I had a pain near the knuckle of my big toe. It had been...", "raw": "I love the giveaways! So many awesome experiences to read about.One experience I have is that I had a pain near the knuckle of my big toe. It had been there for a while and my wife was thinking I had a bone spur. I had started a routine of putting my hands in the infinity bloc in the morning and my feet in the evening. I noticed that while my foot was in the block, the pain was almost completely gone, unless I flexed the toe all the way. The pain slowly came back once the foot was out of the bloc. I have been doing this routine for almost 3 months and realized about a month ago that the pain in my toe was completely gone. Not even a tiny amount left. It took a little while but whatever was causing the pain has completely healed. Another experience/tink I have is that I cut up some wood dowels to use as extensions for the plates of the quantum bloc. The dowels are 2 feet long and perfect ", "photo": "photo_470@06-02-2022_13-49-26.jpg", "photos": ["photo_470@06-02-2022_13-49-26.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": false, "products": ["Infinity Bloc", "Quantum Bloc"], "desc": ""}, {"id": 466, "name": "Philipp Samor von Holtzendorff", "cat": "Product Setup / Unboxing", "score": 7, "summary": "Wonderful 💚 @CT_JACKSON thanks for mentioning it. It actually includes $5 handling fee for the warehouse, packaging material, and postage. But either ...", "raw": "Wonderful 💚 @CT_JACKSON thanks for mentioning it. It actually includes $5 handling fee for the warehouse, packaging material, and postage. But either way we are changing it to $10 moving forward if just the screws are ordered (within the US). The price of the screws will increase to $15 moving forward (from $12). We’re happy to provide the screws, but we can also not lose money when screws are ordered and shipped. They are custom made, unfortunately also cost shipping and handling before the even end up in the warehouse, and the warehouse neither stores for free, not packs or ships for free. That way it’ll be a total of $25 incl shipping & handling vs. $27. 🙏 Not for the outcome of the photo charging. But for having a camera with better energy. We won’t be able to do that. But possibly we can take the top 3 frequencies that people love, and offer them as capsules too. One issue is that t", "photo": "photo_731@22-05-2022_09-35-59.jpg", "photos": ["photo_731@22-05-2022_09-35-59.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": true, "products": ["HEAL Capsule"], "desc": ""}, {"id": 497, "name": "Wendy Basden", "cat": "Health / Healing", "score": 7, "summary": "I am a bit of a skeptic when it comes to external products and I rely on my body/nervous system as a compass to direct me to the truth.Here is the sho...", "raw": "I am a bit of a skeptic when it comes to external products and I rely on my body/nervous system as a compass to direct me to the truth.Here is the short version: I’ve been tracking my HRV for over 3 years. It hovers in the same place consistently. The bottom 2 scans in this photo show my HRV before wearing the HEAL capsule and then while wearing it. For those of you that understand sympathetic/parasympathetic, you will see this is a HUGE difference! Plus I dropped right into my heart area with the HEAL capsule around my neck. These last 2 scans were taken minutes apart.", "photo": "photo_775@13-06-2022_18-32-40.jpg", "photos": ["photo_775@13-06-2022_18-32-40.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": false, "products": ["HEAL Capsule"], "desc": ""}, {"id": 524, "name": "Philipp Samor von Holtzendorff", "cat": "EMF / Radiation Protection", "score": 7, "summary": "@everyone: Some of you had asked for men’s quantum underwear, with silver fabrics that is also antimicrobial, antibacterial, and EMF protective.Very s...", "raw": "@everyone: Some of you had asked for men’s quantum underwear, with silver fabrics that is also antimicrobial, antibacterial, and EMF protective.Very soon we’ll have these in stock 🥳 What’s unique about it:- emf protective and antimicrobial crotch- still looks good after many many washing cycles- charged with pure quantum energy which supports the important root chakra and sex organs areaAlso, we updated the beanies that will now have the mandala embroidered on the outside.I hope it’ll be ready by mid July. Here are some picture previews exclusively shared at this point in this group. 👇👇👇PS: the quantum t-shirts for men now also carry the mandala as shown on the below pictures. Those are already online.", "photo": "photo_813@24-06-2022_11-34-42.jpg", "photos": ["photo_813@24-06-2022_11-34-42.jpg", "photo_814@24-06-2022_11-34-42.jpg", "photo_815@24-06-2022_11-34-42.jpg", "photo_816@24-06-2022_11-34-42.jpg"], "nPhotos": 10, "ba": true, "sci": false, "founder": true, "products": ["Infinity Bloc", "Clothing & Wearables"], "desc": ""}, {"id": 643, "name": "Philipp Samor von Holtzendorff", "cat": "Spiritual / Energy / Consciousness", "score": 7, "summary": "We are 3 WEEKS out from the Music & Sky soul family gathering, Oct 13-16 in Cayuma Valley CA! This is going to be an unforgettable event for all those...", "raw": "We are 3 WEEKS out from the Music & Sky soul family gathering, Oct 13-16 in Cayuma Valley CA! This is going to be an unforgettable event for all those making the journey out. Get ready for a life-changing, immersive weekend journey of activating workshops, integrated healing experiences, inspiring and informative speakers, farm to table meals, art, and dancing to live music and DJs. Taking place at California's newest and finest all inclusive off-grid luxury venue, Cielos.This event is for ALL friends and family who seek a soul-nourishing, family connecting experience. Many are flying in! Kids are very welcome.There are still tickets left, but they're going fast! Last year, 700 attended but this year they are capping it to less attendees, to keep it more intimate. Grab your tickets while they are still available.This Music & Sky event will happen on 10/13 - 10/16 in Cuyama Valley.Leela Q", "photo": "photo_1009@24-09-2022_23-33-44.jpg", "photos": ["photo_1009@24-09-2022_23-33-44.jpg", "photo_1010@24-09-2022_23-33-48.jpg", "photo_1011@24-09-2022_23-34-50.jpg"], "nPhotos": 3, "ba": false, "sci": false, "founder": true, "products": ["Not specified"], "desc": ""}, {"id": 897, "name": "MNSR", "cat": "Water Charging / Crystals / Taste", "score": 7, "summary": "I’d like to share a tip for people who, like myself are wearing the capsules again their skin (I did a quick search in the chat but not sure anyone po...", "raw": "I’d like to share a tip for people who, like myself are wearing the capsules again their skin (I did a quick search in the chat but not sure anyone posted something similar).After a few days the capsule becomes dark. So to give its shine back, I use a natural product based on white clay and some essential oils. You just need to rub the capsule with a bit of water, the white clay and voilà!You can see the before and after pictures below. I bought it in some organic shop here in France but I guess it’s quite common to find anywhere else. It’s also great on copper, if you have the Q copper bracelet getting oxidised after a while. Hope it helps 😉", "photo": "photo_1382@11-06-2023_16-35-46.jpg", "photos": ["photo_1382@11-06-2023_16-35-46.jpg", "photo_1383@11-06-2023_16-35-53.jpg", "photo_1384@11-06-2023_16-35-58.jpg"], "nPhotos": 3, "ba": true, "sci": false, "founder": false, "products": ["HEAL Capsule"], "desc": ""}, {"id": 926, "name": "Mars Malo", "cat": "Water Charging / Crystals / Taste", "score": 7, "summary": "In the middle of May, we had a big opportunity to work along some pretty big names in the Pro Wrestling Industry. On our 5 hour drive, we happened to ...", "raw": "In the middle of May, we had a big opportunity to work along some pretty big names in the Pro Wrestling Industry. On our 5 hour drive, we happened to be listening to the Dave Asprey Podcast that mentioned the 2 week Quantum Upgrade Subscription Trial. We already own the Quantum Block & take the Travel Block with us at other shows. We decided we needed all the Quantum Blessings we could get, so we signed up! As the event is coming to a close, we ask the WWE Hall of Famer & Promoter of the Live Event, Booker T if we could get a picture. He happily agrees & thanks us for supporting the athletes after they perform & then says that we are welcome to come back anytime & they would love to invite us to their new training facility that is in the works! A few weeks ago, we returned to participate at \\\"Summer of Champions\\\" which became their biggest show ever, breaking all previous attendance recor", "photo": "photo_1425@31-07-2023_01-15-25.jpg", "photos": ["photo_1425@31-07-2023_01-15-25.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": false, "products": ["Quantum Bloc", "Travel Bloc", "Quantum Upgrade"], "desc": ""}, {"id": 927, "name": "Rachel", "cat": "Health / Healing", "score": 7, "summary": "After several days of intense exercise and hot weather, my husband was experiencing severe muscle cramps in his legs and feet to the point of being in...", "raw": "After several days of intense exercise and hot weather, my husband was experiencing severe muscle cramps in his legs and feet to the point of being in terrible pain. I had him hold the HEAL capsule for a couple of minutes with no difference, but then he also picked up a sphere of howlite that we had sitting on the mantle next to a large piece of pink quartz. Holding both the capsule and the howlite, the muscle cramps immediately lessened and stopped. He was pretty blown away. Any of you who know about crystals--is there any relationship between howlite and pink quartz? I assume they both worked together with the energy from the capsule...", "photo": "photo_1426@01-08-2023_09-50-55.jpg", "photos": ["photo_1426@01-08-2023_09-50-55.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": false, "products": ["HEAL Capsule", "Titanium Spheres"], "desc": ""}, {"id": 1062, "name": "István I.", "cat": "Pet Health / Behavior", "score": 7, "summary": "Thanks for all the responses my friends! Work in progress 🙏😃 Well, I got answers only partly so far, maybe the answers to some questions are not known...", "raw": "Thanks for all the responses my friends! Work in progress 🙏😃 Well, I got answers only partly so far, maybe the answers to some questions are not known yet at all? 🤔 Like in several other cases: \\\"it's not been tested yet...\\\" For me it seems now based on the answer that charging foods&drinks with TraumEZ is just the same like charging them in a bloc, I think. So this statement on the TraumEZ website about adding the lacking nutrients because of soil depletion is not specific to TraumEZ, but the general harmonization/optimization effect by QE was meant by this sentence...?? 🤔 I'm really curious about this... Further questions...- How strong is the TraumEZ: can my phone overcharge metals, like the blocs other than the QB? (I guess not...)- Can it copy frequencies? (again, I guess not, otherwise everything that is near my phone, for example in my pocket etc would be copied over all the time) ", "photo": "photo_1628@12-03-2024_09-40-50.jpg", "photos": ["photo_1628@12-03-2024_09-40-50.jpg"], "nPhotos": 1, "ba": false, "sci": false, "founder": false, "products": ["Quantum Bloc", "Grand Bloc"], "desc": ""}, {"id": 1096, "name": "D", "cat": "Plant Growth / Revival", "score": 7, "summary": "I had a concern, I was charging meals in a grand bloc and was curious about my meals temperature and to check if my meal was warm enough.I used this l...", "raw": "I had a concern, I was charging meals in a grand bloc and was curious about my meals temperature and to check if my meal was warm enough.I used this laser thermometer while it was in the bloc. I was unsure now if infrared laser beams are safe in the bloc? I don’t intend to do this again, but I’d like to double check with you guys if this is something to be avoided like how K. Says never place magnets in or near the bloc@PhilippSamorvhf @LeelaSupport Also, I was wondering if the leela blocs have the ability to make food nutrients more bioavailable and increase the prana of the food after 4 minutes in grand bloc", "photo": "photo_1669@21-04-2024_18-54-24.jpg", "photos": ["photo_1669@21-04-2024_18-54-24.jpg"], "nPhotos": 1, "ba": true, "sci": false, "founder": false, "products": ["Grand Bloc"], "desc": ""}, {"id": 1159, "name": "Syl_ Cha", "cat": "Plant Growth / Revival", "score": 7, "summary": "I was able to test the frequency just 1 evening, because it's been raining since then.The test was conclusive : no mosquitoes on the patio!I will shar...", "raw": "I was able to test the frequency just 1 evening, because it's been raining since then.The test was conclusive : no mosquitoes on the patio!I will share more results after a couple of days of testing. Waiting for the sun! I must say: this is all influenced by K. 's video: THE QUANTUM GARDEN (2023).I take notes from his videos, in my «QE notebook», and when I have time, I try a few things! What I did this spring:-Put all my seeds in the QBloc-Did the initial watering with QE charged water : I charged my metal watering can, in my Bloc. I can't water all my garden this way all summer long (would be too long!) , but a few waterings with it, here and there, seems to help !-I frequently bring my QBloc in the garden and leave it there for the daymany many great ideas in K's video ! Great idea: I'll do the same weekly, with my spare change! 🙏", "photo": "photo_1772@24-06-2024_15-23-18.jpg", "photos": ["photo_1772@24-06-2024_15-23-18.jpg"], "nPhotos": 1, "ba": true, "sci": true, "founder": false, "products": ["Quantum Bloc"], "desc": ""}, {"id": 1199, "name": "Nah-ore", "cat": "EMF / Radiation Protection", "score": 7, "summary": "Todd for sure had one, him and I have talked about it. Its def not a laser. ITs a super basic LED panel, from before even Joov became popular and popu...", "raw": "Todd for sure had one, him and I have talked about it. Its def not a laser. ITs a super basic LED panel, from before even Joov became popular and popuarlized bigger more powerful panels. But she always claimed to be infusing the light with frequneices / energy beyond just the light. I never really believed her tbh despite owning one myself. But its been in storage for probably 6 years Picture of Todd on her website actually lol I stopped using mine when I measured the EMF coming off of it, was off the charts. Brings body voltage almost up to 2.0 if I remember", "photo": "photo_1828@22-08-2024_08-44-36.jpg", "photos": ["photo_1828@22-08-2024_08-44-36.jpg", "photo_1829@22-08-2024_08-46-53.jpg"], "nPhotos": 2, "ba": true, "sci": false, "founder": false, "products": ["Not specified"], "desc": ""}, {"id": 1212, "name": "Mary Deeny", "cat": "Seed Germination", "score": 7, "summary": "So first time planting a garden in my life! Watered seeds with charged water. 3 days and I have sprouted green beans, peas, spinach, Kohl Rob, cabbage...", "raw": "So first time planting a garden in my life! Watered seeds with charged water. 3 days and I have sprouted green beans, peas, spinach, Kohl Rob, cabbage.Is it normal to sprout seeds in 3 days? Planted seeds Friday afternoon. I'm shocked truly.", "photo": "photo_1845@09-09-2024_17-52-09.jpg", "photos": ["photo_1845@09-09-2024_17-52-09.jpg", "photo_1846@09-09-2024_17-52-10.jpg", "photo_1847@09-09-2024_17-52-10.jpg"], "nPhotos": 3, "ba": true, "sci": false, "founder": false, "products": ["Not specified"], "desc": "Seedling trays by window - first-time garden with charged water showing sprouting"}];
+const ALL_EXPERIMENTS = [...HERO, ...SCIENCE, ...GALLERY];
+
+const CAT_COUNTS = {'All':1096,'Blood / Microscopy':34,'Water Charging / Crystals / Taste':200,'Pet Health / Behavior':159,'Plant Growth / Revival':102,'Seed Germination':5,'Health / Healing':118,'Spiritual / Energy / Consciousness':96,'Food Charging':16,'EMF / Radiation Protection':77,'Business / Location':96,'Creative Use / DIY':80,'Product Setup / Unboxing':95,'Scientific Study / Research':18};
+
+const HERO_CAPTIONS = [
+  {headline:"Blood cells BEFORE wearing the T-shirt vs AFTER 5 minutes", brass:"Cells don't have opinions. They just heal — or they don't."},
+  {headline:"Dr. Beverly Rubik's sham-controlled study: 100% reversal of WiFi blood damage", brass:"Name another company with 59 studies. We'll wait."},
+  {headline:"Dark field microscopy: quantum jacket's effect on blood in real time", brass:"The Emoto Institute didn't endorse it. They LICENSED it."},
+  {headline:"Father-daughter seed experiment: charged seeds sprouted Day 3, control still dormant", brass:"Plants can't be placebo'd."},
+  {headline:"Day 5: normal water (N) vs quantum-charged water (Q). Same flower, same vase.", brass:"Water doesn't have beliefs."}
+];
+
+// ============ HERO CAROUSEL ============
+const slidesEl = document.getElementById('heroSlides');
+const dotsEl = document.getElementById('heroDots');
+let currentSlide = 0;
+
+HERO.forEach((e, i) => {
+  const cap = HERO_CAPTIONS[i] || {};
+  const slide = document.createElement('div');
+  slide.className = 'hero-slide' + (i===0?' active':'');
+  slide.innerHTML = `
+    <div class="hero-inner">
+      <div class="hero-img-wrap">
+        <img src="images/${e.photo}" alt="${e.cat}" onerror="this.style.display='none'">
+        <div class="placeholder">📷 ${e.nPhotos} photo${e.nPhotos>1?'s':''}</div>
+        <div class="hero-badge-row">
+          ${e.ba?'<span class="hero-badge ba">Before / After</span>':''}
+          ${e.sci?'<span class="hero-badge sci">Scientific</span>':''}
+        </div>
+      </div>
+      <div class="hero-content">
+        <h2>${cap.headline || e.summary}</h2>
+        <p class="caption">${e.summary.substring(0,200)}</p>
+        <div class="brass-quote">${cap.brass || ''}</div>
+      </div>
+    </div>
+  `;
+  slidesEl.appendChild(slide);
+
+  const dot = document.createElement('div');
+  dot.className = 'hero-dot' + (i===0?' active':'');
+  dot.onclick = () => goToSlide(i);
+  dotsEl.appendChild(dot);
 });
-// Also show/hide brass balls based on filter
-document.querySelectorAll('.brass').forEach(b=>{
-if(cat==='All'){b.style.display='block'}else{b.style.display='none'}
-});
+
+function goToSlide(n) {
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+  slides.forEach(s => s.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+  slides[n].classList.add('active');
+  dots[n].classList.add('active');
+  currentSlide = n;
+  document.getElementById('heroIdx').textContent = String(n+1).padStart(2,'0');
 }
 
-// Lightbox
-let lbImages=[];let lbIndex=0;
-function openLightbox(images,index){
-lbImages=images;lbIndex=index;
-document.getElementById('lightbox-img').src=images[index];
-document.getElementById('lightbox').classList.add('active');
-updateCounter();
-document.body.style.overflow='hidden';
-}
-function closeLightbox(e){
-if(e.target.classList.contains('lightbox')||e.target.classList.contains('lightbox-close')){
-document.getElementById('lightbox').classList.remove('active');
-document.body.style.overflow='';
-}
-}
-function navLightbox(dir){
-lbIndex=(lbIndex+dir+lbImages.length)%lbImages.length;
-document.getElementById('lightbox-img').src=lbImages[lbIndex];
-updateCounter();
-}
-function updateCounter(){
-const c=document.getElementById('lightbox-counter');
-if(lbImages.length>1){c.textContent=`${lbIndex+1} / ${lbImages.length}`}else{c.textContent=''}
-document.querySelector('.lightbox-prev').style.display=lbImages.length>1?'flex':'none';
-document.querySelector('.lightbox-next').style.display=lbImages.length>1?'flex':'none';
-}
-document.addEventListener('keydown',e=>{
-if(!document.getElementById('lightbox').classList.contains('active'))return;
-if(e.key==='Escape'){document.getElementById('lightbox').classList.remove('active');document.body.style.overflow=''}
-if(e.key==='ArrowLeft')navLightbox(-1);
-if(e.key==='ArrowRight')navLightbox(1);
+setInterval(() => {
+  goToSlide((currentSlide + 1) % HERO.length);
+}, 6000);
+
+// ============ COUNTER ANIMATION ============
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('[data-count]').forEach(el => {
+        const target = +el.dataset.count;
+        if (target === 0) { el.textContent = '0'; return; }
+        let current = 0;
+        const step = Math.max(1, target / 50);
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) { el.textContent = target.toLocaleString(); clearInterval(timer); }
+          else el.textContent = Math.floor(current).toLocaleString();
+        }, 30);
+      });
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+counterObserver.observe(document.querySelector('.stat-bar'));
+
+// ============ SCIENCE GRID ============
+const sciGrid = document.getElementById('scienceGrid');
+SCIENCE.forEach(e => {
+  sciGrid.innerHTML += `
+    <div class="sci-card" onclick="openModal(${e.id})">
+      <div class="sci-card-img">
+        <img src="images/${e.photo}" alt="${e.cat}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="placeholder" style="display:none">🔬 ${e.nPhotos} photo${e.nPhotos>1?'s':''}</span>
+        <div class="sci-card-overlay">
+          <span class="sci-pill">Scientific</span>
+          ${e.ba?'<span class="sci-pill ba">B/A</span>':''}
+        </div>
+      </div>
+      <div class="sci-card-body">
+        <div class="sci-card-name">${e.founder?'<span class="founder-tag">Official · Leela Quantum Tech</span><br>':''}${e.name}</div>
+        <div class="sci-card-summary">${e.summary}</div>
+        <div class="sci-card-link">Read original post →</div>
+      </div>
+    </div>
+  `;
 });
 
-// Animate cards on scroll
-const observer=new IntersectionObserver((entries)=>{
-entries.forEach(e=>{if(e.isIntersecting){e.target.style.animation='fadeUp 0.6s ease forwards';observer.unobserve(e.target)}});
-},{threshold:0.1});
-document.querySelectorAll('.card,.brass').forEach(c=>observer.observe(c));
+// ============ CATEGORY FILTERS ============
+const FILTER_CATS = ['All','Blood / Microscopy','Water Charging / Crystals / Taste','Pet Health / Behavior','Plant Growth / Revival','Seed Germination','Health / Healing','Spiritual / Energy / Consciousness','Food Charging','EMF / Radiation Protection','Business / Location','Creative Use / DIY'];
+const filtersEl = document.getElementById('filters');
+FILTER_CATS.forEach(c => {
+  const btn = document.createElement('button');
+  btn.className = 'filter-btn' + (c==='All'?' active':'');
+  btn.textContent = c==='All' ? `All · ${CAT_COUNTS.All.toLocaleString()}` : `${c} · ${CAT_COUNTS[c]||'—'}`;
+  btn.onclick = () => {
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderGallery(c);
+  };
+  filtersEl.appendChild(btn);
+});
+
+// ============ MASONRY GALLERY (BATCHED) ============
+const IMG_HEIGHTS = ['h-md','h-lg','h-sm','h-md','h-sm','h-lg','h-md','h-sm','h-lg','h-md','h-sm','h-md'];
+const BATCH_SIZE = 30;
+let currentFilter = 'All';
+let currentBatch = 0;
+let currentItems = [];
+
+function getFilteredItems(cat) {
+  return cat==='All' ? GALLERY : GALLERY.filter(e => e.cat===cat);
+}
+
+function renderCard(e, globalIndex) {
+  return `
+    <div class="card" onclick="openModal(${e.id})">
+      <div class="card-img ${IMG_HEIGHTS[globalIndex % IMG_HEIGHTS.length]}">
+        <img src="images/${e.photo}" alt="${e.cat}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="placeholder" style="display:none">📷 ${e.nPhotos} photo${e.nPhotos>1?'s':''}</span>
+        <div class="card-pills">
+          <span class="pill pill-cat">${e.cat}</span>
+          ${e.ba?'<span class="pill pill-ba">B/A</span>':''}
+          ${e.sci?'<span class="pill pill-sci">Sci</span>':''}
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <span class="card-name">${e.founder?'<span class="founder-tag">Official · Leela Quantum Tech</span> ':''}${e.name}</span>
+          <span class="card-score">${e.score}/10</span>
+        </div>
+        <div class="card-summary">${e.summary}</div>
+        <div class="card-read">Read original post <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+    </div>
+  `;
+}
+
+function renderDepthReminder(seen, total) {
+  const remaining = total - seen;
+  const pct = Math.round((seen / total) * 100);
+  return `
+    <div class="depth-reminder">
+      <p>You've seen ${seen} experiments. There are ${remaining.toLocaleString()} more.</p>
+      <div class="depth-bar"><div class="depth-fill" style="width:${pct}%"></div></div>
+    </div>
+  `;
+}
+
+function updateStatus() {
+  const total = CAT_COUNTS[currentFilter] || CAT_COUNTS.All;
+  const shown = Math.min(currentBatch * BATCH_SIZE, currentItems.length);
+  document.getElementById('galleryStatus').textContent = `Showing ${shown} of ${total.toLocaleString()} experiments`;
+}
+
+function renderGallery(cat) {
+  currentFilter = cat;
+  currentBatch = 0;
+  currentItems = getFilteredItems(cat);
+  document.getElementById('grid').innerHTML = '';
+  loadNextBatch();
+}
+
+function loadNextBatch() {
+  const grid = document.getElementById('grid');
+  const start = currentBatch * BATCH_SIZE;
+  const end = Math.min(start + BATCH_SIZE, currentItems.length);
+  const total = CAT_COUNTS[currentFilter] || CAT_COUNTS.All;
+  let html = '';
+
+  // Depth reminder at start of new batch (except first batch)
+  if (currentBatch > 0) {
+    html += renderDepthReminder(start, total);
+  }
+
+  for (let i = start; i < end; i++) {
+    html += renderCard(currentItems[i], i);
+  }
+
+  grid.innerHTML += html;
+  currentBatch++;
+  updateStatus();
+
+  // Show/hide Load More button
+  const wrap = document.getElementById('loadMoreWrap');
+  if (end < currentItems.length) {
+    wrap.style.display = 'block';
+    const remaining = currentItems.length - end;
+    const totalRemaining = total - end;
+    document.getElementById('loadMoreBtn').textContent = `Load ${Math.min(BATCH_SIZE, remaining)} More Experiments`;
+  } else {
+    wrap.style.display = 'none';
+    // Show final depth reminder if there are more experiments in the full dataset than we have loaded
+    if (currentItems.length < total) {
+      grid.innerHTML += `
+        <div class="depth-reminder">
+          <p>Showing ${currentItems.length} of ${total.toLocaleString()} experiments in this category. Full dataset loading soon.</p>
+          <div class="depth-bar"><div class="depth-fill" style="width:${Math.round((currentItems.length/total)*100)}%"></div></div>
+        </div>
+      `;
+    }
+  }
+}
+
+document.getElementById('loadMoreBtn').addEventListener('click', loadNextBatch);
+
+// ============ MODAL ============
+function openModal(id) {
+  const e = ALL_EXPERIMENTS.find(x => x.id === id);
+  if (!e) return;
+  const rawText = e.raw.replace(/\n/g, '\n');
+  document.getElementById('modal').innerHTML = `
+    <div class="modal-close"><button onclick="closeModal()">✕ Close</button></div>
+    <img class="modal-img" src="images/${e.photo}" alt="${e.cat}" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <span class="modal-pill">${e.cat}</span>
+      <div class="modal-name">${e.name}</div>
+      <div class="modal-stamp">Shared in the LeelaQ community. Unedited.</div>
+      <div class="modal-divider"></div>
+      <div class="modal-label">Original community post</div>
+      <div class="modal-raw">${rawText}</div>
+      <div class="modal-products">${e.products.map(p=>`<span>${p}</span>`).join('')}</div>
+    </div>
+  `;
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// Init
+renderGallery('All');
 </script>
 </body>
 </html>
