@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Wellness Industry Has an iPhone Problem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #141414;
+  --bg-card-hover: #1a1a1a;
+  --text: #f0ede6;
+  --text-dim: #8a8880;
+  --accent: #e8372c;
+  --accent-glow: rgba(232, 55, 44, 0.15);
+  --green: #34d399;
+  --gold: #f5c542;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'Space Grotesk', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── UTILITY ── */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 24px;
+  position: relative;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(232,55,44,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.2s forwards;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(42px, 7vw, 88px);
+  line-height: 1.05;
+  font-weight: 400;
+  max-width: 900px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.4s forwards;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero-sub {
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--text-dim);
+  max-width: 600px;
+  margin-top: 28px;
+  font-weight: 300;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.6s forwards;
+}
+.scroll-cue {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-dim);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 1s forwards;
+}
+.scroll-cue .arrow {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--text-dim), transparent);
+  animation: pulse 2s ease infinite;
+}
+
+/* ── SECTIONS ── */
+section {
+  padding: 120px 24px;
+  position: relative;
+}
+section.dark-section {
+  background: #0e0e0e;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.section-number {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.15;
+  margin-bottom: 24px;
+  max-width: 800px;
+}
+.section-title em { font-style: italic; color: var(--accent); }
+.section-text {
+  font-size: 18px;
+  color: var(--text-dim);
+  max-width: 680px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+.section-text strong { color: var(--text); font-weight: 500; }
+
+/* ── RADIO SHACK SECTION ── */
+.radioshack-frame {
+  margin: 48px auto;
+  max-width: 560px;
+  position: relative;
+}
+.radioshack-frame img {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.1);
+  filter: sepia(0.15) contrast(1.05);
+}
+.radioshack-label {
+  position: absolute;
+  bottom: -16px;
+  right: -16px;
+  background: var(--accent);
+  color: white;
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 8px 16px;
+  letter-spacing: 1px;
+}
+.year-tag {
+  font-family: var(--mono);
+  font-size: 80px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.04);
+  position: absolute;
+  top: -30px;
+  left: -20px;
+  user-select: none;
+}
+
+/* ── DEVICE COUNT ── */
+.device-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 2px;
+  margin: 48px 0;
+}
+.device-item {
+  background: var(--bg-card);
+  padding: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-dim);
+  border: 1px solid rgba(255,255,255,0.04);
+  transition: all 0.3s ease;
+}
+.device-item .emoji { font-size: 28px; display: block; margin-bottom: 8px; }
+.device-item:hover { background: var(--bg-card-hover); color: var(--text); }
+
+/* ── IPHONE REVEAL ── */
+.reveal-block {
+  text-align: center;
+  padding: 80px 24px;
+}
+.reveal-block .big-emoji { font-size: 80px; margin-bottom: 24px; }
+.reveal-text {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.2;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.reveal-text em { font-style: italic; color: var(--accent); }
+.reveal-sub {
+  font-size: 16px;
+  color: var(--text-dim);
+  margin-top: 20px;
+  font-weight: 300;
+}
+
+/* ── WELLNESS RADIO SHACK ── */
+.wellness-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 48px 0;
+}
+.wellness-item {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.wellness-item:hover { border-color: rgba(255,255,255,0.12); transform: translateY(-2px); }
+.wellness-item .item-emoji { font-size: 24px; margin-bottom: 8px; }
+.wellness-item .item-name { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+.wellness-item .item-for { font-size: 12px; color: var(--text-dim); margin-bottom: 8px; }
+.wellness-item .item-cost {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.total-bar {
+  background: linear-gradient(135deg, rgba(232,55,44,0.1), rgba(232,55,44,0.05));
+  border: 1px solid rgba(232,55,44,0.2);
+  border-radius: 8px;
+  padding: 32px;
+  text-align: center;
+  margin: 40px 0;
+}
+.total-bar .total-label {
+  font-size: 14px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.total-bar .total-amount {
+  font-family: var(--serif);
+  font-size: 48px;
+  color: var(--accent);
+}
+.total-bar .total-note {
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-top: 8px;
+}
+
+/* ── BIG QUESTION ── */
+.big-question {
+  text-align: center;
+  padding: 100px 24px;
+  position: relative;
+}
+.big-question::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at center, rgba(232,55,44,0.04) 0%, transparent 70%);
+}
+.big-question h2 {
+  font-family: var(--serif);
+  font-size: clamp(36px, 6vw, 72px);
+  line-height: 1.1;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+.big-question h2 em { font-style: italic; color: var(--accent); }
+.big-question p {
+  font-size: 18px;
+  color: var(--text-dim);
+  margin-top: 24px;
+  font-weight: 300;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+/* ── THE ANSWER ── */
+.answer-section {
+  text-align: center;
+  padding: 80px 24px 40px;
+}
+.answer-eyebrow {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--green);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.answer-title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.answer-title em { font-style: italic; color: var(--green); }
+.answer-sub {
+  font-size: 20px;
+  color: var(--text-dim);
+  font-weight: 300;
+  max-width: 650px;
+  margin: 0 auto 48px;
+}
+
+/* ── 3-STEP PROOF ── */
+.three-steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin: 48px auto;
+  max-width: 600px;
+}
+.step-box {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 28px 40px;
+  text-align: center;
+  width: 100%;
+  font-size: 20px;
+  font-weight: 500;
+}
+.step-box .step-emoji { font-size: 28px; margin-right: 8px; }
+.step-arrow {
+  font-size: 24px;
+  color: var(--text-dim);
+  padding: 8px 0;
+}
+
+/* ── RESULTS GRID ── */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+  margin: 48px 0;
+}
+.result-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(52, 211, 153, 0.1);
+  border-radius: 10px;
+  padding: 20px 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.result-card:hover {
+  border-color: rgba(52, 211, 153, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(52, 211, 153, 0.08);
+}
+.result-card .r-emoji { font-size: 32px; margin-bottom: 8px; }
+.result-card .r-name { font-size: 13px; font-weight: 500; }
+.result-card .r-check {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  color: var(--green);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ── COMPARISON BAR ── */
+.compare-section { margin: 64px 0; }
+.compare-row {
+  display: grid;
+  grid-template-columns: 1fr 120px 100px;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 15px;
+}
+.compare-row:first-child { border-top: 1px solid rgba(255,255,255,0.04); }
+.compare-row .c-name { color: var(--text-dim); }
+.compare-row .c-cost { font-family: var(--mono); color: var(--text-dim); text-align: right; }
+.compare-row .c-bar {
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-left: 16px;
+}
+.compare-row .c-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--accent);
+  transition: width 1s ease;
+}
+.compare-row.highlight {
+  padding: 20px 0;
+  border-bottom: 2px solid rgba(52, 211, 153, 0.2);
+}
+.compare-row.highlight .c-name { color: var(--green); font-weight: 600; }
+.compare-row.highlight .c-cost { color: var(--green); font-weight: 600; }
+.compare-row.highlight .c-bar-fill { background: var(--green); }
+
+/* ── PROOF FOOTER ── */
+.proof-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2px;
+  margin: 64px 0 0;
+}
+.proof-stat {
+  background: var(--bg-card);
+  padding: 28px 20px;
+  text-align: center;
+}
+.proof-stat .stat-num {
+  font-family: var(--serif);
+  font-size: 36px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.proof-stat .stat-label {
+  font-size: 12px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ── CTA ── */
+.cta-section {
+  text-align: center;
+  padding: 100px 24px;
+  position: relative;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at center, rgba(52,211,153,0.05) 0%, transparent 60%);
+}
+.cta-title {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.2;
+  margin-bottom: 16px;
+  position: relative;
+}
+.cta-title em { font-style: italic; color: var(--green); }
+.cta-sub {
+  font-size: 18px;
+  color: var(--text-dim);
+  font-weight: 300;
+  margin-bottom: 40px;
+  position: relative;
+}
+.cta-button {
+  display: inline-block;
+  background: var(--green);
+  color: #0a0a0a;
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 18px 48px;
+  border-radius: 60px;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(52,211,153,0.25); }
+.cta-fine {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 16px;
+  position: relative;
+}
+
+/* ── BRASS BALLS QUOTE ── */
+.brass-quote {
+  text-align: center;
+  padding: 60px 24px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.brass-quote blockquote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(20px, 3vw, 28px);
+  color: var(--text-dim);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+.brass-quote blockquote em { color: var(--text); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── STRIKETHROUGH EFFECT ── */
+.strike-list {
+  margin: 40px 0;
+  text-align: center;
+}
+.strike-item {
+  font-size: clamp(18px, 2.5vw, 28px);
+  font-family: var(--serif);
+  color: var(--text-dim);
+  line-height: 2;
+  text-decoration: line-through;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  opacity: 0.5;
+}
+
+/* ── PROOF SITE BLOCKS ── */
+.proof-site-block { padding: 20px 0; }
+.proof-site-number {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.site-cta-row {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.site-link {
+  display: inline-flex;
+  flex-direction: column;
+  text-decoration: none;
+  padding: 24px 36px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.site-link::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.site-link:hover { transform: translateY(-2px); }
+.site-link:hover::before { opacity: 1; }
+.site-link-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
+}
+.site-link-url {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 400;
+  position: relative;
+  z-index: 1;
+}
+
+/* Science link */
+.science-link {
+  background: rgba(232, 55, 44, 0.08);
+  border: 1px solid rgba(232, 55, 44, 0.2);
+}
+.science-link .site-link-eyebrow { color: var(--accent); }
+.science-link .site-link-url { color: var(--accent); }
+.science-link:hover { box-shadow: 0 8px 40px rgba(232, 55, 44, 0.15); }
+
+/* Testimonial link */
+.testimonial-link {
+  background: rgba(245, 197, 66, 0.06);
+  border: 1px solid rgba(245, 197, 66, 0.2);
+}
+.testimonial-link .site-link-eyebrow { color: var(--gold); }
+.testimonial-link .site-link-url { color: var(--gold); }
+.testimonial-link:hover { box-shadow: 0 8px 40px rgba(245, 197, 66, 0.12); }
+
+/* Experiment link */
+.experiment-link {
+  background: rgba(52, 211, 153, 0.06);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+}
+.experiment-link .site-link-eyebrow { color: var(--green); }
+.experiment-link .site-link-url { color: var(--green); }
+.experiment-link:hover { box-shadow: 0 8px 40px rgba(52, 211, 153, 0.12); }
+
+.site-dare {
+  font-size: 16px;
+  color: var(--text-dim);
+  font-weight: 300;
+  max-width: 600px;
+  line-height: 1.7;
+  font-style: italic;
+}
+.site-dare strong { color: var(--text); font-weight: 500; font-style: normal; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  section { padding: 80px 20px; }
+  .wellness-grid { grid-template-columns: 1fr 1fr; }
+  .results-grid { grid-template-columns: repeat(3, 1fr); }
+  .compare-row { grid-template-columns: 1fr 90px; }
+  .compare-row .c-bar { display: none; }
+  .proof-strip { grid-template-columns: repeat(2, 1fr); }
+  .device-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 480px) {
+  .wellness-grid { grid-template-columns: 1fr; }
+  .results-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-eyebrow">A thought experiment</div>
+  <h1>What if there was an <em>iPhone moment</em> for your health?</h1>
+  <p class="hero-sub">The technology revolution that changed everything about how we communicate already happened. The one for wellness is happening right now. Most people just haven't noticed yet.</p>
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<!-- ═══════════ ACT 1: THE RADIO SHACK AD ═══════════ -->
+<section class="dark-section">
+  <div class="container fade-in">
+    <div class="section-number">Part 01</div>
+    <h2 class="section-title">Remember <em>this?</em></h2>
+    <p class="section-text">This is an actual Radio Shack ad. Every single device on this page — the computer, the cell phone, the camcorder, the CD player, the answering machine, the radar detector, the scanner, the cassette recorder — <strong>all of it fits in your pocket now.</strong></p>
+
+    <div class="radioshack-frame">
+      <div class="year-tag">1991</div>
+      <img src="https://pbs.twimg.com/media/Dxa2M3VV4AEqS-q.jpg" alt="Radio Shack newspaper ad from the early 1990s showing dozens of separate electronic devices" onerror="this.style.background='#1a1a1a';this.style.minHeight='400px';this.alt='[Radio Shack Ad — dozens of separate gadgets]'">
+      <div class="radioshack-label">~$5,000+ IN GADGETS</div>
+    </div>
+
+    <div class="device-grid">
+      <div class="device-item"><span class="emoji">🖥️</span>Personal Computer</div>
+      <div class="device-item"><span class="emoji">📱</span>Cell Phone</div>
+      <div class="device-item"><span class="emoji">📹</span>Camcorder</div>
+      <div class="device-item"><span class="emoji">💿</span>CD Player</div>
+      <div class="device-item"><span class="emoji">📻</span>AM/FM Radio</div>
+      <div class="device-item"><span class="emoji">📞</span>Answering Machine</div>
+      <div class="device-item"><span class="emoji">🎙️</span>Tape Recorder</div>
+      <div class="device-item"><span class="emoji">📟</span>Scanner</div>
+      <div class="device-item"><span class="emoji">🔊</span>Speakers</div>
+      <div class="device-item"><span class="emoji">🧮</span>Calculator</div>
+      <div class="device-item"><span class="emoji">⏰</span>Clock Radio</div>
+      <div class="device-item"><span class="emoji">🎧</span>Headphones</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ THE IPHONE REVEAL ═══════════ -->
+<section>
+  <div class="container">
+    <div class="reveal-block fade-in">
+      <div class="big-emoji">📱</div>
+      <div class="reveal-text">One device. <em>Everything.</em><br>That's what a paradigm shift looks like.</div>
+      <p class="reveal-sub">Twelve separate products, thousands of dollars, a drawer full of chargers — replaced by one device in your pocket. Not by improving each gadget. By making them all <strong>obsolete.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ACT 2: WELLNESS IS STILL RADIO SHACK ═══════════ -->
+<section class="dark-section">
+  <div class="container fade-in">
+    <div class="section-number">Part 02</div>
+    <h2 class="section-title">Now look at <em>health &amp; wellness</em> in 2026</h2>
+    <p class="section-text">Turn on any biohacking podcast. Open any wellness influencer's feed. Here's what they're telling you to buy — <strong>each solving ONE problem:</strong></p>
+
+    <div class="wellness-grid">
+      <div class="wellness-item">
+        <div class="item-emoji">🔴</div>
+        <div class="item-name">Red Light Therapy Panel</div>
+        <div class="item-for">Recovery, skin, inflammation</div>
+        <div class="item-cost">$300–$2,000</div>
+      </div>
+      <div class="wellness-item">
+        <div class="item-emoji">🧲</div>
+        <div class="item-name">PEMF Mat</div>
+        <div class="item-for">Cellular energy, pain relief</div>
+        <div class="item-cost">$500–$5,000</div>
+      </div>
+      <div class="wellness-item">
+        <div class="item-emoji">🥶</div>
+        <div class="item-name">Cold Plunge Tub</div>
+        <div class="item-for">Inflammation, focus, dopamine</div>
+        <div class="item-cost">$500–$5,000</div>
+      </div>
+      <div class="wellness-item">
+        <div class="item-emoji">🔥</div>
+        <div class="item-name">Infrared Sauna</div>
+        <div class="item-for">Detox, circulation, relaxation</div>
+        <div class="item-cost">$2,000–$8,000</div>
+      </div>
+      <div class="wellness-item">
+        <div class="item-emoji">⌚</div>
+        <div class="item-name">Oura Ring / Whoop</div>
+        <div class="item-for">Sleep tracking, HRV</div>
+        <div class="item-cost">$300 + $30/mo</div>
+      </div>
+      <div class="wellness-item">
+        <div class="item-emoji">🧠</div>
+        <div class="item-name">Neurofeedback Headband</div>
+        <div class="item-for">Focus, brain optimization</div>
+        <div class="item-cost">$300–$800</div>
+      </div>
+      <div class="wellness-item">
+        <div class="item-emoji">🛡️</div>
+        <div class="item-name">EMF Protection</div>
+        <div class="item-for">Radiation shielding</div>
+        <div class="item-cost">$50–$400</div>
+      </div>
+      <div class="wellness-item">
+        <div class="item-emoji">🌿</div>
+        <div class="item-name">Grounding Sheets</div>
+        <div class="item-for">Sleep, inflammation</div>
+        <div class="item-cost">$100–$300</div>
+      </div>
+      <div class="wellness-item">
+        <div class="item-emoji">💧</div>
+        <div class="item-name">Water Structuring Device</div>
+        <div class="item-for">Hydration, water quality</div>
+        <div class="item-cost">$300–$600</div>
+      </div>
+      <div class="wellness-item">
+        <div class="item-emoji">😎</div>
+        <div class="item-name">Blue Light Glasses</div>
+        <div class="item-for">Eye strain, sleep</div>
+        <div class="item-cost">$50–$150</div>
+      </div>
+      <div class="wellness-item">
+        <div class="item-emoji">🧘</div>
+        <div class="item-name">Meditation App</div>
+        <div class="item-for">Stress, consciousness</div>
+        <div class="item-cost">$15/mo</div>
+      </div>
+      <div class="wellness-item">
+        <div class="item-emoji">💊</div>
+        <div class="item-name">Supplement Stack</div>
+        <div class="item-for">NAD+, adaptogens, nootropics, CoQ10, magnesium, omega-3s, glutathione...</div>
+        <div class="item-cost">$200–$500/mo</div>
+      </div>
+      <div class="wellness-item">
+        <div class="item-emoji">🫧</div>
+        <div class="item-name">Hyperbaric Chamber</div>
+        <div class="item-for">Oxygen, recovery, brain health</div>
+        <div class="item-cost">$5,000–$25,000</div>
+      </div>
+      <div class="wellness-item">
+        <div class="item-emoji">🌬️</div>
+        <div class="item-name">Air Purifier</div>
+        <div class="item-for">Indoor air quality</div>
+        <div class="item-cost">$200–$800</div>
+      </div>
+      <div class="wellness-item">
+        <div class="item-emoji">🧊</div>
+        <div class="item-name">Cryotherapy Sessions</div>
+        <div class="item-for">Inflammation, energy</div>
+        <div class="item-cost">$50–$80/session</div>
+      </div>
+      <div class="wellness-item">
+        <div class="item-emoji">🪡</div>
+        <div class="item-name">Acupuncture</div>
+        <div class="item-for">Pain, energy flow, meridians</div>
+        <div class="item-cost">$100–$200/session</div>
+      </div>
+      <div class="wellness-item">
+        <div class="item-emoji">🫠</div>
+        <div class="item-name">Float Tank Sessions</div>
+        <div class="item-for">Stress, recovery, consciousness</div>
+        <div class="item-cost">$80/session</div>
+      </div>
+      <div class="wellness-item">
+        <div class="item-emoji">🕳️</div>
+        <div class="item-name">NanoVi / Molecular Hydrogen</div>
+        <div class="item-for">Cellular repair, oxidative stress</div>
+        <div class="item-cost">$500–$10,000</div>
+      </div>
+    </div>
+
+    <div class="total-bar">
+      <div class="total-label">The fully-stacked biohacker spends</div>
+      <div class="total-amount">$1,000 – $3,000+/month</div>
+      <div class="total-note">15+ products • 10+ daily habits • dozens of appointments</div>
+    </div>
+
+    <p class="section-text" style="margin-top:40px;">This is the <strong>Radio Shack ad of wellness.</strong> A dozen separate tools, each doing one thing, none of them talking to each other. Some measuring the problem. Most just managing symptoms. All of them demanding your time, space, money, and willpower — every single day.</p>
+  </div>
+</section>
+
+<!-- ═══════════ THE BIG QUESTION ═══════════ -->
+<section>
+  <div class="container">
+    <div class="big-question fade-in">
+      <h2>What if there was <em>one technology</em> that improved nearly <em>every</em> health metric?</h2>
+      <p>Not by replacing your body's intelligence. By <strong>upgrading the energy</strong> your body runs on.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ACT 3: THE REVEAL ═══════════ -->
+<section class="dark-section">
+  <div class="container fade-in">
+    <div class="answer-section">
+      <div class="answer-eyebrow">The paradigm shift</div>
+      <h2 class="answer-title">Meet <em>Quantum Upgrade</em></h2>
+      <p class="answer-sub">Researchers tested quantum energy on every biological system they could think of. The result was always the same.</p>
+    </div>
+
+    <div class="three-steps fade-in">
+      <div class="step-box"><span class="step-emoji">❓</span> Pick literally anything biological</div>
+      <div class="step-arrow">↓</div>
+      <div class="step-box"><span class="step-emoji">⚡</span> Apply quantum energy</div>
+      <div class="step-arrow">↓</div>
+      <div class="step-box"><span class="step-emoji">📈</span> It improves</div>
+    </div>
+
+    <p class="section-text fade-in" style="text-align:center; margin: 24px auto 0; max-width: 650px;">Here's everything that's been tested — independently, in labs, many with placebo controls. <strong>Every single one improved.</strong></p>
+
+    <div class="results-grid fade-in">
+      <div class="result-card"><span class="r-check">✓</span><div class="r-emoji">🩸</div><div class="r-name">Blood Cells</div></div>
+      <div class="result-card"><span class="r-check">✓</span><div class="r-emoji">🧠</div><div class="r-name">Brain Waves</div></div>
+      <div class="result-card"><span class="r-check">✓</span><div class="r-emoji">⚡</div><div class="r-name">ATP Energy</div></div>
+      <div class="result-card"><span class="r-check">✓</span><div class="r-emoji">💧</div><div class="r-name">Water Structure</div></div>
+      <div class="result-card"><span class="r-check">✓</span><div class="r-emoji">❤️</div><div class="r-name">Heart Rate</div></div>
+      <div class="result-card"><span class="r-check">✓</span><div class="r-emoji">🍽️</div><div class="r-name">Food Reactions</div></div>
+      <div class="result-card"><span class="r-check">✓</span><div class="r-emoji">🐕</div><div class="r-name">Dog Health</div></div>
+      <div class="result-card"><span class="r-check">✓</span><div class="r-emoji">🌱</div><div class="r-name">Plant Growth</div></div>
+      <div class="result-card"><span class="r-check">✓</span><div class="r-emoji">🔬</div><div class="r-name">Cell Recovery</div></div>
+      <div class="result-card"><span class="r-check">✓</span><div class="r-emoji">📡</div><div class="r-name">5G Radiation</div></div>
+      <div class="result-card"><span class="r-check">✓</span><div class="r-emoji">😴</div><div class="r-name">Sleep Quality</div></div>
+      <div class="result-card"><span class="r-check">✓</span><div class="r-emoji">💪</div><div class="r-name">Muscle Tension</div></div>
+      <div class="result-card"><span class="r-check">✓</span><div class="r-emoji">✨</div><div class="r-name">Skin Health</div></div>
+      <div class="result-card"><span class="r-check">✓</span><div class="r-emoji">🚗</div><div class="r-name">EMF in Cars</div></div>
+      <div class="result-card"><span class="r-check">✓</span><div class="r-emoji">🛡️</div><div class="r-name">Immune Response</div></div>
+      <div class="result-card"><span class="r-check">✓</span><div class="r-emoji">🔄</div><div class="r-name">Regeneration</div></div>
+      <div class="result-card"><span class="r-check">✓</span><div class="r-emoji">🧬</div><div class="r-name">Nervous System</div></div>
+      <div class="result-card"><span class="r-check">✓</span><div class="r-emoji">🧘</div><div class="r-name">Trauma Response</div></div>
+    </div>
+
+    <p class="section-text fade-in" style="text-align:center; margin: 40px auto 0; max-width:650px; font-style:italic; color: var(--text);">Plants can't be placebo'd. Dogs don't read marketing materials. Water doesn't have beliefs. <strong>Cells don't have opinions — they just heal, or they don't.</strong></p>
+  </div>
+</section>
+
+<!-- ═══════════ THE COST COMPARISON ═══════════ -->
+<section>
+  <div class="container fade-in">
+    <div class="section-number">The math</div>
+    <h2 class="section-title">What does the <em>"iPhone of wellness"</em> cost?</h2>
+
+    <div class="compare-section">
+      <div class="compare-row">
+        <span class="c-name">🔴 Red light panel</span>
+        <span class="c-cost">$150/mo*</span>
+        <div class="c-bar"><div class="c-bar-fill" style="width:75%"></div></div>
+      </div>
+      <div class="compare-row">
+        <span class="c-name">💊 Full supplement stack</span>
+        <span class="c-cost">$300/mo</span>
+        <div class="c-bar"><div class="c-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="compare-row">
+        <span class="c-name">🧊 Cryotherapy (2x/week)</span>
+        <span class="c-cost">$480/mo</span>
+        <div class="c-bar"><div class="c-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="compare-row">
+        <span class="c-name">🪡 Acupuncture (weekly)</span>
+        <span class="c-cost">$600/mo</span>
+        <div class="c-bar"><div class="c-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="compare-row">
+        <span class="c-name">⌚ Oura Ring subscription</span>
+        <span class="c-cost">$30/mo</span>
+        <div class="c-bar"><div class="c-bar-fill" style="width:15%"></div></div>
+      </div>
+      <div class="compare-row">
+        <span class="c-name">🧘 Meditation app</span>
+        <span class="c-cost">$15/mo</span>
+        <div class="c-bar"><div class="c-bar-fill" style="width:8%"></div></div>
+      </div>
+      <div class="compare-row highlight">
+        <span class="c-name">⚡ Quantum Upgrade (24/7 streaming)</span>
+        <span class="c-cost">$35/mo</span>
+        <div class="c-bar"><div class="c-bar-fill" style="width:18%"></div></div>
+      </div>
+    </div>
+
+    <p class="section-text" style="margin-top:8px; font-size:13px;">* Amortized monthly cost based on device price over 2 years. Quantum Upgrade: 7-day free trial, no credit card.</p>
+
+    <div class="total-bar" style="border-color: rgba(52,211,153,0.2); background: linear-gradient(135deg, rgba(52,211,153,0.06), rgba(52,211,153,0.02));">
+      <div class="total-label" style="color:var(--green);">Cost per hour of quantum energy</div>
+      <div class="total-amount" style="color:var(--green);">$0.05</div>
+      <div class="total-note">$35/mo ÷ 720 hours = five cents an hour, 24/7</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ "DON'T BELIEVE US" TRANSITION ═══════════ -->
+<section>
+  <div class="container">
+    <div class="big-question fade-in">
+      <h2>Now here's the part where most companies say <em>"trust us."</em></h2>
+      <p style="max-width:650px;">We're not most companies. We don't want your trust. <strong>We want you to check our homework.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PROOF SITE 1: THE SCIENCE ═══════════ -->
+<section class="dark-section">
+  <div class="container fade-in">
+    <div class="proof-site-block">
+      <div class="proof-site-number">PROOF LAYER 01</div>
+      <h2 class="section-title" style="max-width:900px;">59 scientific studies. 48 placebo-controlled. <em>Go read them yourself.</em></h2>
+      <p class="section-text" style="max-width:700px;">Blood cells recovering from WiFi damage — <strong>100% of subjects.</strong> ATP cellular energy up 20-29%. Brain stress reduced 77.6% on EEG. Water crystals so perfect the Emoto Institute didn't just endorse the technology — <strong>they licensed it.</strong> That's not an endorsement deal. That's the world's leading water crystal lab saying "this is better than anything in our own facility."</p>
+
+      <div class="proof-strip" style="margin-top:40px;">
+        <div class="proof-stat">
+          <div class="stat-num">59+</div>
+          <div class="stat-label">Scientific Studies</div>
+        </div>
+        <div class="proof-stat">
+          <div class="stat-num">48+</div>
+          <div class="stat-label">Placebo-Controlled</div>
+        </div>
+        <div class="proof-stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Blood Cell Recovery</div>
+        </div>
+        <div class="proof-stat">
+          <div class="stat-num">77.6%</div>
+          <div class="stat-label">Brain Stress Reduction</div>
+        </div>
+      </div>
+
+      <div class="site-cta-row fade-in">
+        <a href="https://wedidthescience.com" target="_blank" class="site-link science-link">
+          <span class="site-link-eyebrow">Read every study →</span>
+          <span class="site-link-url">WeDidTheScience.com</span>
+        </a>
+        <p class="site-dare">Name another wellness company with 59 studies. Name one with 48 placebo-controlled trials. <strong>We'll wait.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PROOF SITE 2: THE TESTIMONIALS ═══════════ -->
+<section>
+  <div class="container fade-in">
+    <div class="proof-site-block">
+      <div class="proof-site-number">PROOF LAYER 02</div>
+      <h2 class="section-title" style="max-width:900px;">20,257 real testimonials. <em>Not curated. Not cherry-picked. All of them.</em></h2>
+      <p class="section-text" style="max-width:700px;">Sleep improvements. Pain gone. Anxiety dissolved. Depression lifting. Autoimmune conditions changing. Athletic performance spiking. And a special tag we're particularly proud of: <strong>"Skeptic Turned Believer" — 3,150 of them.</strong> These aren't paid reviews. They're real people in real community groups sharing what happened when they tried it. Filter by condition. Filter by who benefited — yourself, your kids, your pets, your plants. Read as many as you want. We've got 20,257 of them.</p>
+
+      <div class="proof-strip" style="margin-top:40px;">
+        <div class="proof-stat">
+          <div class="stat-num">20,257</div>
+          <div class="stat-label">Real Testimonials</div>
+        </div>
+        <div class="proof-stat">
+          <div class="stat-num">3,150</div>
+          <div class="stat-label">Skeptics Turned Believers</div>
+        </div>
+        <div class="proof-stat">
+          <div class="stat-num">5,321</div>
+          <div class="stat-label">Family & Children Results</div>
+        </div>
+        <div class="proof-stat">
+          <div class="stat-num">5,235</div>
+          <div class="stat-label">Pet Results</div>
+        </div>
+      </div>
+
+      <div class="site-cta-row fade-in">
+        <a href="https://thankyouleelaq.com" target="_blank" class="site-link testimonial-link">
+          <span class="site-link-eyebrow">Read the testimonials →</span>
+          <span class="site-link-url">ThankYouLeelaQ.com</span>
+        </a>
+        <p class="site-dare">Dogs don't read marketing materials. Plants can't be placebo'd. Children don't write fake reviews for fun. <strong>At some point, the volume of evidence stops being "anecdotal" and starts being a signal.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PROOF SITE 3: THE EXPERIMENTS ═══════════ -->
+<section class="dark-section">
+  <div class="container fade-in">
+    <div class="proof-site-block">
+      <div class="proof-site-number">PROOF LAYER 03</div>
+      <h2 class="section-title" style="max-width:900px;">8,885 experiments. <em>With photos.</em> Run by regular people, not paid actors.</h2>
+      <p class="section-text" style="max-width:700px;">Community members running their own experiments — on their gardens, their pets, their water, their food, their blood work. Photographing the results. Sharing them publicly. Side-by-side comparisons of plants grown with and without quantum energy. Before-and-after blood work. Pet behavior changes. <strong>8,885 experiments. Zero paid actors. Zero staged photos.</strong> Just real people, too amazed to keep it to themselves.</p>
+
+      <div class="proof-strip" style="margin-top:40px;">
+        <div class="proof-stat">
+          <div class="stat-num">8,885</div>
+          <div class="stat-label">Community Experiments</div>
+        </div>
+        <div class="proof-stat">
+          <div class="stat-num">1,934</div>
+          <div class="stat-label">Plant Experiments</div>
+        </div>
+        <div class="proof-stat">
+          <div class="stat-num">5,235</div>
+          <div class="stat-label">Pet Experiments</div>
+        </div>
+        <div class="proof-stat">
+          <div class="stat-num">358</div>
+          <div class="stat-label">Photo-Documented</div>
+        </div>
+      </div>
+
+      <div class="site-cta-row fade-in">
+        <a href="https://iloveleelaq.com" target="_blank" class="site-link experiment-link">
+          <span class="site-link-eyebrow">See the experiments →</span>
+          <span class="site-link-url">ILoveLeelaQ.com</span>
+        </a>
+        <p class="site-dare">Water doesn't have beliefs. Cells don't have opinions. <strong>They just heal — or they don't.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ THE DARE ═══════════ -->
+<section>
+  <div class="container">
+    <div class="big-question fade-in" style="padding:80px 24px;">
+      <h2 style="font-size:clamp(24px, 4vw, 44px); line-height:1.4;">
+        <span style="display:block; color:var(--text-dim); font-size:0.7em; margin-bottom:16px;">So here's what we're saying:</span>
+        Check the science at <a href="https://wedidthescience.com" target="_blank" style="color:var(--accent); text-decoration:none; border-bottom:2px solid var(--accent);">WeDidTheScience.com</a>.<br>
+        Read the testimonials at <a href="https://thankyouleelaq.com" target="_blank" style="color:var(--gold); text-decoration:none; border-bottom:2px solid var(--gold);">ThankYouLeelaQ.com</a>.<br>
+        See the experiments at <a href="https://iloveleelaq.com" target="_blank" style="color:var(--green); text-decoration:none; border-bottom:2px solid var(--green);">ILoveLeelaQ.com</a>.<br>
+        <span style="display:block; margin-top:20px; font-style:italic;">Then <em>try to find any other company</em> that comes close.</span>
+      </h2>
+      <p style="margin-top:28px; max-width:550px; font-size:16px;"><strong>We dare you.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="dark-section">
+  <div class="container">
+    <div class="cta-section fade-in">
+      <h2 class="cta-title">Try the <em>iPhone of wellness</em> — free for 7 days</h2>
+      <p class="cta-sub">No credit card. No commitment. No catch. Just quantum energy streaming to you 24/7 for a week. Your body is the judge. Your experience is the verdict.</p>
+      <a href="https://quantumupgrade.io/start/" class="cta-button">Start Your Free Trial →</a>
+      <p class="cta-fine">7-day trial • No credit card required • Cancel anytime</p>
+      <div style="margin-top:48px; padding-top:32px; border-top: 1px solid rgba(255,255,255,0.06);">
+        <p style="font-size:14px; color:var(--text-dim); font-weight:300; max-width:600px; margin:0 auto; line-height:1.8;">
+          <strong style="color:var(--text);">Still not sure?</strong> That's fine. We built an entire proof ecosystem because we know this sounds too good to be true. Start anywhere:<br>
+          <a href="https://wedidthescience.com" target="_blank" style="color:var(--accent);">The Science</a> · 
+          <a href="https://thankyouleelaq.com" target="_blank" style="color:var(--gold);">The Testimonials</a> · 
+          <a href="https://iloveleelaq.com" target="_blank" style="color:var(--green);">The Experiments</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer style="text-align:center; padding:40px 24px; border-top: 1px solid rgba(255,255,255,0.04);">
+  <p style="font-size:11px; color:var(--text-dim); max-width:700px; margin:0 auto; line-height:1.8;">These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Individual results may vary. Scientific studies referenced are available at <a href="https://wedidthescience.com" style="color:var(--text-dim);">WeDidTheScience.com</a>. Community testimonials at <a href="https://thankyouleelaq.com" style="color:var(--text-dim);">ThankYouLeelaQ.com</a>. Community experiments at <a href="https://iloveleelaq.com" style="color:var(--text-dim);">ILoveLeelaQ.com</a>. Quantum Upgrade is a wellness technology and does not replace professional medical advice.</p>
+</footer>
+
+<script>
+// Intersection Observer for fade-in animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
