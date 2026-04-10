@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Remote Control Moment — Quantum Upgrade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0b0f1a;
+  --bg-warm: #10131f;
+  --bg-card: #151929;
+  --text: #e8e4dc;
+  --text-dim: #7d8597;
+  --text-warm: #c4b99a;
+  --amber: #e4a853;
+  --amber-glow: rgba(228, 168, 83, 0.12);
+  --blue: #5b8def;
+  --green: #34d399;
+  --red: #e8534a;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── GLOBAL ── */
+.container { max-width: 780px; margin: 0 auto; padding: 0 28px; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 28px;
+  position: relative;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(228,168,83,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(91,141,239,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.2s forwards;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(40px, 7vw, 80px);
+  line-height: 1.1;
+  font-weight: 300;
+  max-width: 800px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.4s forwards;
+}
+.hero h1 em { font-style: italic; color: var(--amber); }
+.hero-sub {
+  font-size: clamp(16px, 2vw, 19px);
+  color: var(--text-dim);
+  max-width: 520px;
+  margin-top: 28px;
+  font-weight: 300;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.6s forwards;
+}
+.hero-attribution {
+  margin-top: 40px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.8s forwards;
+}
+.scroll-line {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--amber), transparent);
+  animation: pulse 2.5s ease infinite;
+}
+
+/* ── ERA SECTIONS ── */
+.era {
+  padding: 100px 28px;
+  position: relative;
+  border-top: 1px solid rgba(255,255,255,0.03);
+}
+.era-dark { background: var(--bg-warm); }
+.era-year {
+  font-family: var(--serif);
+  font-size: clamp(80px, 15vw, 160px);
+  font-weight: 300;
+  color: rgba(228, 168, 83, 0.06);
+  position: absolute;
+  top: 40px;
+  right: 28px;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+}
+.era-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.era-label::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--amber);
+}
+
+/* ── NARRATIVE BLOCKS ── */
+.narrative {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.6;
+  font-weight: 300;
+  color: var(--text);
+  max-width: 700px;
+}
+.narrative em { font-style: italic; color: var(--amber); }
+.narrative strong { font-weight: 500; color: #fff; }
+
+.body-text {
+  font-family: var(--sans);
+  font-size: 17px;
+  color: var(--text-dim);
+  line-height: 1.8;
+  max-width: 650px;
+  margin-top: 24px;
+  font-weight: 300;
+}
+.body-text strong { color: var(--text); font-weight: 500; }
+
+/* ── REACTION BOX ── */
+.reaction {
+  margin: 40px 0;
+  padding: 28px 32px;
+  border-left: 3px solid var(--amber);
+  background: rgba(228, 168, 83, 0.04);
+  border-radius: 0 8px 8px 0;
+}
+.reaction-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 8px;
+}
+.reaction-text {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-style: italic;
+  color: var(--text-warm);
+  line-height: 1.5;
+}
+
+/* ── BREAKTHROUGH BOXES ── */
+.breakthrough {
+  margin: 48px 0;
+  padding: 36px;
+  background: var(--bg-card);
+  border: 1px solid rgba(228,168,83,0.12);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.breakthrough::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--amber), transparent);
+}
+.bt-step {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 12px;
+}
+.bt-title {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3.5vw, 32px);
+  font-weight: 400;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.bt-title em { font-style: italic; color: var(--amber); }
+.bt-body {
+  font-size: 16px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  font-weight: 300;
+}
+.bt-body strong { color: var(--text); font-weight: 500; }
+.bt-result {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: rgba(52, 211, 153, 0.06);
+  border: 1px solid rgba(52, 211, 153, 0.15);
+  border-radius: 8px;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--green);
+}
+
+/* ── DIVIDER ── */
+.divider {
+  text-align: center;
+  padding: 60px 0;
+  font-family: var(--serif);
+  font-size: 36px;
+  color: rgba(228, 168, 83, 0.2);
+  letter-spacing: 12px;
+}
+
+/* ── PHILIPP QUOTE ── */
+.philipp-voice {
+  padding: 80px 28px;
+  position: relative;
+}
+.philipp-voice::before {
+  content: '"';
+  font-family: var(--serif);
+  font-size: 200px;
+  color: rgba(228, 168, 83, 0.06);
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  line-height: 1;
+  pointer-events: none;
+}
+.pv-text {
+  font-family: var(--serif);
+  font-size: clamp(20px, 3vw, 28px);
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text-warm);
+  max-width: 680px;
+  position: relative;
+}
+.pv-text em { color: var(--amber); }
+.pv-attribution {
+  margin-top: 24px;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.pv-attribution::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--amber);
+}
+
+/* ── NOBEL CALLOUT ── */
+.nobel-box {
+  margin: 48px 0;
+  padding: 32px;
+  background: linear-gradient(135deg, rgba(91,141,239,0.06), rgba(91,141,239,0.02));
+  border: 1px solid rgba(91,141,239,0.15);
+  border-radius: 12px;
+}
+.nobel-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 12px;
+}
+.nobel-text {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--text);
+}
+.nobel-text em { font-style: italic; color: var(--blue); }
+.nobel-sub {
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-top: 12px;
+}
+
+/* ── PROOF SITES ── */
+.proof-ecosystem {
+  padding: 80px 28px;
+  background: var(--bg-warm);
+  border-top: 1px solid rgba(255,255,255,0.03);
+}
+.proof-title {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 12px;
+}
+.proof-title em { font-style: italic; color: var(--amber); }
+.proof-subtitle {
+  text-align: center;
+  font-size: 16px;
+  color: var(--text-dim);
+  font-weight: 300;
+  margin-bottom: 48px;
+}
+.proof-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.proof-card {
+  padding: 28px 24px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+.proof-card:hover { transform: translateY(-3px); }
+.pc-science {
+  background: rgba(232,83,74,0.06);
+  border: 1px solid rgba(232,83,74,0.15);
+}
+.pc-science:hover { box-shadow: 0 8px 40px rgba(232,83,74,0.1); }
+.pc-testimonials {
+  background: rgba(228,168,83,0.06);
+  border: 1px solid rgba(228,168,83,0.15);
+}
+.pc-testimonials:hover { box-shadow: 0 8px 40px rgba(228,168,83,0.1); }
+.pc-experiments {
+  background: rgba(52,211,153,0.06);
+  border: 1px solid rgba(52,211,153,0.15);
+}
+.pc-experiments:hover { box-shadow: 0 8px 40px rgba(52,211,153,0.1); }
+
+.pc-stat {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+.pc-science .pc-stat { color: var(--red); }
+.pc-testimonials .pc-stat { color: var(--amber); }
+.pc-experiments .pc-stat { color: var(--green); }
+
+.pc-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.pc-desc {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  flex: 1;
+}
+.pc-url {
+  font-family: var(--mono);
+  font-size: 12px;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pc-science .pc-url { color: var(--red); }
+.pc-testimonials .pc-url { color: var(--amber); }
+.pc-experiments .pc-url { color: var(--green); }
+
+/* ── CTA ── */
+.cta-section {
+  text-align: center;
+  padding: 100px 28px;
+  position: relative;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at center, rgba(228,168,83,0.04) 0%, transparent 60%);
+}
+.cta-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 20px;
+  position: relative;
+}
+.cta-title {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  position: relative;
+}
+.cta-title em { font-style: italic; color: var(--amber); }
+.cta-sub {
+  font-size: 17px;
+  color: var(--text-dim);
+  font-weight: 300;
+  margin-bottom: 40px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+.cta-button {
+  display: inline-block;
+  background: var(--amber);
+  color: var(--bg);
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 18px 48px;
+  border-radius: 60px;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(228,168,83,0.3); }
+.cta-fine {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 16px;
+  position: relative;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.8; }
+}
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .era { padding: 80px 20px; }
+  .era-year { font-size: clamp(60px, 12vw, 100px); top: 20px; right: 16px; }
+  .breakthrough { padding: 24px; }
+  .reaction { padding: 20px 24px; }
+  .proof-cards { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-eyebrow">A thought experiment from Philipp</div>
+  <h1>Imagine you had a <em>time machine</em></h1>
+  <p class="hero-sub">Every breakthrough technology in history was once considered impossible — by smart people, with good reasons, who turned out to be wrong.</p>
+  <div class="hero-attribution">Philipp Samor von Holtzendorff-Fehling · Founder, Leela Quantum Tech</div>
+  <div class="scroll-line"></div>
+</section>
+
+<!-- ═══════════ ERA 1: THE 1700s ═══════════ -->
+<section class="era era-dark">
+  <div class="container fade-in">
+    <div class="era-year">1700s</div>
+    <div class="era-label">The thought experiment begins</div>
+
+    <p class="narrative">If I had a time machine, and I brought someone back from the 1700s, and I sat them in front of a television — <em>they would lose their mind.</em></p>
+
+    <p class="body-text">Think about it. A glowing box showing moving images of people who aren't in the room. Voices coming from nowhere. Scenes from places they've never been, couldn't possibly travel to. They wouldn't just be confused. <strong>They might think I was the Devil.</strong> Their brain has no category for what they're seeing. No framework. No reference point. It's not that they're stupid — it's that the technology is so far beyond their reality that their mind literally cannot process it.</p>
+
+    <div class="reaction">
+      <div class="reaction-label">Their reaction</div>
+      <div class="reaction-text">"Witchcraft. Sorcery. This is not possible. I need to leave this place."</div>
+    </div>
+
+    <p class="body-text">We laugh at that. Of course a TV isn't magic. But put yourself in their shoes — they've never seen electricity, never heard a recorded sound, never seen a photograph. <strong>A television is so many leaps beyond their reality that every single step would need to be explained first.</strong></p>
+  </div>
+</section>
+
+<!-- ═══════════ ERA 2: THE 1890s ═══════════ -->
+<section class="era">
+  <div class="container fade-in">
+    <div class="era-year">1896</div>
+    <div class="era-label">It happened for real</div>
+
+    <p class="narrative">This isn't hypothetical. <em>It actually happened.</em></p>
+
+    <p class="body-text">In 1896, one of the first films ever shown to an audience was a simple clip: a train pulling into a station. The footage was shot from the platform. The train got bigger and bigger on the screen as it approached. And the audience — grown adults, educated people — <strong>jumped out of their chairs and ran for the exits.</strong></p>
+
+    <p class="body-text">They thought the train was going to come through the wall and kill them. A flat image on a white sheet made people flee for their lives. <strong>We laugh at them now.</strong> But their reaction was perfectly rational given what they knew. They had never seen moving images before. Their brain did the only logical thing: if something that looks like a train is coming at you, you move.</p>
+
+    <div class="reaction">
+      <div class="reaction-label">The lesson</div>
+      <div class="reaction-text">"Every new technology looks like magic — or madness — until you've seen it work enough times that your brain creates a new category for it."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ERA 3: THE 1960s ═══════════ -->
+<section class="era era-dark">
+  <div class="container fade-in">
+    <div class="era-year">1960s</div>
+    <div class="era-label">Now let's speed it up</div>
+
+    <p class="narrative">Bring someone from the 1960s to today. Show them a modern TV. <em>They won't think it's the Devil.</em></p>
+
+    <p class="body-text">They've already seen televisions. They have a category for it. They'll be amazed at how thin it is, how sharp the picture is, how many channels exist. But they won't run screaming. <strong>Their brain can handle an improvement to something they already understand.</strong></p>
+
+    <p class="body-text" style="margin-top:32px;">But now hand them a remote control.</p>
+
+    <p class="narrative" style="margin-top:32px;">Tell them: <em>"Point this at the TV. Press this button. The channel changes. Wirelessly. From your couch."</em></p>
+
+    <div class="reaction">
+      <div class="reaction-label">Their reaction</div>
+      <div class="reaction-text">"You're playing a prank on me. How is that possible? There's no wire. Nothing is connecting them. That's impossible."</div>
+    </div>
+
+    <p class="body-text">The TV didn't break their brain. <strong>The remote control did.</strong> Because the TV was an improvement to something familiar. The remote control was a <em>new principle</em> — invisible energy traveling through the air, affecting a physical object, with no visible connection between them.</p>
+
+    <p class="body-text"><strong>That's the exact reaction I get when I explain Quantum Upgrade.</strong></p>
+  </div>
+</section>
+
+<div class="divider fade-in">· · ·</div>
+
+<!-- ═══════════ PHILIPP'S VOICE: THE DISCOVERY ═══════════ -->
+<section class="philipp-voice">
+  <div class="container fade-in">
+    <p class="pv-text">I think about this a lot. When I try to explain what we've built, I feel like I'm handing a remote control to someone from the 1960s. The look on their face is always the same — <em>"That's impossible."</em> And honestly? I get it. Because I didn't believe it either.</p>
+    <div class="pv-attribution">Philipp Samor von Holtzendorff-Fehling</div>
+  </div>
+</section>
+
+<!-- ═══════════ THE BREAKTHROUGHS ═══════════ -->
+<section class="era era-dark">
+  <div class="container fade-in">
+    <div class="era-label">How we got here</div>
+    <p class="narrative" style="margin-bottom:16px;">Here's what happened — <em>step by step</em></p>
+    <p class="body-text" style="margin-top:0; margin-bottom:48px;">Each breakthrough seemed impossible until it worked. Then it seemed obvious. Then we pushed further.</p>
+
+    <div class="breakthrough fade-in">
+      <div class="bt-step">Breakthrough 01</div>
+      <div class="bt-title">The Bloc: put <em>anything</em> inside, it improves</div>
+      <div class="bt-body">When I first started working with our Leela Quantum Blocs, I was amazed. You could put water inside — the molecular structure changed. Food — it tasted different. Supplements — they tested stronger. <strong>We could change literally anything biological, just by putting it into a Bloc.</strong> This alone was remarkable. But it was still "contact" — the object had to be physically inside the Bloc.</div>
+      <div class="bt-result">✓ Verified in lab testing — water structure, ATP, food sensitivity — all improved through direct contact</div>
+    </div>
+
+    <div class="breakthrough fade-in">
+      <div class="bt-step">Breakthrough 02</div>
+      <div class="bt-title">The photograph: <em>same results at a distance</em></div>
+      <div class="bt-body">Then we tried something that sounded crazy. Instead of putting a person's hand into the Bloc, we put their <strong>photograph</strong> into the Bloc. And the same changes happened. Not similar changes. <strong>The EXACT same changes.</strong> It didn't matter if the person was in the next room or halfway across the country. The 29% ATP increase that happened with direct contact? The same 29% ATP increase happened through the photograph.</div>
+      <div class="bt-result">✓ Same 20-29% ATP increase — whether the person touched the Bloc or their photo was placed inside it</div>
+    </div>
+
+    <div class="breakthrough fade-in">
+      <div class="bt-step">Breakthrough 03</div>
+      <div class="bt-title">DNA: skin, hair, <em>any biological sample</em></div>
+      <div class="bt-body">We pushed further. If a photograph worked, what about biological material? A piece of skin. A strand of hair. And it worked. <strong>The reason was DNA.</strong> DNA is unique to the individual — it serves as a quantum signature, a connection point between the energy in the Bloc and the biology of the person, no matter where they are.</div>
+      <div class="bt-result">✓ Biological samples (hair, skin) produced the same measurable results as direct contact</div>
+    </div>
+
+    <div class="breakthrough fade-in">
+      <div class="bt-step">Breakthrough 04 — The big one</div>
+      <div class="bt-title">Any unique identifier. <em>That changed everything.</em></div>
+      <div class="bt-body">Then came the breakthrough that made Quantum Upgrade possible. We discovered that we didn't need a photo. We didn't need DNA. <strong>Any unique identifier worked.</strong> A person's name, their birthdate, specific details that are unique to them — written on a piece of paper, placed into the Bloc. The same results. The same measurable, reproducible, placebo-controlled results. This sounds absolutely crazy. We know that. <strong>But we have proven it over, and over, and over.</strong></div>
+      <div class="bt-result">✓ Unique identifiers (name + birthdate + details) produced the same lab-verified results as direct physical contact</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ NOBEL PRIZE CALLOUT ═══════════ -->
+<section class="era">
+  <div class="container fade-in">
+    <div class="nobel-box">
+      <div class="nobel-label">This isn't fringe science</div>
+      <div class="nobel-text">The 2022 Nobel Prize in Physics was awarded to Alain Aspect, John Clauser, and Anton Zeilinger for experimentally proving <em>quantum entanglement</em> — the phenomenon where particles remain connected and instantly influence each other regardless of distance.</div>
+      <div class="nobel-sub">Einstein himself called this "spooky action at a distance." He couldn't believe it was real. But it is. And our technology is built on this verified principle.</div>
+    </div>
+
+    <p class="body-text" style="margin-top:32px;">Quantum entanglement means that two connected particles affect each other instantly — <strong>no matter how far apart they are.</strong> Not "pretty fast." Not "at the speed of light." <em>Instantly.</em> This has been proven so conclusively that it won the highest prize in science. <strong>This is the principle underlying Quantum Upgrade.</strong></p>
+  </div>
+</section>
+
+<!-- ═══════════ PHILIPP'S VOICE: THE STRUGGLE ═══════════ -->
+<section class="philipp-voice" style="background: var(--bg-warm);">
+  <div class="container fade-in">
+    <p class="pv-text">The hardest part of what I do isn't the science. It isn't the engineering. <em>It's the telling.</em> I have to explain to people that they can have this energy sent to them — to their body, their house, their phone, their pet — <em>anywhere in the world.</em> And I watch their face do the exact same thing as the man from the 1960s holding a remote control for the first time.</p>
+    <div class="pv-attribution">Philipp Samor von Holtzendorff-Fehling</div>
+  </div>
+</section>
+
+<!-- ═══════════ THE REMOTE CONTROL MOMENT ═══════════ -->
+<section class="era">
+  <div class="container fade-in">
+    <div class="era-label">The point of this story</div>
+
+    <p class="narrative">Every technology that is now considered <em>ordinary</em> was once considered <em>impossible</em></p>
+
+    <p class="body-text" style="margin-top:24px; margin-bottom:32px;">TV. Radio. WiFi. GPS. X-rays. Bluetooth. Electricity. Every single one was invisible, unexplainable, and "obviously fake" to the smartest people alive at the time. And every single one became so normal that we forgot it was ever controversial.</p>
+
+    <p class="narrative"><em>You are living in a remote control moment right now.</em></p>
+
+    <p class="body-text">Technology is moving faster than ever — AI, quantum computing, breakthroughs happening monthly. Within the next 2-5 years, the average person won't think this is crazy. They'll know this technology works. They'll wonder why they didn't try it sooner.</p>
+
+    <p class="body-text"><strong>But you don't have to wait 2-5 years. It exists right now. It's called Quantum Upgrade. And all you have to do is give us some unique information about yourself, and it starts working within minutes.</strong></p>
+  </div>
+</section>
+
+<!-- ═══════════ THE PROOF ECOSYSTEM ═══════════ -->
+<section class="proof-ecosystem fade-in">
+  <h2 class="proof-title">Don't take our word for it. <em>Check the evidence.</em></h2>
+  <p class="proof-subtitle">We built an entire proof ecosystem because we know this sounds too good to be true.</p>
+
+  <div class="proof-cards">
+    <a href="https://wedidthescience.com" target="_blank" class="proof-card pc-science">
+      <div class="pc-stat">59+</div>
+      <div class="pc-label">Scientific Studies</div>
+      <div class="pc-desc">48 placebo-controlled. Blood cells, brain waves, ATP, water structure — all independently tested and verified. The Emoto Institute didn't just endorse the technology. They licensed it.</div>
+      <div class="pc-url">→ WeDidTheScience.com</div>
+    </a>
+    <a href="https://thankyouleelaq.com" target="_blank" class="proof-card pc-testimonials">
+      <div class="pc-stat">20,257</div>
+      <div class="pc-label">Real Testimonials</div>
+      <div class="pc-desc">Filter by condition, by who benefited, by product. 3,150 tagged "Skeptic Turned Believer." These aren't paid reviews. They're real people who tried it and couldn't keep quiet.</div>
+      <div class="pc-url">→ ThankYouLeelaQ.com</div>
+    </a>
+    <a href="https://iloveleelaq.com" target="_blank" class="proof-card pc-experiments">
+      <div class="pc-stat">8,885</div>
+      <div class="pc-label">Community Experiments</div>
+      <div class="pc-desc">Photos of plant experiments, pet changes, water tests, blood work — run by regular people, documented publicly. 358 with photos. Zero paid actors.</div>
+      <div class="pc-url">→ ILoveLeelaQ.com</div>
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════ FINAL CTA ═══════════ -->
+<section>
+  <div class="container">
+    <div class="cta-section fade-in">
+      <div class="cta-eyebrow">Your remote control moment</div>
+      <h2 class="cta-title">Try Quantum Upgrade — <em>free for 7 days</em></h2>
+      <p class="cta-sub">No credit card. No commitment. Give us a few unique details, and quantum energy starts streaming to you within minutes. Your body will tell you what your mind can't yet accept.</p>
+      <a href="https://quantumupgrade.io/start/" class="cta-button">Start Your Free Trial →</a>
+      <p class="cta-fine">7-day trial · No credit card · Cancel anytime</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer style="text-align:center; padding:40px 28px; border-top: 1px solid rgba(255,255,255,0.03);">
+  <p style="font-size:11px; color:var(--text-dim); max-width:680px; margin:0 auto; line-height:1.8;">These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Individual results may vary. Scientific studies available at <a href="https://wedidthescience.com" style="color:var(--text-dim);">WeDidTheScience.com</a>. Community testimonials at <a href="https://thankyouleelaq.com" style="color:var(--text-dim);">ThankYouLeelaQ.com</a>. Community experiments at <a href="https://iloveleelaq.com" style="color:var(--text-dim);">ILoveLeelaQ.com</a>. Quantum Upgrade is a wellness technology and does not replace professional medical advice.</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
