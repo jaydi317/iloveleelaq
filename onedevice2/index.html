@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Smartphone of Wellness | Quantum Upgrade</title>
+<meta name="description" content="The biohacking industry looks like a 1991 Radio Shack ad. 18 gadgets. $30,000+. What if one technology replaced them all?">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #000;
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    overflow-x: hidden;
+    padding: 32px 16px;
+  }
+  .scene { display: none; text-align: center; max-width: 680px; width: 100%; animation: fadeUp 0.7s ease; }
+  .scene.active { display: block; }
+  .kicker { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 0.2em; color: #B71C1C; margin-bottom: 16px; }
+  .headline { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-style: italic; line-height: 1.2; margin-bottom: 16px; }
+  .headline span { color: #D4AF37; }
+  .subtext { font-size: 14px; color: #888; line-height: 1.6; max-width: 480px; margin: 0 auto; }
+  .subtext strong { color: #fff; }
+  .tap-hint { margin-top: 28px; font-size: 12px; color: #444; font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.2em; }
+
+  /* Radio Shack card */
+  .rs-card {
+    background: #F5F0E0; border: 3px solid #B71C1C; border-radius: 4px;
+    padding: 20px 16px; max-width: 440px; margin: 0 auto;
+  }
+  .rs-title { font-family: 'Special Elite', 'Courier New', monospace; color: #B71C1C; font-weight: 700; font-size: 18px; margin-bottom: 8px; text-transform: uppercase; }
+  .rs-items { display: flex; flex-wrap: wrap; gap: 4px 8px; justify-content: center; }
+  .rs-items span { padding: 3px 8px; border-radius: 2px; font-size: 9px; font-family: 'Special Elite', monospace; color: #fff; }
+  .rs-total { font-family: 'Bebas Neue', sans-serif; color: #B71C1C; font-size: 24px; margin-top: 12px; }
+
+  /* Biohack grid */
+  .bio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); gap: 6px; margin-bottom: 20px; }
+  .bio-card {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px; padding: 10px 8px; text-align: center;
+  }
+  .bio-card .icon { font-size: 22px; margin-bottom: 4px; }
+  .bio-card .name { font-size: 10px; font-weight: 600; color: #ccc; margin-bottom: 2px; }
+  .bio-card .fixes { font-size: 9px; color: #888; margin-bottom: 3px; }
+  .bio-card .cost { font-size: 11px; font-weight: 700; color: #B71C1C; font-family: 'Bebas Neue', sans-serif; }
+  .bio-total {
+    display: flex; justify-content: center; gap: 24px;
+    padding: 16px 24px; background: rgba(183,28,28,0.1);
+    border: 1px solid rgba(183,28,28,0.3); border-radius: 8px;
+  }
+  .bio-total .label { font-size: 10px; color: #888; }
+  .bio-total .amount { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: #B71C1C; }
+  .bio-total .sep { width: 1px; background: rgba(255,255,255,0.1); }
+
+  /* Algorithm */
+  .algo-steps { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 28px; }
+  .algo-step {
+    border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;
+    padding: 14px 36px; font-size: 16px; font-weight: 500; min-width: 320px;
+  }
+  .algo-arrow { color: #555; font-size: 18px; }
+  .algo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); gap: 6px; }
+  .algo-item {
+    background: rgba(255,255,255,0.04); border-radius: 8px;
+    padding: 12px 6px; text-align: center;
+  }
+  .algo-item .icon { font-size: 24px; margin-bottom: 4px; }
+  .algo-item .label { font-size: 10px; color: #aaa; }
+  .algo-item .check { color: #4CAF50; font-size: 12px; margin-top: 2px; }
+
+  /* Final comparison */
+  .compare-grid {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    gap: 20px; align-items: center; margin-bottom: 36px;
+  }
+  .compare-box { border-radius: 12px; padding: 24px 16px; }
+  .compare-old { background: rgba(183,28,28,0.08); border: 1px solid rgba(183,28,28,0.2); }
+  .compare-new { background: rgba(212,175,55,0.08); border: 2px solid rgba(212,175,55,0.3); box-shadow: 0 0 40px rgba(212,175,55,0.1); }
+  .compare-vs { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #555; }
+  .compare-label { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.1em; }
+  .compare-detail { font-size: 11px; line-height: 1.5; margin-top: 8px; }
+  .compare-price { font-family: 'Bebas Neue', sans-serif; font-size: 28px; margin-top: 12px; }
+  .compare-sub { font-size: 10px; }
+  .punchline-box {
+    background: rgba(212,175,55,0.06); border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 10px; padding: 24px 28px;
+  }
+  .punchline-quote {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: clamp(17px, 3vw, 23px); color: #D4AF37; line-height: 1.5; margin-bottom: 12px;
+  }
+
+  /* Nav dots */
+  .nav-dots {
+    position: fixed; bottom: 20px; display: flex; gap: 8px; z-index: 100;
+  }
+  .nav-dot {
+    height: 8px; border-radius: 4px;
+    cursor: pointer; transition: all 0.3s ease; border: none;
+  }
+  .nav-dot.active { width: 24px; background: #D4AF37; }
+  .nav-dot:not(.active) { width: 8px; background: rgba(255,255,255,0.15); }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes revealIn { from { opacity:0; transform:scale(0.92); } to { opacity:1; transform:scale(1); } }
+
+  @media (max-width: 500px) {
+    .bio-grid { grid-template-columns: repeat(3, 1fr); }
+    .algo-step { min-width: auto; padding: 12px 20px; font-size: 14px; }
+    .compare-grid { grid-template-columns: 1fr; gap: 12px; }
+    .compare-vs { display: none; }
+    .headline { font-size: clamp(22px, 6vw, 42px); }
+  }
+</style>
+</head>
+<body>
+
+<!-- SCENE 0: Radio Shack Setup -->
+<div class="scene active" id="scene0">
+  <div class="kicker">A BRIEF HISTORY OF DISRUPTION</div>
+  <h1 class="headline" style="font-size: clamp(28px, 6vw, 50px);">In 1991, this was the state of technology.</h1>
+  <div class="rs-card">
+    <div class="rs-title">★ America's Technology Store ★</div>
+    <div class="rs-items" id="rsItems"></div>
+    <div class="rs-total">15 DEVICES — $3,289 TOTAL</div>
+  </div>
+  <div class="tap-hint">TAP TO CONTINUE →</div>
+</div>
+
+<!-- SCENE 1: iPhone solved it -->
+<div class="scene" id="scene1">
+  <div style="font-size: 80px; margin-bottom: 20px;">📱</div>
+  <h2 class="headline" style="font-size: clamp(24px, 5vw, 42px);">
+    Then Steve Jobs put all 15 devices<br><span>in your pocket.</span>
+  </h2>
+  <p class="subtext">
+    $3,289 worth of electronics. Replaced by a single device. Not by making each gadget slightly better — by making them all <strong>obsolete.</strong>
+  </p>
+  <div class="tap-hint">TAP TO CONTINUE →</div>
+</div>
+
+<!-- SCENE 2: Now look at wellness -->
+<div class="scene" id="scene2">
+  <div class="kicker">NOW LOOK AT HEALTH & WELLNESS IN 2026</div>
+  <h2 class="headline" style="font-size: clamp(22px, 4.5vw, 38px);">
+    Turn on any biohacking podcast and they'll tell you to buy...
+  </h2>
+  <p style="font-size: 13px; color: #777;">(Sound familiar?)</p>
+  <div class="tap-hint">TAP TO SEE THE LIST →</div>
+</div>
+
+<!-- SCENE 3: The Biohacker's Radio Shack -->
+<div class="scene" id="scene3">
+  <div class="kicker">THE BIOHACKER'S RADIO SHACK AD</div>
+  <div class="bio-grid" id="bioGrid"></div>
+  <div class="bio-total">
+    <div><div class="label">UPFRONT COST</div><div class="amount">$30,000+</div></div>
+    <div class="sep"></div>
+    <div><div class="label">ONGOING</div><div class="amount">$700+/mo</div></div>
+  </div>
+  <p style="font-size: 11px; color: #555; margin-top: 12px;">18 separate devices. 18 separate purchases. 18 things to maintain. And each one only addresses <em>one</em> problem.</p>
+  <div class="tap-hint">TAP TO CONTINUE →</div>
+</div>
+
+<!-- SCENE 4: The question -->
+<div class="scene" id="scene4">
+  <h2 class="headline" style="font-size: clamp(24px, 5vw, 42px); color: #D4AF37;">
+    What if there was one technology<br>that improved <em>all</em> of it?
+  </h2>
+  <p style="font-size: 15px; color: #888; margin-top: 20px; line-height: 1.6;">
+    Not a tracker that <em>measures</em> your problems.<br>
+    Not a gadget that addresses <em>one</em> symptom.<br>
+    A single technology that works at the <strong style="color:#fff">root level</strong><br>
+    — your quantum energy field — and improves<br>
+    <strong style="color:#D4AF37">everything downstream.</strong>
+  </p>
+  <div class="tap-hint">TAP FOR THE ALGORITHM →</div>
+</div>
+
+<!-- SCENE 5: THE ALGORITHM -->
+<div class="scene" id="scene5">
+  <h2 style="font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 8vw, 64px); letter-spacing: 0.05em; margin-bottom: 28px;">THE ALGORITHM</h2>
+  <div class="algo-steps">
+    <div class="algo-step">1. Pick literally anything biological ❓</div>
+    <div class="algo-arrow">↓</div>
+    <div class="algo-step">2. Apply quantum energy ⚡</div>
+    <div class="algo-arrow">↓</div>
+    <div class="algo-step">3. It improves ↑</div>
+  </div>
+  <p style="font-family: 'Instrument Serif', serif; font-style: italic; font-size: 18px; color: #aaa; margin-bottom: 20px;">Here's everything that's been tested:</p>
+  <div class="algo-grid" id="algoGrid"></div>
+  <div class="tap-hint" style="margin-top:20px">TAP FOR THE PUNCHLINE →</div>
+</div>
+
+<!-- SCENE 6: The punchline -->
+<div class="scene" id="scene6" style="animation: revealIn 1s ease;">
+  <div class="compare-grid">
+    <div class="compare-box compare-old">
+      <div style="font-size:36px; margin-bottom:8px;">📦📦📦</div>
+      <div class="compare-label" style="color:#B71C1C;">THE OLD WAY</div>
+      <div class="compare-detail" style="color:#888;">18 gadgets<br>18 subscriptions<br>18 things to maintain</div>
+      <div class="compare-price" style="color:#B71C1C;">$30,000+</div>
+      <div class="compare-sub" style="color:#888;">+ $700/mo ongoing</div>
+    </div>
+    <div class="compare-vs">VS</div>
+    <div class="compare-box compare-new">
+      <div style="font-size:48px; margin-bottom:8px;">✦</div>
+      <div class="compare-label" style="color:#D4AF37;">QUANTUM UPGRADE</div>
+      <div class="compare-detail" style="color:#aaa;">One technology<br>Every metric improved<br>Works 24/7 passively</div>
+      <div class="compare-price" style="color:#D4AF37;">$35/mo</div>
+      <div class="compare-sub" style="color:#D4AF37;">7-day free trial. No credit card.</div>
+    </div>
+  </div>
+
+  <div class="punchline-box">
+    <p class="punchline-quote">"The smartphone didn't make each gadget slightly better. It made them all unnecessary."</p>
+    <p style="font-size: 13px; color: #aaa; line-height: 1.6;">
+      Quantum Upgrade doesn't compete with your cold plunge, your red light panel, or your supplement stack. It operates at a level <em>beneath</em> all of them — your quantum energy field — and improves every metric they're trying to address individually.
+    </p>
+    <p style="font-size: 14px; color: #fff; font-weight: 600; margin-top: 16px;">
+      59 studies. 48 placebo-controlled. 18 biological markers tested and improved.
+    </p>
+  </div>
+
+  <div style="margin-top:24px;">
+    <a href="https://quantumupgrade.io" style="display:inline-block; background:#D4AF37; color:#1a1a1a; font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:0.1em; padding:14px 40px; border-radius:6px; text-decoration:none; margin-bottom:12px;">TRY IT FREE FOR 7 DAYS →</a>
+    <div style="font-family:'Bebas Neue',sans-serif; font-size:14px; letter-spacing:0.15em; color:#D4AF37; margin-top:8px;">
+      <a href="https://wedidthescience.com" style="color:#D4AF37; text-decoration:none;">wedidthescience.com</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAV DOTS -->
+<div class="nav-dots" id="navDots"></div>
+
+<script>
+  const totalScenes = 7;
+  let currentScene = 0;
+
+  // Radio Shack items
+  const rsItems = [
+    "All-Weather Stereo", "AM/FM Clock Radio", "In-Ear Phones", "Calculator",
+    "Computer System", "Cellular Phone", "CD Player", "Radar Detector",
+    "Desktop Scanner", "VHS Camcorder", "CB Radio", "Phone Answerer",
+    "Speakers", "Speed-Dial Phone", "Cassette Recorder"
+  ];
+  const rsColors = ["#B71C1C", "#1a1a1a", "#444"];
+  const rsContainer = document.getElementById("rsItems");
+  rsItems.forEach((item, i) => {
+    const s = document.createElement("span");
+    s.textContent = item;
+    s.style.background = rsColors[i % 3];
+    rsContainer.appendChild(s);
+  });
+
+  // Biohack gadgets
+  const gadgets = [
+    { name:"Oura Ring", cost:"$299", fixes:"Sleep & HRV tracking", icon:"💍" },
+    { name:"WHOOP Strap", cost:"$30/mo", fixes:"Recovery & strain", icon:"⌚" },
+    { name:"Red Light Panel", cost:"$1,200+", fixes:"Skin & mitochondria", icon:"🔴" },
+    { name:"Cold Plunge", cost:"$4,500", fixes:"Inflammation & dopamine", icon:"🧊" },
+    { name:"Infrared Sauna", cost:"$3,500", fixes:"Detox & cardiovascular", icon:"🔥" },
+    { name:"Hyperbaric Chamber", cost:"$15,000", fixes:"Brain function & O₂", icon:"🫧" },
+    { name:"PEMF Mat", cost:"$2,500", fixes:"Pain & cellular repair", icon:"🧲" },
+    { name:"Grounding Sheets", cost:"$180", fixes:"Sleep & cortisol", icon:"🌿" },
+    { name:"Blue Light Glasses", cost:"$120", fixes:"Circadian rhythm", icon:"🕶️" },
+    { name:"Water Filter System", cost:"$500", fixes:"Toxin removal", icon:"💧" },
+    { name:"Hydrogen Water Gen.", cost:"$1,200", fixes:"Antioxidant & inflammation", icon:"🫗" },
+    { name:"EMF Shielding", cost:"$300", fixes:"Radiation blocking", icon:"📡" },
+    { name:"Air Purifier", cost:"$600", fixes:"Allergens & mold", icon:"🌬️" },
+    { name:"CGM Monitor", cost:"$150/mo", fixes:"Blood sugar tracking", icon:"📊" },
+    { name:"Float Tank Membership", cost:"$120/mo", fixes:"Stress & pain relief", icon:"🛁" },
+    { name:"Neurofeedback Headband", cost:"$250", fixes:"Focus & brain training", icon:"🧠" },
+    { name:"Supplement Stack", cost:"$400/mo", fixes:"NAD+, magnesium, omega-3...", icon:"💊" },
+    { name:"Standing Desk", cost:"$800", fixes:"Posture & energy", icon:"🖥️" },
+  ];
+  const bioGrid = document.getElementById("bioGrid");
+  gadgets.forEach(g => {
+    const d = document.createElement("div");
+    d.className = "bio-card";
+    d.innerHTML = `<div class="icon">${g.icon}</div><div class="name">${g.name}</div><div class="fixes">${g.fixes}</div><div class="cost">${g.cost}</div>`;
+    bioGrid.appendChild(d);
+  });
+
+  // Algorithm items
+  const algoItems = [
+    { name:"Blood Cells", icon:"🩸" }, { name:"Brain Waves", icon:"🧠" },
+    { name:"ATP Energy", icon:"⚡" }, { name:"Water Structure", icon:"💧" },
+    { name:"Heart Rate", icon:"❤️" }, { name:"Food Reactions", icon:"🔬" },
+    { name:"Dog Health", icon:"🐕" }, { name:"Plant Growth", icon:"🌱" },
+    { name:"Cell Recovery", icon:"🔬" }, { name:"5G Radiation", icon:"📡" },
+    { name:"Sleep Quality", icon:"😴" }, { name:"Muscle Tension", icon:"💪" },
+    { name:"Skin Health", icon:"✨" }, { name:"EMF in Cars", icon:"🚗" },
+    { name:"Immune Response", icon:"🛡️" }, { name:"Regeneration", icon:"🔄" },
+    { name:"Nervous System", icon:"🧬" }, { name:"Trauma Response", icon:"🧘" },
+  ];
+  const algoGrid = document.getElementById("algoGrid");
+  algoItems.forEach(a => {
+    const d = document.createElement("div");
+    d.className = "algo-item";
+    d.innerHTML = `<div class="icon">${a.icon}</div><div class="label">${a.name}</div><div class="check">✓</div>`;
+    algoGrid.appendChild(d);
+  });
+
+  // Nav dots
+  const dotsContainer = document.getElementById("navDots");
+  for (let i = 0; i < totalScenes; i++) {
+    const dot = document.createElement("button");
+    dot.className = "nav-dot" + (i === 0 ? " active" : "");
+    dot.onclick = (e) => { e.stopPropagation(); goToScene(i); };
+    dotsContainer.appendChild(dot);
+  }
+
+  function goToScene(n) {
+    document.querySelectorAll(".scene").forEach((el, i) => {
+      el.classList.toggle("active", i === n);
+      el.style.animation = "none";
+      el.offsetHeight; // reflow
+      el.style.animation = i === n ? (n === 6 ? "revealIn 1s ease" : "fadeUp 0.7s ease") : "none";
+    });
+    document.querySelectorAll(".nav-dot").forEach((dot, i) => {
+      dot.classList.toggle("active", i === n);
+    });
+    currentScene = n;
+    document.body.style.cursor = n < totalScenes - 1 ? "pointer" : "default";
+  }
+
+  document.body.addEventListener("click", (e) => {
+    if (e.target.closest(".nav-dots") || e.target.tagName === "A") return;
+    if (currentScene < totalScenes - 1) goToScene(currentScene + 1);
+  });
+
+  // Keyboard support
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); if (currentScene < totalScenes - 1) goToScene(currentScene + 1); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); if (currentScene > 0) goToScene(currentScene - 1); }
+  });
+</script>
+</body>
+</html>
