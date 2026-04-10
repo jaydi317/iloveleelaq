@@ -1,315 +1,479 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quantum Upgrade — Mockup C: The Dare</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Sora:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Quantum Upgrade Dashboard — 4 Design Directions</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
 <style>
-:root {
-  --qu-void:#0B0E17;--qu-obsidian:#141825;--qu-graphite:#1E2333;--qu-slate:#2C3147;
-  --qu-mist:#8A92A8;--qu-cloud:#C8CDD9;--qu-snow:#F0F2F7;
-  --qu-teal-deep:#0A6B6E;--qu-teal:#0FABA4;--qu-teal-bright:#2EEADB;--qu-teal-glow:rgba(15,171,164,0.15);
-  --qu-gold-deep:#9A7200;--qu-gold:#E5AA17;--qu-gold-bright:#FFD052;--qu-gold-glow:rgba(229,170,23,0.12);
-  --qu-violet:#7B5CE5;--qu-violet-glow:rgba(123,92,229,0.12);
-  --qu-success:#22C97A;
-  --font-display:'Sora',sans-serif;--font-body:'Plus Jakarta Sans',sans-serif;--font-mono:'JetBrains Mono',monospace;
-  --radius-lg:16px;--radius-xl:24px;--radius-pill:9999px;
-  --ease-out:cubic-bezier(0.16,1,0.3,1);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-body);background:var(--qu-void);color:var(--qu-cloud);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{text-decoration:none;color:inherit}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a0a0a;min-height:100vh;overflow-x:hidden;}
 
-.nav{position:sticky;top:0;z-index:100;background:rgba(11,14,23,0.9);backdrop-filter:blur(20px) saturate(1.5);border-bottom:1px solid var(--qu-slate);padding:0 clamp(20px,4vw,80px);height:64px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:var(--font-display);font-weight:700;font-size:1.25rem;color:var(--qu-snow);letter-spacing:-0.03em}
-.nav-logo span{color:var(--qu-teal)}
-.nav-links{display:flex;align-items:center;gap:clamp(16px,2.5vw,32px)}
-.nav-links a{font-size:0.875rem;font-weight:500;color:var(--qu-mist);transition:color 150ms}
-.nav-links a:hover{color:var(--qu-teal-bright)}
-.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-weight:600;border:none;cursor:pointer;border-radius:var(--radius-pill);transition:all 250ms var(--ease-out);white-space:nowrap}
-.btn-cta{background:linear-gradient(135deg,var(--qu-gold),var(--qu-gold-bright));color:var(--qu-void);padding:10px 24px;font-size:0.875rem;box-shadow:0 0 24px rgba(229,170,23,0.25)}
-.btn-cta:hover{transform:translateY(-2px);box-shadow:0 0 36px rgba(229,170,23,0.4)}
-.btn-cta-hero{background:linear-gradient(135deg,var(--qu-gold),var(--qu-gold-bright));color:var(--qu-void);padding:18px 48px;font-size:1.125rem;box-shadow:0 0 30px rgba(229,170,23,0.3);letter-spacing:-0.01em}
-.btn-cta-hero:hover{transform:translateY(-3px);box-shadow:0 0 48px rgba(229,170,23,0.5)}
-.btn-secondary{background:transparent;border:1.5px solid var(--qu-teal);color:var(--qu-teal-bright);padding:12px 28px;font-size:0.9375rem}
-.btn-secondary:hover{background:var(--qu-teal-glow)}
-.btn-ghost{background:transparent;color:var(--qu-mist);border:1.5px solid var(--qu-slate);padding:10px 24px;font-size:0.875rem}
-.btn-ghost:hover{border-color:var(--qu-mist);color:var(--qu-snow)}
+@keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,20px)}}
+@keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-15px)}}
+@keyframes drift3{0%,100%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(10px,10px) rotate(3deg)}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+@keyframes glow{0%,100%{box-shadow:0 0 20px var(--glow1)}50%{box-shadow:0 0 40px var(--glow2)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
 
-/* HERO — THE DARE */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px clamp(20px,4vw,80px);position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 800px 600px at 50% 40%,rgba(229,170,23,0.08),transparent),radial-gradient(ellipse 600px 400px at 30% 60%,var(--qu-teal-glow),transparent),radial-gradient(ellipse 500px 400px at 70% 50%,var(--qu-violet-glow),transparent)}
+/* Tabs */
+.tabs{display:flex;gap:0;margin:0 auto;width:fit-content;padding:14px 0 10px;position:sticky;top:0;z-index:100;background:#0a0a0a;}
+.tab{padding:12px 24px;font-size:12px;font-weight:700;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;letter-spacing:0.3px;transition:all .2s;color:#666;background:transparent;border-bottom:2px solid transparent;}
+.tab.active{color:#fff;border-bottom-color:#fff;}
+.tab:hover:not(.active){color:#999;}
+.tab-label{display:block;font-size:9px;font-weight:400;margin-top:2px;letter-spacing:0.5px;text-transform:uppercase;opacity:0.5;}
 
-.hero>*{position:relative;z-index:1}
-.hero-dare{font-family:var(--font-mono);font-size:0.8125rem;color:var(--qu-gold);text-transform:uppercase;letter-spacing:0.2em;margin-bottom:24px;display:inline-flex;align-items:center;gap:12px;padding:8px 20px;border:1px solid rgba(229,170,23,0.3);border-radius:var(--radius-pill);background:var(--qu-gold-glow)}
-.hero h1{font-family:var(--font-display);font-size:clamp(2.5rem,6vw,5rem);font-weight:800;color:var(--qu-snow);letter-spacing:-0.05em;line-height:1.05;margin-bottom:32px;max-width:1000px}
-.hero h1 .teal{color:var(--qu-teal-bright)}
-.hero h1 .gold{color:var(--qu-gold-bright)}
-.hero-sub{font-size:clamp(1.0625rem,1.5vw,1.25rem);color:var(--qu-mist);max-width:620px;margin-bottom:40px;line-height:1.7}
-.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
-.hero-note{font-family:var(--font-mono);font-size:0.6875rem;color:var(--qu-mist)}
+.dashboard{display:none;width:100%;max-width:1160px;margin:0 auto 60px;border-radius:20px;overflow:hidden;min-height:85vh;position:relative;}
+.dashboard.active{display:block;animation:fadeUp 0.4s ease;}
 
-/* DARE STATEMENTS */
-.dare-strip{border-top:1px solid var(--qu-slate);border-bottom:1px solid var(--qu-slate);overflow:hidden;padding:20px 0}
-.dare-track{display:flex;gap:64px;animation:dare-scroll 30s linear infinite;width:max-content}
-.dare-track span{font-family:var(--font-display);font-size:1.125rem;font-weight:700;color:var(--qu-snow);white-space:nowrap;opacity:0.5}
-.dare-track span em{font-style:normal;color:var(--qu-teal-bright);opacity:1}
-@keyframes dare-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+/* ══════════ VARIATION 1: COSMIC DEEP SPACE ══════════ */
+.v1{background:#04040e;font-family:'Outfit',sans-serif;border:1px solid #151530;}
+.v1 .bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.v1 .bg .nebula1{position:absolute;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(120,60,220,0.12) 0%,rgba(40,20,120,0.05) 40%,transparent 70%);top:-300px;right:-200px;animation:drift1 25s ease-in-out infinite;}
+.v1 .bg .nebula2{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,200,180,0.08) 0%,transparent 60%);bottom:-200px;left:-100px;animation:drift2 30s ease-in-out infinite;}
+.v1 .bg .stars{position:absolute;inset:0;background-image:radial-gradient(1px 1px at 20% 30%,rgba(255,255,255,0.3),transparent),radial-gradient(1px 1px at 60% 70%,rgba(255,255,255,0.2),transparent),radial-gradient(1px 1px at 80% 20%,rgba(255,255,255,0.15),transparent),radial-gradient(1px 1px at 40% 80%,rgba(255,255,255,0.25),transparent),radial-gradient(1px 1px at 10% 50%,rgba(255,255,255,0.2),transparent),radial-gradient(1px 1px at 90% 40%,rgba(255,255,255,0.15),transparent),radial-gradient(1px 1px at 50% 10%,rgba(255,255,255,0.3),transparent),radial-gradient(1px 1px at 30% 60%,rgba(255,255,255,0.1),transparent);background-size:200px 200px;}
+.v1 .content{position:relative;z-index:1;padding:36px 44px;}
+.v1 .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;}
+.v1 .logo{display:flex;align-items:center;gap:12px;}
+.v1 .logo-mark{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:18px;animation:breathe 4s ease-in-out infinite;box-shadow:0 0 30px rgba(124,58,237,0.3);}
+.v1 .wallet{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:10px 18px;color:#e8b84b;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:14px;}
 
-/* SECTIONS */
-.section{max-width:1440px;margin:0 auto;padding:96px clamp(20px,4vw,80px)}
-.section+.section{border-top:1px solid var(--qu-slate)}
-.section-tag{font-family:var(--font-mono);font-size:0.75rem;color:var(--qu-teal);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px}
-.section h2{font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:700;color:var(--qu-snow);letter-spacing:-0.03em;margin-bottom:8px}
-.section .subtitle{font-size:1.125rem;color:var(--qu-mist);max-width:580px;margin-bottom:48px}
-.center{text-align:center}.center .subtitle{margin-left:auto;margin-right:auto}
+.v1 .energy-hub{display:flex;gap:28px;margin-bottom:32px;align-items:center;}
+.v1 .ring-container{position:relative;width:180px;height:180px;flex-shrink:0;}
+.v1 .ring-container svg{transform:rotate(-90deg);filter:drop-shadow(0 0 12px rgba(6,182,212,0.3));}
+.v1 .ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.v1 .ring-label{font-size:42px;font-weight:900;color:#06b6d4;font-family:'JetBrains Mono',monospace;line-height:1;text-shadow:0 0 30px rgba(6,182,212,0.4);}
+.v1 .stats-grid{flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+.v1 .stat-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;}
+.v1 .stat-num{font-size:28px;font-weight:900;font-family:'JetBrains Mono',monospace;line-height:1;}
+.v1 .stat-label{color:#7a7a9e;font-size:11px;font-weight:600;margin-top:6px;text-transform:uppercase;letter-spacing:0.5px;}
 
-/* COMPARISON TABLE — Brass balls "name another company" */
-.compare-table{width:100%;border-collapse:collapse;max-width:900px;margin:0 auto}
-.compare-table th{font-family:var(--font-mono);font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--qu-mist);text-align:left;padding:12px 16px;border-bottom:1px solid var(--qu-slate)}
-.compare-table th:first-child{width:50%}
-.compare-table td{padding:14px 16px;border-bottom:1px solid rgba(44,49,71,0.5);font-size:0.9375rem;color:var(--qu-cloud)}
-.compare-table td:first-child{font-weight:600;color:var(--qu-snow)}
-.compare-table .qu-col{color:var(--qu-teal-bright);font-weight:700;font-family:var(--font-display)}
-.compare-table .other-col{color:var(--qu-mist)}
-.compare-table tr:hover td{background:rgba(15,171,164,0.03)}
+.v1 .field-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:22px 24px;margin-bottom:14px;display:flex;align-items:center;gap:18px;transition:all .2s;position:relative;overflow:hidden;}
+.v1 .field-card:hover{border-color:rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);}
+.v1 .field-card .shimmer-line{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#7c3aed,#06b6d4,#7c3aed);background-size:200% 100%;animation:shimmer 4s linear infinite;}
+.v1 .field-icon{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;position:relative;}
+.v1 .field-icon::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:2px solid;animation:spin 8s linear infinite;opacity:0.3;}
+.v1 .field-name{color:#f0f0ff;font-weight:700;font-size:16px;}
+.v1 .field-sub{color:#7a7a9e;font-size:11px;margin-top:2px;}
+.v1 .field-energy{font-size:22px;font-weight:900;font-family:'JetBrains Mono',monospace;}
+.v1 .field-meta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.05);}
+.v1 .meta-item{font-size:10px;color:#55556a;text-transform:uppercase;letter-spacing:0.3px;}
+.v1 .meta-val{color:#ddddf0;font-size:13px;font-weight:600;margin-top:3px;}
 
-/* BOLD STAT BLOCKS */
-.stat-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--qu-slate);border:1px solid var(--qu-slate);border-radius:var(--radius-lg);overflow:hidden}
-.stat-block{background:var(--qu-obsidian);padding:32px 24px;text-align:center}
-.stat-block .number{font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--qu-teal-bright);line-height:1}
-.stat-block .label{font-size:0.8125rem;color:var(--qu-mist);margin-top:6px}
+/* ══════════ VARIATION 2: CLEAN CLINICAL (LIGHT) ══════════ */
+.v2{background:#fafbfc;font-family:'DM Sans',sans-serif;border:1px solid #e5e7ec;color:#1a1a2e;}
+.v2 .sidebar{width:240px;background:#fff;border-right:1px solid #eceef2;padding:28px 0;position:absolute;left:0;top:0;bottom:0;}
+.v2 .sidebar-logo{padding:0 24px 28px;display:flex;align-items:center;gap:10px;}
+.v2 .sidebar-mark{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#2563eb,#0ea5e9);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:900;}
+.v2 .sidebar-nav{padding:0 12px;}
+.v2 .nav-row{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:500;color:#6b7280;margin-bottom:2px;transition:all .15s;}
+.v2 .nav-row:hover{background:#f3f4f6;}
+.v2 .nav-row.active{background:#eff6ff;color:#2563eb;font-weight:600;}
+.v2 .nav-icon{width:18px;text-align:center;font-size:13px;}
 
-/* SKEPTIC PATH */
-.skeptic-path{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-@media(max-width:900px){.skeptic-path{grid-template-columns:1fr 1fr}}
-@media(max-width:500px){.skeptic-path{grid-template-columns:1fr}}
-.path-step{background:var(--qu-obsidian);border:1px solid var(--qu-slate);border-radius:var(--radius-lg);padding:24px;text-align:center;position:relative}
-.path-step .step-num{font-family:var(--font-mono);font-size:0.6875rem;color:var(--qu-teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px}
-.path-step h4{font-family:var(--font-display);font-size:1.0625rem;color:var(--qu-snow);font-weight:600;margin-bottom:8px}
-.path-step p{font-size:0.8125rem;color:var(--qu-mist)}
-.path-step .arrow{position:absolute;right:-14px;top:50%;transform:translateY(-50%);color:var(--qu-teal);font-size:1.25rem}
-@media(max-width:900px){.path-step .arrow{display:none}}
+.v2 .main{margin-left:240px;padding:32px 40px;}
+.v2 .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;}
+.v2 .greeting{font-size:24px;font-weight:700;color:#111827;letter-spacing:-0.5px;}
+.v2 .wallet2{background:#fef3c7;border:1px solid #fde68a;border-radius:10px;padding:8px 16px;color:#92400e;font-weight:700;font-size:13px;}
 
-/* BRASS BANNERS */
-.brass{background:var(--qu-graphite);border-top:1px solid var(--qu-slate);border-bottom:1px solid var(--qu-slate);padding:56px clamp(20px,4vw,80px);text-align:center}
-.brass p{font-family:var(--font-display);font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:700;color:var(--qu-snow);max-width:800px;margin:0 auto;letter-spacing:-0.02em;line-height:1.4}
-.brass em{font-style:normal;color:var(--qu-teal-bright)}
-.brass .gold{color:var(--qu-gold-bright)}
+.v2 .overview2{display:grid;grid-template-columns:200px 1fr;gap:24px;margin-bottom:28px;}
+.v2 .ring-box{background:#fff;border:1px solid #e5e7ec;border-radius:16px;padding:24px;display:flex;flex-direction:column;align-items:center;}
+.v2 .ring-box svg{transform:rotate(-90deg);}
+.v2 .ring-box .rc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.v2 .mini-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+.v2 .mini-stat{background:#fff;border:1px solid #e5e7ec;border-radius:14px;padding:18px;}
+.v2 .mini-stat .n{font-size:28px;font-weight:800;color:#111827;font-family:'JetBrains Mono',monospace;}
+.v2 .mini-stat .l{color:#9ca3af;font-size:11px;font-weight:600;margin-top:4px;text-transform:uppercase;letter-spacing:0.3px;}
 
-/* PRICING */
-.tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:960px;margin:0 auto}
-.tier-card{background:var(--qu-obsidian);border:1.5px solid var(--qu-slate);border-radius:var(--radius-xl);padding:32px;text-align:center;position:relative;transition:border-color 250ms,transform 250ms}
-.tier-card:hover{border-color:var(--qu-teal);transform:translateY(-4px)}
-.tier-card.featured{border-color:var(--qu-gold);background:linear-gradient(180deg,rgba(229,170,23,0.06) 0%,var(--qu-obsidian) 40%)}
-.tier-card.featured::before{content:'MOST POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:0.12em;background:var(--qu-gold);color:var(--qu-void);padding:4px 14px;border-radius:var(--radius-pill)}
-.tier-card .tier-name{font-family:var(--font-display);font-size:1.25rem;color:var(--qu-snow);font-weight:600;margin-bottom:4px}
-.tier-card .tier-price{font-family:var(--font-display);font-size:2.5rem;color:var(--qu-snow);font-weight:800}
-.tier-card .tier-price span{font-size:1rem;font-weight:400;color:var(--qu-mist)}
-.tier-card .tier-features{list-style:none;text-align:left;margin:24px 0}
-.tier-card .tier-features li{padding:6px 0;font-size:0.875rem;color:var(--qu-cloud);border-bottom:1px solid var(--qu-slate)}
-.tier-card .tier-features li::before{content:'✦ ';color:var(--qu-teal)}
+.v2 .section-title{font-size:15px;font-weight:700;color:#111827;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.v2 .field2{background:#fff;border:1px solid #e5e7ec;border-radius:14px;padding:20px 24px;margin-bottom:12px;display:flex;align-items:center;gap:16px;transition:box-shadow .2s;}
+.v2 .field2:hover{box-shadow:0 4px 20px rgba(0,0,0,0.06);}
+.v2 .f-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;}
+.v2 .f-name{font-weight:700;font-size:15px;color:#111827;}
+.v2 .f-sub{font-size:11px;color:#9ca3af;margin-top:1px;}
+.v2 .f-energy{font-size:20px;font-weight:800;font-family:'JetBrains Mono',monospace;}
+.v2 .f-bar{width:80px;height:6px;background:#e5e7ec;border-radius:3px;overflow:hidden;margin-top:6px;}
+.v2 .f-bar-fill{height:100%;border-radius:3px;}
+.v2 .f-details{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid #f3f4f6;}
+.v2 .f-detail{font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.3px;}
+.v2 .f-detail-val{font-size:12px;color:#374151;font-weight:600;margin-top:2px;}
+.v2 .status-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;}
 
-/* FINAL CTA */
-.final-cta{text-align:center;padding:96px clamp(20px,4vw,80px);position:relative;overflow:hidden}
-.final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 600px 400px at 50% 50%,var(--qu-gold-glow),transparent),radial-gradient(ellipse 400px 300px at 30% 60%,var(--qu-teal-glow),transparent);opacity:0.5}
-.final-cta>*{position:relative;z-index:1}
-.final-cta h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:800;color:var(--qu-snow);letter-spacing:-0.03em;margin-bottom:12px}
-.final-cta p{font-size:1.125rem;color:var(--qu-mist);max-width:550px;margin:0 auto 32px}
-.final-cta .dare-line{font-family:var(--font-mono);font-size:0.75rem;color:var(--qu-gold);text-transform:uppercase;letter-spacing:0.1em;margin-top:16px}
+/* ══════════ VARIATION 3: SACRED GEOMETRY ══════════ */
+.v3{background:#0b0a10;font-family:'Cormorant Garamond',serif;border:1px solid #1f1a2e;position:relative;}
+.v3 .bg3{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.v3 .bg3 .geo{position:absolute;width:500px;height:500px;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.03;}
+.v3 .bg3 .geo svg{width:100%;height:100%;animation:spin 120s linear infinite;}
+.v3 .bg3 .glow1{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,0.06) 0%,transparent 60%);top:-100px;left:50%;transform:translateX(-50%);animation:breathe 8s ease-in-out infinite;}
 
-footer{border-top:1px solid var(--qu-slate);padding:48px clamp(20px,4vw,80px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;max-width:1440px;margin:0 auto}
-footer .copy{font-size:0.75rem;color:var(--qu-mist)}
-footer .foot-links{display:flex;gap:24px}
-footer .foot-links a{font-size:0.75rem;color:var(--qu-mist);transition:color 150ms}
-footer .foot-links a:hover{color:var(--qu-teal-bright)}
+.v3 .content3{position:relative;z-index:1;padding:44px 52px;}
+.v3 .header3{text-align:center;margin-bottom:40px;}
+.v3 .header3 .symbol{font-size:36px;margin-bottom:8px;color:#d4af37;animation:float 4s ease-in-out infinite;}
+.v3 .header3 h1{font-size:14px;font-weight:400;letter-spacing:6px;text-transform:uppercase;color:#8a7a5a;font-family:'DM Sans',sans-serif;}
+.v3 .header3 .welcome{font-size:32px;font-weight:700;color:#f5f0e8;margin-top:4px;font-style:italic;}
+.v3 .wallet3{position:absolute;top:44px;right:52px;color:#d4af37;font-size:16px;font-weight:600;font-family:'JetBrains Mono',monospace;}
 
-.mockup-label{position:fixed;bottom:16px;right:16px;background:var(--qu-gold);color:var(--qu-void);font-family:var(--font-mono);font-size:10px;font-weight:700;padding:6px 14px;border-radius:var(--radius-pill);z-index:999;letter-spacing:0.05em}
+.v3 .energy-mandala{display:flex;justify-content:center;margin-bottom:40px;position:relative;}
+.v3 .mandala-ring{position:relative;width:200px;height:200px;}
+.v3 .mandala-ring svg{transform:rotate(-90deg);filter:drop-shadow(0 0 15px rgba(212,175,55,0.25));}
+.v3 .mandala-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.v3 .mandala-num{font-size:48px;font-weight:700;color:#d4af37;font-family:'Cormorant Garamond',serif;line-height:1;text-shadow:0 0 30px rgba(212,175,55,0.3);}
+.v3 .mandala-label{font-size:11px;color:#8a7a5a;letter-spacing:3px;text-transform:uppercase;font-family:'DM Sans',sans-serif;margin-top:4px;}
 
-@media(max-width:768px){.nav-links a:not(.btn-cta){display:none}.tier-grid{grid-template-columns:1fr}}
+.v3 .stats3{display:flex;justify-content:center;gap:48px;margin-bottom:40px;}
+.v3 .stat3 .num{font-size:36px;font-weight:700;color:#f5f0e8;text-align:center;font-family:'Cormorant Garamond',serif;}
+.v3 .stat3 .lab{font-size:10px;color:#6a5a3a;text-align:center;letter-spacing:2px;text-transform:uppercase;font-family:'DM Sans',sans-serif;margin-top:4px;}
+
+.v3 .divider{width:200px;height:1px;background:linear-gradient(90deg,transparent,#d4af3730,transparent);margin:0 auto 36px;}
+
+.v3 .field3{background:rgba(212,175,55,0.02);border:1px solid rgba(212,175,55,0.08);border-radius:2px;padding:28px 32px;margin-bottom:16px;position:relative;}
+.v3 .field3::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#d4af3740,transparent);}
+.v3 .field3-top{display:flex;align-items:center;gap:20px;}
+.v3 .field3-icon{width:56px;height:56px;border:1px solid rgba(212,175,55,0.2);display:flex;align-items:center;justify-content:center;font-size:26px;position:relative;}
+.v3 .field3-icon::before{content:'';position:absolute;inset:-4px;border:1px solid rgba(212,175,55,0.08);transform:rotate(45deg);}
+.v3 .field3-name{font-size:22px;font-weight:700;color:#f5f0e8;font-style:italic;}
+.v3 .field3-sub{font-size:12px;color:#6a5a3a;letter-spacing:2px;text-transform:uppercase;font-family:'DM Sans',sans-serif;margin-top:2px;}
+.v3 .field3-energy{font-size:32px;font-weight:700;color:#d4af37;font-family:'Cormorant Garamond',serif;margin-left:auto;}
+.v3 .field3-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px;padding-top:18px;border-top:1px solid rgba(212,175,55,0.06);}
+.v3 .field3-meta-label{font-size:9px;color:#5a4a2a;letter-spacing:1.5px;text-transform:uppercase;font-family:'DM Sans',sans-serif;}
+.v3 .field3-meta-val{font-size:15px;color:#c9b88a;font-weight:600;margin-top:4px;}
+.v3 .status3{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-family:'DM Sans',sans-serif;}
+.v3 .status3 .dot{width:6px;height:6px;border-radius:50%;animation:pulse 2s infinite;}
+
+/* ══════════ VARIATION 4: GLASS AURORA ══════════ */
+.v4{background:#0d1117;font-family:'Outfit',sans-serif;border:1px solid rgba(255,255,255,0.06);overflow:hidden;}
+.v4 .bg4{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.v4 .bg4 .aurora1{position:absolute;width:100%;height:400px;top:-100px;background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(99,102,241,0.06),rgba(236,72,153,0.04));filter:blur(80px);animation:drift3 20s ease-in-out infinite;}
+.v4 .bg4 .aurora2{position:absolute;width:100%;height:300px;bottom:-50px;background:linear-gradient(225deg,rgba(99,102,241,0.06),rgba(16,185,129,0.04),rgba(245,158,11,0.03));filter:blur(60px);animation:drift1 25s ease-in-out infinite;}
+
+.v4 .content4{position:relative;z-index:1;display:flex;min-height:85vh;}
+.v4 .side4{width:72px;background:rgba(255,255,255,0.02);border-right:1px solid rgba(255,255,255,0.05);display:flex;flex-direction:column;align-items:center;padding:20px 0;gap:4px;backdrop-filter:blur(20px);}
+.v4 .side4-icon{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;transition:all .15s;color:rgba(255,255,255,0.3);}
+.v4 .side4-icon:hover{background:rgba(255,255,255,0.04);}
+.v4 .side4-icon.active{background:rgba(16,185,129,0.1);color:#10b981;}
+
+.v4 .main4{flex:1;padding:32px 36px;}
+.v4 .top4{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;}
+.v4 .greeting4{font-size:13px;color:rgba(255,255,255,0.4);font-weight:500;}
+.v4 .title4{font-size:26px;font-weight:800;color:#fff;letter-spacing:-0.5px;margin-top:2px;}
+.v4 .wallet4{background:rgba(255,255,255,0.04);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:10px 18px;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:14px;color:#f59e0b;}
+
+.v4 .glass{background:rgba(255,255,255,0.03);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.07);border-radius:20px;}
+.v4 .overview4{padding:28px;margin-bottom:20px;display:flex;gap:28px;align-items:center;}
+.v4 .ring4{position:relative;width:150px;height:150px;flex-shrink:0;}
+.v4 .ring4 svg{transform:rotate(-90deg);filter:drop-shadow(0 0 10px rgba(16,185,129,0.3));}
+.v4 .ring4 .rc4{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.v4 .ring4-num{font-size:36px;font-weight:900;color:#10b981;font-family:'JetBrains Mono',monospace;line-height:1;}
+.v4 .ring4-label{font-size:10px;color:rgba(255,255,255,0.3);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.v4 .stats4{flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+.v4 .stat4{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:14px;padding:18px;}
+.v4 .stat4 .n{font-size:24px;font-weight:800;font-family:'JetBrains Mono',monospace;}
+.v4 .stat4 .l{color:rgba(255,255,255,0.3);font-size:10px;font-weight:600;margin-top:4px;text-transform:uppercase;letter-spacing:0.3px;}
+
+.v4 .fields4{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.v4 .field4{padding:22px;position:relative;overflow:hidden;transition:all .2s;cursor:pointer;}
+.v4 .field4:hover{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);}
+.v4 .field4 .accent-line{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--c1),var(--c2));background-size:200% 100%;animation:shimmer 3s linear infinite;}
+.v4 .field4-top{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+.v4 .field4-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);}
+.v4 .field4-name{font-weight:700;font-size:15px;color:#fff;}
+.v4 .field4-sub{font-size:11px;color:rgba(255,255,255,0.3);margin-top:1px;}
+.v4 .field4-energy{font-size:28px;font-weight:900;font-family:'JetBrains Mono',monospace;margin-left:auto;}
+.v4 .field4-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.v4 .field4-item{background:rgba(255,255,255,0.02);border-radius:10px;padding:10px 12px;}
+.v4 .field4-item-label{font-size:9px;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:0.5px;font-weight:600;}
+.v4 .field4-item-val{font-size:12px;color:rgba(255,255,255,0.8);font-weight:600;margin-top:3px;}
 </style>
 </head>
 <body>
 
-<div class="mockup-label">MOCKUP C — THE DARE</div>
+<div class="tabs">
+  <button class="tab active" onclick="show(0,this)">A · Cosmic Deep Space<span class="tab-label">Immersive & futuristic</span></button>
+  <button class="tab" onclick="show(1,this)">B · Clean Clinical<span class="tab-label">Oura/Whoop inspired</span></button>
+  <button class="tab" onclick="show(2,this)">C · Sacred Geometry<span class="tab-label">Consciousness & gold</span></button>
+  <button class="tab" onclick="show(3,this)">D · Glass Aurora<span class="tab-label">Modern & translucent</span></button>
+</div>
 
-<nav class="nav">
-  <div class="nav-logo">Quantum<span>Upgrade</span></div>
-  <div class="nav-links">
-    <a href="#">The Science</a>
-    <a href="#">Challenge</a>
-    <a href="#">Pricing</a>
-    <a href="#" class="btn btn-cta">Try Free — We Dare You</a>
-  </div>
-</nav>
+<!-- ═══════════════ A: COSMIC DEEP SPACE ═══════════════ -->
+<div class="dashboard v1 active">
+  <div class="bg"><div class="nebula1"></div><div class="nebula2"></div><div class="stars"></div></div>
+  <div class="content">
+    <div class="topbar">
+      <div class="logo">
+        <div class="logo-mark">✦</div>
+        <div><div style="color:#f0f0ff;font-size:15px;font-weight:800;letter-spacing:0.5px">QUANTUM UPGRADE</div><div style="color:#7a7a9e;font-size:10px;font-weight:500;letter-spacing:1px">COMMAND CENTER</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <div class="wallet">💰 $40</div>
+        <div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer">⚙</div>
+      </div>
+    </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-dare">⚡ We dare you to try it for 7 days</div>
-  <h1><span class="teal">59 Studies.</span> <span class="gold">20,257 Testimonials.</span> Zero Excuses Left.</h1>
-  <p class="hero-sub">Quantum Upgrade is the most researched quantum energy technology on Earth. We've funded the studies. We've published the results. Now we're giving you 7 days free to prove us wrong. <strong style="color:var(--qu-snow)">You won't.</strong></p>
-  <div class="hero-ctas">
-    <a href="#" class="btn btn-cta-hero">Start Your Free 7-Day Trial →</a>
-  </div>
-  <div class="hero-note">No credit card · No catch · No excuses</div>
-</section>
+    <div class="energy-hub">
+      <div class="ring-container">
+        <svg width="180" height="180"><circle cx="90" cy="90" r="82" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="4"/><circle cx="90" cy="90" r="82" fill="none" stroke="#06b6d4" stroke-width="4" stroke-dasharray="515" stroke-dashoffset="128.7" stroke-linecap="round" style="filter:drop-shadow(0 0 12px rgba(6,182,212,0.4))"/><circle cx="90" cy="90" r="72" fill="none" stroke="rgba(124,58,237,0.15)" stroke-width="2" stroke-dasharray="4 8"/></svg>
+        <div class="ring-center"><div class="ring-label">1500</div><div style="font-size:10px;color:#7a7a9e;font-weight:600;letter-spacing:1px;text-transform:uppercase;font-family:'JetBrains Mono',monospace">TOTAL QE</div></div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-num" style="color:#3ee8a0">2</div><div class="stat-label">Active Fields</div><div style="color:#3ee8a055;font-size:9px;margin-top:2px">All streaming</div></div>
+        <div class="stat-card"><div class="stat-num" style="color:#7c3aed">Night</div><div class="stat-label">Current Mode</div><div style="color:#7c3aed55;font-size:9px;margin-top:2px">Auto-switched</div></div>
+        <div class="stat-card"><div class="stat-num" style="color:#e8b84b">2</div><div class="stat-label">Boosters Active</div><div style="color:#e8b84b55;font-size:9px;margin-top:2px">5,000 QE each</div></div>
+      </div>
+    </div>
 
-<!-- DARE STRIP -->
-<div class="dare-strip">
-  <div class="dare-track">
-    <span>Plants can't be placebo'd.</span>
-    <span>Dogs don't read marketing materials.</span>
-    <span><em>Water doesn't have beliefs.</em></span>
-    <span>Cells don't have opinions — they just heal, or they don't.</span>
-    <span>The Emoto Institute didn't endorse it — <em>they LICENSED it.</em></span>
-    <span>Name another company with 48+ placebo-controlled studies. We'll wait.</span>
-    <span>Plants can't be placebo'd.</span>
-    <span>Dogs don't read marketing materials.</span>
-    <span><em>Water doesn't have beliefs.</em></span>
-    <span>Cells don't have opinions — they just heal, or they don't.</span>
-    <span>The Emoto Institute didn't endorse it — <em>they LICENSED it.</em></span>
-    <span>Name another company with 48+ placebo-controlled studies. We'll wait.</span>
+    <div style="color:#7a7a9e;font-size:12px;font-weight:600;margin-bottom:14px;letter-spacing:0.5px">QUANTUM FIELDS</div>
+
+    <div class="field-card" style="animation:slideIn 0.5s ease both">
+      <div class="shimmer-line"></div>
+      <div class="field-icon" style="background:rgba(6,182,212,0.08);border:1px solid rgba(6,182,212,0.15)"><span style="position:relative;z-index:1">🧬</span><style>.v1 .field-card:first-of-type .field-icon::after{border-color:rgba(6,182,212,0.2)}</style></div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:10px"><div class="field-name">James Ryan Davis</div><div style="background:rgba(62,232,160,0.1);color:#3ee8a0;padding:2px 10px;border-radius:20px;font-size:9px;font-weight:700;display:flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace"><div style="width:6px;height:6px;border-radius:50%;background:#3ee8a0;animation:pulse 2s infinite"></div>ACTIVE</div></div>
+        <div class="field-sub">Human · June 6th, 1982</div>
+        <div class="field-meta">
+          <div><div class="meta-item">Frequency (Day)</div><div class="meta-val">H.E.A.L.360™</div></div>
+          <div><div class="meta-item">Frequency (Night)</div><div class="meta-val">Calm & Rest</div></div>
+          <div><div class="meta-item">Booster</div><div class="meta-val">10:23 PM · 180 min</div></div>
+        </div>
+      </div>
+      <div style="text-align:right"><div class="field-energy" style="color:#06b6d4">600</div><div style="color:#55556a;font-size:9px;font-family:'JetBrains Mono',monospace;letter-spacing:1px">QE</div></div>
+    </div>
+
+    <div class="field-card" style="animation:slideIn 0.5s ease 0.1s both">
+      <div class="shimmer-line" style="background:linear-gradient(90deg,#e8b84b,#f59e0b,#e8b84b);background-size:200% 100%;animation:shimmer 3s linear infinite"></div>
+      <div class="field-icon" style="background:rgba(232,184,75,0.08);border:1px solid rgba(232,184,75,0.15)"><span style="position:relative;z-index:1">📱</span><style>.v1 .field-card:nth-of-type(2) .field-icon::after{border-color:rgba(232,184,75,0.2)}</style></div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:10px"><div class="field-name">+1-626-354-3229</div><div style="background:rgba(232,184,75,0.1);color:#e8b84b;padding:2px 10px;border-radius:20px;font-size:9px;font-weight:700;display:flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace"><div style="width:6px;height:6px;border-radius:50%;background:#e8b84b;animation:pulse 2s infinite"></div>BOOSTED</div></div>
+        <div class="field-sub">Phone · EMF Protection</div>
+        <div class="field-meta">
+          <div><div class="meta-item">Frequency (Day)</div><div class="meta-val">H.E.A.L.360™</div></div>
+          <div><div class="meta-item">Frequency (Night)</div><div class="meta-val">Calm & Rest</div></div>
+          <div><div class="meta-item">Booster</div><div class="meta-val">10:25 PM · 180 min</div></div>
+        </div>
+      </div>
+      <div style="text-align:right"><div class="field-energy" style="color:#e8b84b">900</div><div style="color:#55556a;font-size:9px;font-family:'JetBrains Mono',monospace;letter-spacing:1px">QE</div></div>
+    </div>
   </div>
 </div>
 
-<!-- STAT STRIP -->
-<section class="section" style="padding-top:64px;padding-bottom:64px">
-  <div class="stat-strip">
-    <div class="stat-block"><div class="number">59+</div><div class="label">Published Studies</div></div>
-    <div class="stat-block"><div class="number">48+</div><div class="label">Placebo-Controlled</div></div>
-    <div class="stat-block"><div class="number">100%</div><div class="label">Blood Cell Recovery</div></div>
-    <div class="stat-block"><div class="number">77.6%</div><div class="label">Brain Stress Reduction</div></div>
-    <div class="stat-block"><div class="number">20–29%</div><div class="label">ATP Energy Increase</div></div>
+<!-- ═══════════════ B: CLEAN CLINICAL ═══════════════ -->
+<div class="dashboard v2">
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-mark">Q</div>
+      <div><div style="font-size:14px;font-weight:700;color:#111827">Quantum</div><div style="font-size:10px;color:#9ca3af;font-weight:500">Upgrade</div></div>
+    </div>
+    <div class="sidebar-nav">
+      <div class="nav-row active"><span class="nav-icon">◉</span>Dashboard</div>
+      <div class="nav-row"><span class="nav-icon">◫</span>Manage Fields</div>
+      <div class="nav-row"><span class="nav-icon">▶</span>Quick Start</div>
+      <div class="nav-row"><span class="nav-icon">★</span>Rewards</div>
+      <div class="nav-row"><span class="nav-icon">◇</span>Referrals</div>
+      <div class="nav-row"><span class="nav-icon">⊡</span>Billing</div>
+      <div class="nav-row"><span class="nav-icon">⚙</span>Settings</div>
+    </div>
   </div>
-</section>
+  <div class="main">
+    <div class="top"><div><div class="greeting">Welcome back</div></div><div class="wallet2">Wallet: $40</div></div>
 
-<!-- COMPARISON TABLE -->
-<section class="section center">
-  <div class="section-tag">The Uncomfortable Truth</div>
-  <h2>Name Another Company That Even Comes Close</h2>
-  <p class="subtitle">We didn't cherry-pick one study. We funded 59+. Most are placebo-controlled. This isn't marketing — it's an arsenal.</p>
+    <div class="overview2">
+      <div class="ring-box">
+        <div style="position:relative;width:140px;height:140px">
+          <svg width="140" height="140"><circle cx="70" cy="70" r="62" fill="none" stroke="#e5e7ec" stroke-width="5"/><circle cx="70" cy="70" r="62" fill="none" stroke="#2563eb" stroke-width="5" stroke-dasharray="389.6" stroke-dashoffset="97.4" stroke-linecap="round"/></svg>
+          <div class="rc"><div style="font-size:32px;font-weight:900;color:#111827;font-family:'JetBrains Mono',monospace">1500</div><div style="font-size:9px;color:#9ca3af;font-weight:600;letter-spacing:1px;text-transform:uppercase">Total QE</div></div>
+        </div>
+        <div style="margin-top:12px;display:flex;align-items:center;gap:5px"><div style="width:8px;height:8px;border-radius:50%;background:#10b981"></div><span style="font-size:11px;font-weight:600;color:#10b981">All fields active</span></div>
+      </div>
+      <div class="mini-stats">
+        <div class="mini-stat"><div class="n" style="color:#2563eb">2</div><div class="l">Active Fields</div></div>
+        <div class="mini-stat"><div class="n" style="color:#7c3aed">Night</div><div class="l">Current Mode</div></div>
+        <div class="mini-stat"><div class="n" style="color:#f59e0b">2</div><div class="l">Boosters</div></div>
+      </div>
+    </div>
 
-  <table class="compare-table">
-    <thead>
-      <tr><th>Proof Point</th><th>Quantum Upgrade</th><th>Everyone Else</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Total published studies</td><td class="qu-col">59+</td><td class="other-col">Usually 0–2</td></tr>
-      <tr><td>Placebo-controlled studies</td><td class="qu-col">48+</td><td class="other-col">Rarely any</td></tr>
-      <tr><td>User testimonials</td><td class="qu-col">20,257</td><td class="other-col">"Hundreds"</td></tr>
-      <tr><td>Photo-documented experiments</td><td class="qu-col">1,000+</td><td class="other-col">Stock photos</td></tr>
-      <tr><td>Plant/pet experiments (can't be placebo'd)</td><td class="qu-col">7,169</td><td class="other-col">— </td></tr>
-      <tr><td>Emoto Institute relationship</td><td class="qu-col">Licensed technology</td><td class="other-col">— </td></tr>
-      <tr><td>Free trial (no credit card)</td><td class="qu-col">7 days, zero risk</td><td class="other-col">Usually requires payment</td></tr>
-    </tbody>
-  </table>
-</section>
+    <div class="section-title">Fields on Dashboard <span style="width:18px;height:18px;border-radius:50%;background:#eff6ff;color:#2563eb;font-size:10px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer">?</span></div>
 
-<!-- BRASS BANNER -->
-<div class="brass">
-  <p>Does quantum energy work? <em>YES.</em> And the science <span class="gold">isn't even close.</span></p>
+    <div class="field2">
+      <div class="f-icon" style="background:#eff6ff;border:1px solid #dbeafe">🧬</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px"><div class="f-name">James Ryan Davis</div><div class="status-badge" style="background:#d1fae5;color:#065f46">● Active</div></div>
+        <div class="f-sub">Human · June 6th, 1982</div>
+        <div class="f-details">
+          <div><div class="f-detail">Frequency (Day)</div><div class="f-detail-val">H.E.A.L.360™</div></div>
+          <div><div class="f-detail">Frequency (Night)</div><div class="f-detail-val">Calm & Rest</div></div>
+          <div><div class="f-detail">Booster</div><div class="f-detail-val">10:23 PM · 180 min · Lvl 5000</div></div>
+        </div>
+      </div>
+      <div style="text-align:right"><div class="f-energy" style="color:#2563eb">600</div><div class="f-bar"><div class="f-bar-fill" style="width:60%;background:#2563eb"></div></div></div>
+    </div>
+
+    <div class="field2">
+      <div class="f-icon" style="background:#fef3c7;border:1px solid #fde68a">📱</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px"><div class="f-name">+1-626-354-3229</div><div class="status-badge" style="background:#fef3c7;color:#92400e">⚡ Boosted</div></div>
+        <div class="f-sub">Phone · EMF Protection</div>
+        <div class="f-details">
+          <div><div class="f-detail">Frequency (Day)</div><div class="f-detail-val">H.E.A.L.360™</div></div>
+          <div><div class="f-detail">Frequency (Night)</div><div class="f-detail-val">Calm & Rest</div></div>
+          <div><div class="f-detail">Booster</div><div class="f-detail-val">10:25 PM · 180 min · Lvl 5000</div></div>
+        </div>
+      </div>
+      <div style="text-align:right"><div class="f-energy" style="color:#f59e0b">900</div><div class="f-bar"><div class="f-bar-fill" style="width:90%;background:linear-gradient(90deg,#f59e0b,#eab308)"></div></div></div>
+    </div>
+  </div>
 </div>
 
-<!-- SKEPTIC PATH -->
-<section class="section center">
-  <div class="section-tag">The Skeptic's Path</div>
-  <h2>Don't Believe Us. Good. We Built a Path for You.</h2>
-  <p class="subtitle">Follow the evidence trail. Take as long as you need. Then try it free.</p>
+<!-- ═══════════════ C: SACRED GEOMETRY ═══════════════ -->
+<div class="dashboard v3">
+  <div class="bg3">
+    <div class="glow1"></div>
+    <div class="geo"><svg viewBox="0 0 500 500"><polygon points="250,30 470,250 250,470 30,250" fill="none" stroke="rgba(212,175,55,0.15)" stroke-width="0.5"/><polygon points="250,80 420,250 250,420 80,250" fill="none" stroke="rgba(212,175,55,0.1)" stroke-width="0.5"/><polygon points="250,130 370,250 250,370 130,250" fill="none" stroke="rgba(212,175,55,0.08)" stroke-width="0.5"/><circle cx="250" cy="250" r="200" fill="none" stroke="rgba(212,175,55,0.06)" stroke-width="0.5"/><circle cx="250" cy="250" r="150" fill="none" stroke="rgba(212,175,55,0.05)" stroke-width="0.5"/><circle cx="250" cy="250" r="100" fill="none" stroke="rgba(212,175,55,0.04)" stroke-width="0.5"/></svg></div>
+  </div>
+  <div class="content3">
+    <div class="wallet3">$40</div>
+    <div class="header3">
+      <div class="symbol">✦</div>
+      <h1>Quantum Upgrade</h1>
+      <div class="welcome">Welcome back</div>
+    </div>
 
-  <div class="skeptic-path">
-    <div class="path-step">
-      <div class="step-num">Step 01</div>
-      <h4>Read the Science</h4>
-      <p>59+ studies. 48+ placebo-controlled. Start with Dr. Beverly Rubik's blood cell research.</p>
-      <span class="arrow">→</span>
+    <div class="energy-mandala">
+      <div class="mandala-ring">
+        <svg width="200" height="200"><circle cx="100" cy="100" r="90" fill="none" stroke="rgba(212,175,55,0.08)" stroke-width="2"/><circle cx="100" cy="100" r="90" fill="none" stroke="#d4af37" stroke-width="2" stroke-dasharray="565" stroke-dashoffset="141" stroke-linecap="round" style="filter:drop-shadow(0 0 15px rgba(212,175,55,0.3))"/><circle cx="100" cy="100" r="80" fill="none" stroke="rgba(212,175,55,0.04)" stroke-width="1" stroke-dasharray="3 6"/></svg>
+        <div class="mandala-center"><div class="mandala-num">1500</div><div class="mandala-label">Total Energy</div></div>
+      </div>
     </div>
-    <div class="path-step">
-      <div class="step-num">Step 02</div>
-      <h4>See the Experiments</h4>
-      <p>1,000+ photo-documented experiments. Plants, water crystals, pets. Things that can't be placebo'd.</p>
-      <span class="arrow">→</span>
+
+    <div class="stats3">
+      <div class="stat3"><div class="num">2</div><div class="lab">Active Fields</div></div>
+      <div class="stat3"><div class="num" style="font-style:italic">Night</div><div class="lab">Current Mode</div></div>
+      <div class="stat3"><div class="num">2</div><div class="lab">Boosters</div></div>
     </div>
-    <div class="path-step">
-      <div class="step-num">Step 03</div>
-      <h4>Read the Testimonials</h4>
-      <p>20,257 real testimonials filtered by condition. 3,150 are from skeptics who became believers.</p>
-      <span class="arrow">→</span>
+
+    <div class="divider"></div>
+
+    <div class="field3">
+      <div class="field3-top">
+        <div class="field3-icon">🧬</div>
+        <div>
+          <div class="field3-name">James Ryan Davis</div>
+          <div class="field3-sub">Human · Born June 6, 1982</div>
+        </div>
+        <div style="margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+          <div class="status3"><div class="dot" style="background:#c9b88a"></div><span style="color:#c9b88a">Streaming</span></div>
+          <div class="field3-energy">600</div>
+        </div>
+      </div>
+      <div class="field3-meta">
+        <div><div class="field3-meta-label">Day Frequency</div><div class="field3-meta-val">H.E.A.L.360™</div></div>
+        <div><div class="field3-meta-label">Night Frequency</div><div class="field3-meta-val">Calm & Rest</div></div>
+        <div><div class="field3-meta-label">Booster</div><div class="field3-meta-val">10:23 PM · 180 min</div></div>
+      </div>
     </div>
-    <div class="path-step">
-      <div class="step-num">Step 04</div>
-      <h4>Try It Free</h4>
-      <p>7 days. No credit card. No commitment. Feel the difference yourself — or don't. It's on us.</p>
+
+    <div class="field3">
+      <div class="field3-top">
+        <div class="field3-icon">📱</div>
+        <div>
+          <div class="field3-name">+1-626-354-3229</div>
+          <div class="field3-sub">Phone · EMF Shield</div>
+        </div>
+        <div style="margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+          <div class="status3"><div class="dot" style="background:#d4af37"></div><span style="color:#d4af37">Boosted</span></div>
+          <div class="field3-energy" style="color:#d4af37">900</div>
+        </div>
+      </div>
+      <div class="field3-meta">
+        <div><div class="field3-meta-label">Day Frequency</div><div class="field3-meta-val">H.E.A.L.360™</div></div>
+        <div><div class="field3-meta-label">Night Frequency</div><div class="field3-meta-val">Calm & Rest</div></div>
+        <div><div class="field3-meta-label">Booster</div><div class="field3-meta-val">10:25 PM · 180 min</div></div>
+      </div>
     </div>
   </div>
-</section>
-
-<!-- BRASS BANNER 2 -->
-<div class="brass">
-  <p>We have so much proof we're <em>bored of winning.</em> Your turn.</p>
 </div>
 
-<!-- PRICING -->
-<section class="section center">
-  <div class="section-tag">Pricing</div>
-  <h2>7 Days Free. Then Decide.</h2>
-  <p class="subtitle">No credit card to start. No contract. No hard feelings if you leave. (But you won't.)</p>
+<!-- ═══════════════ D: GLASS AURORA ═══════════════ -->
+<div class="dashboard v4">
+  <div class="bg4"><div class="aurora1"></div><div class="aurora2"></div></div>
+  <div class="content4">
+    <div class="side4">
+      <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#10b981,#6366f1);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;margin-bottom:16px">✦</div>
+      <div class="side4-icon active">◉</div>
+      <div class="side4-icon">◫</div>
+      <div class="side4-icon">▶</div>
+      <div class="side4-icon">★</div>
+      <div class="side4-icon">◇</div>
+      <div style="flex:1"></div>
+      <div class="side4-icon">⚙</div>
+    </div>
+    <div class="main4">
+      <div class="top4">
+        <div><div class="greeting4">Welcome back</div><div class="title4">Dashboard</div></div>
+        <div class="wallet4">💰 $40</div>
+      </div>
 
-  <div class="tier-grid">
-    <div class="tier-card">
-      <div class="tier-name">Personal</div>
-      <div class="tier-price">$49<span>/mo</span></div>
-      <ul class="tier-features">
-        <li>1 person quantum stream</li>
-        <li>Home + car protection</li>
-        <li>Phone harmonizer</li>
-        <li>Basic frequencies</li>
-      </ul>
-      <a href="#" class="btn btn-secondary" style="width:100%;justify-content:center">Start Free Trial</a>
-    </div>
-    <div class="tier-card featured">
-      <div class="tier-name">Family</div>
-      <div class="tier-price">$89<span>/mo</span></div>
-      <ul class="tier-features">
-        <li>Up to 4 people + pets</li>
-        <li>Full home coverage</li>
-        <li>30+ frequencies</li>
-        <li>Boost mode</li>
-        <li>Priority support</li>
-      </ul>
-      <a href="#" class="btn btn-cta" style="width:100%;justify-content:center;padding:12px 24px;font-size:0.9375rem">Start Free Trial</a>
-    </div>
-    <div class="tier-card">
-      <div class="tier-name">Enterprise</div>
-      <div class="tier-price">Custom</div>
-      <ul class="tier-features">
-        <li>Office / building coverage</li>
-        <li>Unlimited streams</li>
-        <li>Custom frequencies</li>
-        <li>Dedicated support</li>
-      </ul>
-      <a href="#" class="btn btn-ghost" style="width:100%;justify-content:center">Contact Sales</a>
+      <div class="glass overview4">
+        <div class="ring4">
+          <svg width="150" height="150"><circle cx="75" cy="75" r="67" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="4"/><circle cx="75" cy="75" r="67" fill="none" stroke="#10b981" stroke-width="4" stroke-dasharray="421" stroke-dashoffset="105" stroke-linecap="round" style="filter:drop-shadow(0 0 10px rgba(16,185,129,0.4))"/></svg>
+          <div class="rc4"><div class="ring4-num">1500</div><div class="ring4-label">Total QE</div></div>
+        </div>
+        <div class="stats4">
+          <div class="stat4"><div class="n" style="color:#10b981">2</div><div class="l">Active Fields</div></div>
+          <div class="stat4"><div class="n" style="color:#8b5cf6">Night</div><div class="l">Current Mode</div></div>
+          <div class="stat4"><div class="n" style="color:#f59e0b">2</div><div class="l">Boosters Active</div></div>
+        </div>
+      </div>
+
+      <div style="font-size:12px;color:rgba(255,255,255,0.3);font-weight:600;margin-bottom:12px;letter-spacing:0.5px">QUANTUM FIELDS</div>
+
+      <div class="fields4">
+        <div class="glass field4" style="--c1:#10b981;--c2:#6366f1">
+          <div class="accent-line"></div>
+          <div class="field4-top">
+            <div class="field4-icon">🧬</div>
+            <div><div class="field4-name">James Ryan Davis</div><div class="field4-sub">Human · June 6, 1982</div></div>
+            <div class="field4-energy" style="color:#10b981">600</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;margin-bottom:14px"><div style="width:6px;height:6px;border-radius:50%;background:#10b981;animation:pulse 2s infinite"></div><span style="font-size:10px;font-weight:600;color:#10b981;letter-spacing:0.5px">ACTIVE · NIGHT MODE</span></div>
+          <div class="field4-grid">
+            <div class="field4-item"><div class="field4-item-label">☀ Day Freq</div><div class="field4-item-val">H.E.A.L.360™</div></div>
+            <div class="field4-item"><div class="field4-item-label">☽ Night Freq</div><div class="field4-item-val">Calm & Rest</div></div>
+            <div class="field4-item"><div class="field4-item-label">⏰ Booster</div><div class="field4-item-val">10:23 PM</div></div>
+            <div class="field4-item"><div class="field4-item-label">⚡ Level</div><div class="field4-item-val">5,000 · 180 min</div></div>
+          </div>
+        </div>
+
+        <div class="glass field4" style="--c1:#f59e0b;--c2:#ec4899">
+          <div class="accent-line"></div>
+          <div class="field4-top">
+            <div class="field4-icon">📱</div>
+            <div><div class="field4-name">+1-626-354-3229</div><div class="field4-sub">Phone · EMF Protection</div></div>
+            <div class="field4-energy" style="color:#f59e0b">900</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;margin-bottom:14px"><div style="width:6px;height:6px;border-radius:50%;background:#f59e0b;animation:pulse 2s infinite"></div><span style="font-size:10px;font-weight:600;color:#f59e0b;letter-spacing:0.5px">BOOSTED · NIGHT MODE</span></div>
+          <div class="field4-grid">
+            <div class="field4-item"><div class="field4-item-label">☀ Day Freq</div><div class="field4-item-val">H.E.A.L.360™</div></div>
+            <div class="field4-item"><div class="field4-item-label">☽ Night Freq</div><div class="field4-item-val">Calm & Rest</div></div>
+            <div class="field4-item"><div class="field4-item-label">⏰ Booster</div><div class="field4-item-val">10:25 PM</div></div>
+            <div class="field4-item"><div class="field4-item-label">⚡ Level</div><div class="field4-item-val">5,000 · 180 min</div></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- FINAL CTA -->
-<section class="final-cta">
-  <h2>59 Studies Say Yes.<br>20,257 People Agree.<br>What's Your Excuse?</h2>
-  <p>7 days free. No credit card. Prove us wrong — or join the 20,257 who couldn't.</p>
-  <a href="#" class="btn btn-cta-hero">Start Your Free Trial →</a>
-  <div class="dare-line">We dare you.</div>
-</section>
-
-<footer>
-  <div class="copy">© 2026 Quantum Upgrade · Leela Quantum Tech Inc.</div>
-  <div class="foot-links">
-    <a href="#">Privacy</a>
-    <a href="#">Terms</a>
-    <a href="#">Research</a>
-    <a href="#">Contact</a>
-  </div>
-</footer>
-
+<script>
+function show(i,btn){
+  document.querySelectorAll('.dashboard').forEach(d=>d.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.dashboard')[i].classList.add('active');
+  btn.classList.add('active');
+}
+</script>
 </body>
 </html>
