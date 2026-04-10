@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantum Upgrade — Mockup A: The Proof Avalanche</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Sora:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --qu-void:#0B0E17;--qu-obsidian:#141825;--qu-graphite:#1E2333;--qu-slate:#2C3147;
+  --qu-mist:#8A92A8;--qu-cloud:#C8CDD9;--qu-snow:#F0F2F7;
+  --qu-teal-deep:#0A6B6E;--qu-teal:#0FABA4;--qu-teal-bright:#2EEADB;--qu-teal-glow:rgba(15,171,164,0.15);
+  --qu-gold-deep:#9A7200;--qu-gold:#E5AA17;--qu-gold-bright:#FFD052;--qu-gold-glow:rgba(229,170,23,0.12);
+  --qu-violet-deep:#4A2D8C;--qu-violet:#7B5CE5;--qu-violet-bright:#A78BFA;--qu-violet-glow:rgba(123,92,229,0.12);
+  --qu-success:#22C97A;--qu-warning:#F5A623;--qu-error:#EF4444;
+  --font-display:'Sora',sans-serif;--font-body:'Plus Jakarta Sans',sans-serif;--font-mono:'JetBrains Mono',monospace;
+  --radius-sm:6px;--radius-md:10px;--radius-lg:16px;--radius-xl:24px;--radius-pill:9999px;
+  --ease-out:cubic-bezier(0.16,1,0.3,1);--ease-spring:cubic-bezier(0.34,1.56,0.64,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-body);background:var(--qu-void);color:var(--qu-cloud);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(11,14,23,0.9);backdrop-filter:blur(20px) saturate(1.5);border-bottom:1px solid var(--qu-slate);padding:0 clamp(20px,4vw,80px);height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--font-display);font-weight:700;font-size:1.25rem;color:var(--qu-snow);letter-spacing:-0.03em}
+.nav-logo span{color:var(--qu-teal)}
+.nav-links{display:flex;align-items:center;gap:clamp(16px,2.5vw,32px)}
+.nav-links a{font-size:0.875rem;font-weight:500;color:var(--qu-mist);transition:color 150ms}
+.nav-links a:hover{color:var(--qu-teal-bright)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-weight:600;border:none;cursor:pointer;border-radius:var(--radius-pill);transition:all 250ms var(--ease-out);white-space:nowrap}
+.btn-cta{background:linear-gradient(135deg,var(--qu-gold),var(--qu-gold-bright));color:var(--qu-void);padding:10px 24px;font-size:0.875rem;box-shadow:0 0 24px rgba(229,170,23,0.25)}
+.btn-cta:hover{transform:translateY(-2px);box-shadow:0 0 36px rgba(229,170,23,0.4)}
+.btn-primary{background:linear-gradient(135deg,var(--qu-teal),var(--qu-teal-bright));color:var(--qu-void);padding:14px 32px;font-size:1rem;box-shadow:0 0 24px rgba(15,171,164,0.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 36px rgba(15,171,164,0.45)}
+.btn-secondary{background:transparent;border:1.5px solid var(--qu-teal);color:var(--qu-teal-bright);padding:12px 28px;font-size:0.9375rem}
+.btn-secondary:hover{background:var(--qu-teal-glow)}
+.btn-ghost{background:transparent;color:var(--qu-mist);border:1.5px solid var(--qu-slate);padding:10px 24px;font-size:0.875rem}
+.btn-ghost:hover{border-color:var(--qu-mist);color:var(--qu-snow)}
+
+/* HERO — PROOF AVALANCHE */
+.hero{min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px clamp(20px,4vw,80px);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 700px 500px at 40% 40%,var(--qu-teal-glow),transparent),radial-gradient(ellipse 500px 400px at 65% 60%,var(--qu-violet-glow),transparent);opacity:0.5}
+.hero>*{position:relative;z-index:1}
+
+.hero-mono{font-family:var(--font-mono);font-size:0.75rem;color:var(--qu-teal);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:24px}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.5rem,5.5vw,4.5rem);font-weight:800;color:var(--qu-snow);letter-spacing:-0.04em;line-height:1.08;margin-bottom:24px;max-width:900px}
+.hero h1 em{font-style:normal;color:var(--qu-teal-bright)}
+.hero-sub{font-size:clamp(1rem,1.5vw,1.25rem);color:var(--qu-mist);max-width:600px;margin-bottom:40px}
+
+/* TRUST COUNTER ROW */
+.trust-row{display:flex;gap:clamp(24px,4vw,64px);justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.trust-badge{text-align:center}
+.trust-badge .number{font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;color:var(--qu-teal-bright);line-height:1}
+.trust-badge .label{font-size:0.75rem;color:var(--qu-mist);text-transform:uppercase;letter-spacing:0.08em;margin-top:4px}
+
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.hero-note{font-family:var(--font-mono);font-size:0.75rem;color:var(--qu-mist);margin-top:12px}
+
+/* SECTIONS */
+.section{max-width:1440px;margin:0 auto;padding:96px clamp(20px,4vw,80px)}
+.section+.section{border-top:1px solid var(--qu-slate)}
+.section-tag{font-family:var(--font-mono);font-size:0.75rem;color:var(--qu-teal);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px}
+.section h2{font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:700;color:var(--qu-snow);letter-spacing:-0.03em;margin-bottom:8px}
+.section .subtitle{font-size:1.25rem;color:var(--qu-mist);max-width:640px;margin-bottom:48px}
+
+/* STUDY CARDS GRID */
+.studies-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.card-study{background:var(--qu-obsidian);border:1px solid var(--qu-slate);border-radius:var(--radius-lg);padding:24px;transition:border-color 250ms,box-shadow 250ms}
+.card-study:hover{border-color:var(--qu-teal);box-shadow:0 0 20px var(--qu-teal-glow)}
+.card-study .badge{display:inline-block;font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;padding:3px 10px;border-radius:var(--radius-pill);background:var(--qu-teal-glow);color:var(--qu-teal-bright);margin-bottom:12px}
+.card-study h4{font-family:var(--font-display);font-size:1.125rem;color:var(--qu-snow);font-weight:600;margin-bottom:4px;line-height:1.3}
+.card-study .result{font-size:1.5rem;font-weight:700;color:var(--qu-teal-bright);font-family:var(--font-display);margin:8px 0}
+.card-study .method{font-size:0.75rem;color:var(--qu-mist);margin-top:8px}
+
+/* HOW IT WORKS */
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+@media(max-width:768px){.how-grid{grid-template-columns:1fr}}
+.how-step{text-align:center;padding:32px 24px}
+.how-step .num{font-family:var(--font-display);font-size:3.5rem;font-weight:800;color:var(--qu-teal);opacity:0.2;line-height:1;margin-bottom:-4px}
+.how-step h4{font-family:var(--font-display);font-size:1.25rem;color:var(--qu-snow);font-weight:600;margin-bottom:8px}
+.how-step p{font-size:0.9375rem;color:var(--qu-mist)}
+
+/* CELEBRITY SOCIAL PROOF */
+.celeb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px}
+.card-testimonial{background:var(--qu-obsidian);border:1px solid var(--qu-slate);border-radius:var(--radius-lg);padding:24px;position:relative}
+.card-testimonial::before{content:'"';position:absolute;top:8px;left:16px;font-family:var(--font-display);font-size:4rem;color:var(--qu-teal-glow);line-height:1;opacity:0.5}
+.card-testimonial .quote{font-style:italic;color:var(--qu-cloud);margin-bottom:16px;line-height:1.7;position:relative;font-size:0.9375rem}
+.card-testimonial .author{display:flex;align-items:center;gap:10px}
+.card-testimonial .avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--qu-teal),var(--qu-violet));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.875rem;color:#fff;flex-shrink:0}
+.card-testimonial .author-name{font-weight:600;color:var(--qu-snow);font-size:0.875rem}
+.card-testimonial .author-tag{font-size:10px;font-family:var(--font-mono);background:var(--qu-graphite);color:var(--qu-mist);padding:2px 8px;border-radius:var(--radius-pill);margin-top:2px;display:inline-block}
+
+/* PRICING */
+.tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.tier-card{background:var(--qu-obsidian);border:1.5px solid var(--qu-slate);border-radius:var(--radius-xl);padding:32px;text-align:center;position:relative;transition:border-color 250ms,transform 250ms}
+.tier-card:hover{border-color:var(--qu-teal);transform:translateY(-4px)}
+.tier-card.featured{border-color:var(--qu-gold);background:linear-gradient(180deg,rgba(229,170,23,0.06) 0%,var(--qu-obsidian) 40%)}
+.tier-card.featured::before{content:'MOST POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:0.12em;background:var(--qu-gold);color:var(--qu-void);padding:4px 14px;border-radius:var(--radius-pill)}
+.tier-card .tier-name{font-family:var(--font-display);font-size:1.25rem;color:var(--qu-snow);font-weight:600;margin-bottom:4px}
+.tier-card .tier-price{font-family:var(--font-display);font-size:2.5rem;color:var(--qu-snow);font-weight:800}
+.tier-card .tier-price span{font-size:1rem;font-weight:400;color:var(--qu-mist)}
+.tier-card .tier-features{list-style:none;text-align:left;margin:24px 0}
+.tier-card .tier-features li{padding:6px 0;font-size:0.875rem;color:var(--qu-cloud);border-bottom:1px solid var(--qu-slate)}
+.tier-card .tier-features li::before{content:'✦ ';color:var(--qu-teal)}
+
+/* BRASS BALLS BANNER */
+.brass-banner{background:var(--qu-graphite);border-top:1px solid var(--qu-slate);border-bottom:1px solid var(--qu-slate);padding:48px clamp(20px,4vw,80px);text-align:center}
+.brass-banner p{font-family:var(--font-display);font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:700;color:var(--qu-snow);max-width:800px;margin:0 auto;letter-spacing:-0.02em;line-height:1.4}
+.brass-banner p em{font-style:normal;color:var(--qu-teal-bright)}
+
+/* FAQ */
+.faq-list{max-width:720px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--qu-slate);padding:20px 0}
+.faq-q{font-family:var(--font-display);font-weight:600;color:var(--qu-snow);font-size:1.0625rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-q::after{content:'+';font-size:1.25rem;color:var(--qu-teal);transition:transform 250ms}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 300ms var(--ease-out);color:var(--qu-mist);font-size:0.9375rem;line-height:1.7}
+.faq-item.open .faq-a{max-height:300px;padding-top:12px}
+
+/* FINAL CTA */
+.final-cta{text-align:center;padding:96px clamp(20px,4vw,80px);position:relative;overflow:hidden}
+.final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 600px 400px at 50% 50%,var(--qu-gold-glow),transparent);opacity:0.4}
+.final-cta>*{position:relative;z-index:1}
+.final-cta h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:800;color:var(--qu-snow);letter-spacing:-0.03em;margin-bottom:12px}
+.final-cta p{font-size:1.125rem;color:var(--qu-mist);max-width:500px;margin:0 auto 32px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--qu-slate);padding:48px clamp(20px,4vw,80px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;max-width:1440px;margin:0 auto}
+footer .copy{font-size:0.75rem;color:var(--qu-mist)}
+footer .foot-links{display:flex;gap:24px}
+footer .foot-links a{font-size:0.75rem;color:var(--qu-mist);transition:color 150ms}
+footer .foot-links a:hover{color:var(--qu-teal-bright)}
+
+/* LABEL */
+.mockup-label{position:fixed;bottom:16px;right:16px;background:var(--qu-gold);color:var(--qu-void);font-family:var(--font-mono);font-size:10px;font-weight:700;padding:6px 14px;border-radius:var(--radius-pill);z-index:999;letter-spacing:0.05em}
+
+@media(max-width:768px){
+  .nav-links a:not(.btn-cta){display:none}
+  .hero h1{font-size:2.25rem}
+  .trust-row{gap:20px}
+  .studies-grid,.celeb-grid,.tier-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="mockup-label">MOCKUP A — PROOF AVALANCHE</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">Quantum<span>Upgrade</span></div>
+  <div class="nav-links">
+    <a href="#">How It Works</a>
+    <a href="#">Research</a>
+    <a href="#">Testimonials</a>
+    <a href="#">Pricing</a>
+    <a href="#" class="btn btn-cta">Start Free Trial</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-mono">Backed by 59+ studies · 48+ placebo-controlled</div>
+  <h1>The Most <em>Researched</em> Quantum Energy Technology on Earth</h1>
+  <p class="hero-sub">Stream quantum energy to your body, home, car, and pets. 7-day free trial. No credit card. No catch.</p>
+  
+  <div class="trust-row">
+    <div class="trust-badge"><div class="number">59+</div><div class="label">Studies</div></div>
+    <div class="trust-badge"><div class="number">48+</div><div class="label">Placebo-Controlled</div></div>
+    <div class="trust-badge"><div class="number">20,257</div><div class="label">Testimonials</div></div>
+    <div class="trust-badge"><div class="number">1,000+</div><div class="label">Photo Experiments</div></div>
+  </div>
+
+  <div class="hero-ctas">
+    <a href="#" class="btn btn-cta" style="padding:14px 36px;font-size:1rem">Start Your Free 7-Day Trial →</a>
+    <a href="#" class="btn btn-secondary">See the Research</a>
+  </div>
+  <div class="hero-note">No credit card required · Cancel anytime</div>
+</section>
+
+<!-- BRASS BALLS BANNER 1 -->
+<div class="brass-banner">
+  <p>Name another wellness technology with <em>48+ placebo-controlled studies</em>. We'll wait.</p>
+</div>
+
+<!-- STUDY HIGHLIGHTS -->
+<section class="section">
+  <div class="section-tag">The Science</div>
+  <h2>What Researchers Found</h2>
+  <p class="subtitle">We don't make claims. We fund studies, publish results, and let you decide.</p>
+  
+  <div class="studies-grid">
+    <div class="card-study">
+      <div class="badge">Placebo-Controlled</div>
+      <h4>Blood Cell Recovery from WiFi Radiation</h4>
+      <div class="result">100% of subjects</div>
+      <div class="method">Dr. Beverly Rubik · Double-blind · n=40</div>
+    </div>
+    <div class="card-study">
+      <div class="badge">Placebo-Controlled</div>
+      <h4>ATP Cellular Energy Increase</h4>
+      <div class="result">20–29% increase</div>
+      <div class="method">Independent Lab · Placebo-controlled</div>
+    </div>
+    <div class="card-study">
+      <div class="badge">EEG Measured</div>
+      <h4>Brain Stress Reduction</h4>
+      <div class="result">77.6% reduction</div>
+      <div class="method">EEG brain mapping · Controlled environment</div>
+    </div>
+    <div class="card-study">
+      <div class="badge">Licensed Technology</div>
+      <h4>Emoto Institute Water Crystal Study</h4>
+      <div class="result">Perfect crystalline structures</div>
+      <div class="method">Emoto Institute · They licensed the technology</div>
+    </div>
+    <div class="card-study">
+      <div class="badge">Placebo-Controlled</div>
+      <h4>5G EMF Protection</h4>
+      <div class="result">Significant biofield protection</div>
+      <div class="method">Independent researchers · Double-blind</div>
+    </div>
+    <div class="card-study">
+      <div class="badge">1,000+ Experiments</div>
+      <h4>Plant Growth Experiments</h4>
+      <div class="result">Visible growth differences</div>
+      <div class="method">Community-run · Side-by-side photo proof</div>
+    </div>
+  </div>
+  
+  <div style="text-align:center;margin-top:48px">
+    <a href="#" class="btn btn-secondary">View All 59+ Studies →</a>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <div class="section-tag">How It Works</div>
+  <h2>Activate in Under 2 Minutes</h2>
+  <p class="subtitle">No devices to charge. No hardware to install. Just quantum energy, streaming to you.</p>
+
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="num">01</div>
+      <h4>Choose What to Protect</h4>
+      <p>Yourself, your family, pets, home, car, phone — or all of the above. Each gets its own stream.</p>
+    </div>
+    <div class="how-step">
+      <div class="num">02</div>
+      <h4>Enter Your Details</h4>
+      <p>Email and a photo or address. The quantum field locks onto the target through subtle informational fields.</p>
+    </div>
+    <div class="how-step">
+      <div class="num">03</div>
+      <h4>Feel the Difference</h4>
+      <p>Most users report noticeable changes within 24–72 hours. Better sleep, more energy, reduced stress.</p>
+    </div>
+  </div>
+  
+  <div style="text-align:center;margin-top:48px">
+    <a href="#" class="btn btn-cta" style="padding:14px 36px;font-size:1rem">Start Your Free Trial →</a>
+    <div class="hero-note" style="margin-top:12px">No credit card required</div>
+  </div>
+</section>
+
+<!-- BRASS BALLS BANNER 2 -->
+<div class="brass-banner">
+  <p>Plants can't be placebo'd. Dogs don't read marketing materials. <em>Water doesn't have beliefs.</em></p>
+</div>
+
+<!-- CELEBRITY PROOF -->
+<section class="section">
+  <div class="section-tag">Who Uses It</div>
+  <h2>Trusted by World-Class Performers</h2>
+  <p class="subtitle">Athletes, biohackers, doctors, and thought leaders who stake their reputation on results.</p>
+
+  <div class="celeb-grid">
+    <div class="card-testimonial">
+      <div class="quote">Here is some next level tech for you. It's called Quantum Upgrade and it's something I actually use. It helps to balance your energy and shield your body from what EMFs do to you.</div>
+      <div class="author">
+        <div class="avatar">DA</div>
+        <div><div class="author-name">Dave Asprey</div><div class="author-tag">Bulletproof Founder · #1 Biohacker</div></div>
+      </div>
+    </div>
+    <div class="card-testimonial">
+      <div class="quote">Quantum Upgrade is a real game changer, and I highly recommend it to all of my patients. It offers remarkable support for the human bio-field — all scientifically proven.</div>
+      <div class="author">
+        <div class="avatar">CM</div>
+        <div><div class="author-name">Dr. Chris Motley</div><div class="author-tag">Host, Ancient Health Podcast</div></div>
+      </div>
+    </div>
+    <div class="card-testimonial">
+      <div class="quote">I rely on Quantum Upgrade for EMF protection 24/7. The boosters make it feel like I'm living inside my own optimized field. It's my favorite travel hack.</div>
+      <div class="author">
+        <div class="avatar">LS</div>
+        <div><div class="author-name">Luke Storey</div><div class="author-tag">Host, The Life Stylist Podcast</div></div>
+      </div>
+    </div>
+    <div class="card-testimonial">
+      <div class="quote">Science shows that when you introduce positive frequencies into your life, you start to look, feel, and perform fantastically. I recommend using Quantum Upgrade for your home, car, and office.</div>
+      <div class="author">
+        <div class="avatar">BG</div>
+        <div><div class="author-name">Ben Greenfield</div><div class="author-tag">Bestselling Author · Health Consultant</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section">
+  <div class="section-tag">Pricing</div>
+  <h2>Start Free. Stay Because It Works.</h2>
+  <p class="subtitle">7-day free trial on every plan. No credit card to start. Cancel anytime.</p>
+
+  <div class="tier-grid">
+    <div class="tier-card">
+      <div class="tier-name">Personal</div>
+      <div class="tier-price">$49<span>/mo</span></div>
+      <ul class="tier-features">
+        <li>1 person quantum energy stream</li>
+        <li>Home & car protection</li>
+        <li>Phone harmonizer</li>
+        <li>Basic frequency access</li>
+      </ul>
+      <a href="#" class="btn btn-secondary" style="width:100%;justify-content:center">Start Free Trial</a>
+    </div>
+    <div class="tier-card featured">
+      <div class="tier-name">Family</div>
+      <div class="tier-price">$89<span>/mo</span></div>
+      <ul class="tier-features">
+        <li>Up to 4 people + pets</li>
+        <li>Full home coverage</li>
+        <li>30+ specialized frequencies</li>
+        <li>Boost mode access</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="#" class="btn btn-cta" style="width:100%;justify-content:center">Start Free Trial</a>
+    </div>
+    <div class="tier-card">
+      <div class="tier-name">Enterprise</div>
+      <div class="tier-price">Custom</div>
+      <ul class="tier-features">
+        <li>Office / building coverage</li>
+        <li>Unlimited streams</li>
+        <li>Custom frequency selection</li>
+        <li>Dedicated account manager</li>
+      </ul>
+      <a href="#" class="btn btn-ghost" style="width:100%;justify-content:center">Contact Sales</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="section-tag">FAQ</div>
+  <h2>Common Questions</h2>
+  <p class="subtitle">Straight answers. No hand-waving.</p>
+
+  <div class="faq-list">
+    <div class="faq-item open">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How does quantum energy streaming work?</div>
+      <div class="faq-a">Quantum Upgrade functions through subtle informational fields — not electromagnetic or mechanical signals. These fields carry coherent energetic patterns that interact with your body's own quantum communication systems, helping to restore biological coherence. Think of it like tuning a radio to the right frequency — your cells already know what to do with clean energy.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do I need to install any hardware?</div>
+      <div class="faq-a">No. There's nothing to plug in, charge, or wear. The quantum energy stream is activated through our platform and directed to you, your home, car, or pet via a photo or address. You manage everything from your phone.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What does the free trial include?</div>
+      <div class="faq-a">Full access to the quantum energy stream for 7 days. No credit card required. No commitment. Just enter your email, choose what to protect, and experience it yourself.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is this scientifically validated?</div>
+      <div class="faq-a">Yes — with 59+ studies, 48+ of which are placebo-controlled. Key findings include 100% blood cell recovery from WiFi exposure (Dr. Beverly Rubik), 20-29% ATP energy increase, and 77.6% brain stress reduction via EEG. The Emoto Institute was so impressed they licensed the technology.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I use it for my pets?</div>
+      <div class="faq-a">Absolutely. Thousands of users stream quantum energy to their pets. We have 5,235 pet-related testimonials. Dogs, cats, horses — animals can't be placebo'd, and the results speak for themselves.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2>59+ Studies. 20,257 Testimonials.<br>One Free Trial.</h2>
+  <p>No credit card. No commitment. Just 7 days to feel the difference.</p>
+  <a href="#" class="btn btn-cta" style="padding:16px 40px;font-size:1.0625rem">Start Your Free Trial →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="copy">© 2026 Quantum Upgrade · Leela Quantum Tech Inc.</div>
+  <div class="foot-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Research</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
