@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Becoming Truly You: The Greatest Act of Self-Love — with Cru</title>
+<meta name="description" content="A year-long transformational journey. Three immersive blocks. One complete return to yourself.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Lato:wght@300;400;700&family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFDF9;--bg2:#F9F5EE;--bg3:#F3EDE3;
+  --fg:#2C2622;--muted:#7A6F64;--light:#B5A99A;
+  --rose:#C08B70;--rose-deep:#9E6B50;--rose-light:#E8CDB5;--rose-bg:rgba(192,139,112,0.06);
+  --sage:#7A9E74;--sage-deep:#4D6E47;--sage-bg:rgba(122,158,116,0.06);
+  --gold:#B8A070;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Lato','Helvetica Neue',sans-serif;
+  --hand:'Caveat',cursive;
+  --r:8px;--r-lg:16px;--r-pill:100px;
+  --shadow:0 4px 24px rgba(44,38,34,0.06);
+  --ease:cubic-bezier(0.25,0.46,0.45,0.94);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--fg);line-height:1.85;-webkit-font-smoothing:antialiased;font-size:17px;font-weight:300}
+img{max-width:100%;display:block}
+a{color:var(--rose);text-decoration:none}
+.w{max-width:700px;margin:0 auto;padding:0 24px}
+.w-wide{max-width:920px;margin:0 auto;padding:0 24px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,253,249,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(44,38,34,0.04);padding:12px 0}
+nav .w-wide{display:flex;justify-content:space-between;align-items:center}
+.nav-brand{font-family:var(--serif);font-size:16px;font-weight:400;color:var(--muted);letter-spacing:2px}
+.nav-cta{background:var(--rose);color:white;padding:8px 24px;border-radius:var(--r-pill);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:all 0.3s}
+.nav-cta:hover{background:var(--rose-deep);color:white;transform:translateY(-1px)}
+
+/* HERO */
+.hero{padding:140px 0 64px;text-align:center;position:relative}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:100%;background:radial-gradient(ellipse at 50% 30%,rgba(192,139,112,0.04) 0%,transparent 60%)}
+.pre-head{font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin-bottom:20px}
+.hero h1{font-family:var(--serif);font-size:clamp(38px,5.5vw,64px);font-weight:300;line-height:1.1;margin-bottom:20px}
+.hero h1 .hl{background:linear-gradient(transparent 62%,var(--rose-light) 62%);display:inline}
+.hero-sub{font-family:var(--serif);font-size:22px;font-weight:300;font-style:italic;color:var(--muted);max-width:540px;margin:0 auto 36px;line-height:1.6}
+.hero-img{max-width:380px;margin:0 auto 28px;border-radius:var(--r-lg);overflow:hidden;box-shadow:0 12px 48px rgba(44,38,34,0.12)}
+.hero-img img{width:100%;aspect-ratio:3/4;object-fit:cover}
+.endorse{background:var(--bg2);border-radius:var(--r-lg);padding:24px 28px;max-width:480px;margin:0 auto 32px;text-align:center}
+.endorse blockquote{font-family:var(--serif);font-size:20px;font-style:italic;color:var(--fg);margin-bottom:6px}
+.endorse cite{font-size:13px;color:var(--muted);font-style:normal}
+
+/* CTA */
+.cta-wrap{text-align:center;padding:28px 0}
+.cta-btn{display:inline-block;background:var(--rose);color:white;padding:18px 48px;border-radius:var(--r-pill);font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:all 0.4s var(--ease);box-shadow:0 4px 20px rgba(192,139,112,0.25)}
+.cta-btn:hover{background:var(--rose-deep);color:white;transform:translateY(-3px);box-shadow:0 8px 30px rgba(192,139,112,0.35)}
+.cta-sub{font-size:13px;color:var(--muted);margin-top:10px;font-style:italic}
+
+/* LETTER STYLE */
+.letter{padding:64px 0}
+.letter h2{font-family:var(--serif);font-size:clamp(28px,3.5vw,40px);font-weight:400;margin-bottom:24px;line-height:1.25}
+.letter p{margin-bottom:18px}
+.letter .cru-voice{font-family:var(--serif);font-size:21px;font-style:italic;line-height:1.65;color:var(--fg);padding:20px 0 20px 24px;border-left:3px solid var(--rose-light);margin:28px 0}
+.letter .hand-note{font-family:var(--hand);font-size:24px;color:var(--rose);text-align:center;padding:24px 0}
+.letter ul{list-style:none;padding:0;margin:24px 0}
+.letter li{padding:12px 0 12px 28px;position:relative;border-bottom:1px solid rgba(44,38,34,0.04)}
+.letter li::before{content:'✦';position:absolute;left:0;color:var(--rose);font-size:12px;top:15px}
+.callout{background:var(--rose-bg);border-radius:var(--r-lg);padding:28px 32px;margin:32px 0}
+.callout p{font-family:var(--serif);font-size:21px;font-style:italic;line-height:1.55;color:var(--fg);margin:0}
+
+/* SECTION BG */
+.bg2{background:var(--bg2)}
+.bg3{background:var(--bg3)}
+
+/* FRAMEWORK */
+.block-card{background:var(--bg);border-radius:var(--r-lg);padding:36px;margin-bottom:20px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.block-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%}
+.b1::before{background:var(--sage)} .b2::before{background:var(--gold)} .b3::before{background:var(--rose)}
+.block-num{font-family:var(--serif);font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.b1 .block-num{color:var(--sage)} .b2 .block-num{color:var(--gold)} .b3 .block-num{color:var(--rose)}
+.block-card h3{font-family:var(--serif);font-size:24px;font-weight:400;margin-bottom:10px}
+.block-card p{font-size:15px;color:var(--muted);margin-bottom:12px;line-height:1.75}
+.block-card li{padding:6px 0 6px 24px;position:relative;font-size:15px;color:var(--fg);list-style:none}
+.block-card li::before{content:'→';position:absolute;left:0;color:var(--rose)}
+
+/* VALUE STACK */
+.stack-item{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(44,38,34,0.05)}
+.stack-item .name{font-size:15px;flex:1;padding-right:16px}
+.stack-item .val{font-family:var(--serif);font-size:18px;color:var(--muted);text-align:right;min-width:70px;white-space:nowrap}
+.stack-total{display:flex;justify-content:space-between;align-items:center;padding:16px 0;margin-top:8px}
+.stack-total .label{font-family:var(--serif);font-size:20px;font-weight:600}
+.stack-total .total{font-family:var(--serif);font-size:26px;font-weight:600;color:var(--rose);text-decoration:line-through}
+.price-box{text-align:center;padding:28px 0}
+.price-actual{font-family:var(--serif);font-size:48px;font-weight:500;color:var(--fg)}
+.price-plan{font-size:15px;color:var(--muted);margin-top:8px}
+
+/* TESTIMONIALS */
+.testi{background:var(--bg);border-radius:var(--r-lg);padding:28px;margin-bottom:16px;box-shadow:var(--shadow)}
+.testi-stars{color:var(--rose);font-size:14px;letter-spacing:2px;margin-bottom:10px}
+.testi p{font-family:var(--serif);font-size:18px;font-style:italic;line-height:1.6;margin-bottom:12px}
+.testi-name{font-weight:700;font-size:14px}
+.testi-det{font-size:12px;color:var(--muted)}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid rgba(44,38,34,0.06);padding:16px 0}
+.faq-q{font-weight:700;font-size:16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-q::after{content:'+';font-family:var(--serif);font-size:24px;color:var(--rose);transition:transform 0.3s}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s var(--ease)}
+.faq-item.open .faq-a{max-height:500px}
+.faq-a p{padding:12px 0;font-size:15px;color:var(--muted);line-height:1.75}
+
+/* SCARCITY + GUARANTEE */
+.scarcity{background:var(--rose-bg);border:1px solid rgba(192,139,112,0.12);border-radius:var(--r-lg);padding:24px;margin:28px 0;text-align:center}
+.scarcity h3{font-family:var(--serif);font-size:20px;color:var(--rose-deep);margin-bottom:4px}
+.scarcity p{font-size:14px;color:var(--muted)}
+.guarantee{background:var(--sage-bg);border:1px solid rgba(122,158,116,0.12);border-radius:var(--r-lg);padding:28px;margin:28px 0;text-align:center}
+.guarantee h3{font-family:var(--serif);font-size:20px;color:var(--sage-deep);margin-bottom:6px}
+.guarantee p{font-size:14px;color:var(--muted);line-height:1.7}
+
+/* FINAL */
+.final{padding:80px 0;text-align:center;background:var(--bg2)}
+.final h2{font-family:var(--serif);font-size:clamp(28px,4vw,44px);font-weight:300;margin-bottom:16px}
+.final .sub{font-family:var(--serif);font-size:20px;font-style:italic;color:var(--muted);max-width:540px;margin:0 auto 32px;line-height:1.6}
+.final .hand{font-family:var(--hand);font-size:32px;color:var(--rose);margin-top:24px}
+
+footer{padding:32px 0;text-align:center;font-size:12px;color:var(--light);border-top:1px solid rgba(44,38,34,0.04)}
+footer a{color:var(--light)}
+
+@media(max-width:600px){body{font-size:16px}.hero h1{font-size:34px}.cta-btn{padding:16px 32px;font-size:14px}}
+</style>
+</head>
+<body>
+
+<nav><div class="w-wide"><span class="nav-brand">cruessence</span><a href="#apply" class="nav-cta">Apply Now</a></div></nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="w">
+    <div class="pre-head">A Letter from Cru</div>
+    <h1>You Are a <span class="hl">Complete Being.</span><br>You've Just Forgotten Where You Put Some Things.</h1>
+    <p class="hero-sub">This year-long journey is how we find them together.</p>
+    <div class="hero-img"><img src="cru-hero.jpg" alt="Cru von Holtzendorff-Fehling"></div>
+    <div class="endorse">
+      <blockquote>"One of the most tuned-in beings I know."</blockquote>
+      <cite>— Luke Storey, The Life Stylist Podcast</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE LETTER (Problem Agitation in Cru's Voice) ═══ -->
+<section class="letter">
+  <div class="w">
+
+    <p>Dear beautiful soul,</p>
+
+    <p>I want to tell you something that nobody told me for a very long time:</p>
+
+    <div class="cru-voice">We are all complete beings. The truth is that we have just forgotten where we put stuff. We've learned to think in patterns that don't even allow us to look for things within ourselves.</div>
+
+    <p>If you're reading this, I already know something about you.</p>
+
+    <p>You've done the work. You've tried the breathwork, the meditation, the retreats, maybe therapy, maybe plant medicine. You've read books that made you cry because someone finally put words to what you've been feeling your whole life.</p>
+
+    <p>And you've had moments — <em>real</em> moments — where you touched something true inside yourself. Where you felt, even if just for a breath, the version of you that existed before the conditioning. Before the stories. Before the world told you who to be.</p>
+
+    <p>But then life pulls you back. The patterns return. And you're left with a quiet ache that sounds something like this:</p>
+
+    <ul>
+      <li><strong>"I know I'm meant for more — so why am I still stuck?"</strong></li>
+      <li><strong>"I can see my truth, but I can't seem to live from it"</strong></li>
+      <li><strong>"Everyone sees me as 'together' — but inside I feel like I'm performing"</strong></li>
+      <li><strong>"I've had glimpses of who I really am — why can't I stay there?"</strong></li>
+      <li><strong>"Something in me is ready. I just don't know what it's ready for."</strong></li>
+    </ul>
+
+    <p>I hear you. I've been you.</p>
+
+    <div class="cru-voice">I needed to understand why I was so sick, because I believe that every disease is actually a message that we didn't listen to in time. I was so stubborn, not accepting that I was that sick. I could be up maybe three or four hours a day for the kids, and the rest of the time I was just suffering through.</div>
+
+    <p>That illness — and the years of healing that followed — taught me something I now teach everyone who comes to me:</p>
+
+    <div class="callout">
+      <p>The reason weekend retreats and eight-week courses don't create lasting change is because lasting change requires two ingredients the modern world has forgotten: love and time. Not more information. Not another technique. Love. And time.</p>
+    </div>
+
+    <p>That's why I created this.</p>
+
+  </div>
+</section>
+
+<!-- ═══ THE REVEAL ═══ -->
+<section class="letter bg2">
+  <div class="w">
+    <h2 style="text-align:center">Becoming Truly You:<br><em>The Greatest Act of Self-Love</em></h2>
+    <p class="hand-note">A year-long journey. Three sacred immersions. One complete return to yourself.</p>
+
+    <p>This is not a course. I don't have a protocol. When people ask me "how do you work?" I say, <em>"I can't tell you how I would work with you until you tell me what you want from me."</em> Because everybody's journey is so extremely individual that we can only be successful if we allow ourselves to meet each person exactly where they are.</p>
+
+    <p>What I <em>can</em> tell you is what this year is designed to do:</p>
+
+    <div class="cru-voice">I run a training for people to know their essence and how to manifest that into life. Whether you're 17 or 60, you have a different outcome — because this isn't about becoming someone new. It's about unfolding who you already are. To see that beauty unfold in their lives... that is one of the most beautiful things I can watch.</div>
+
+    <p>Over three immersive blocks — each one a six-day deep dive in either Spain or Costa Rica — we will journey through every level of healing until you arrive at home within every aspect of your being.</p>
+
+    <p>Not visiting your truth on weekends. <em>Living</em> from it.</p>
+  </div>
+</section>
+
+<!-- ═══ FIRST CTA ═══ -->
+<div class="cta-wrap" id="apply">
+  <a href="mailto:love@cru-essence.com?subject=Becoming%20Truly%20You%20—%20I%20Am%20Ready" class="cta-btn">Begin Your Application →</a>
+  <p class="cta-sub">Group Sapphire 2026 — Limited Enrollment</p>
+</div>
+
+<!-- ═══ THE THREE BLOCKS ═══ -->
+<section class="letter">
+  <div class="w">
+    <h2 style="text-align:center">The Three Blocks</h2>
+    <p style="text-align:center;font-family:var(--serif);font-size:18px;color:var(--muted);font-style:italic;margin-bottom:40px">18 days over one year. Three immersions. Each one builds on the last.</p>
+
+    <div class="block-card b1">
+      <div class="block-num">Block I</div>
+      <h3>Deliverance, Grace & the Resurrection of Your Soul's Truth</h3>
+      <p>We begin by stripping away everything that isn't you. The conditioning. The beliefs you absorbed from family, religion, culture, pain. Through live readings from your Akashic Records, I will show you the blueprint your soul brought into this life — the one that was always there, underneath everything.</p>
+      <ul>
+        <li>Live Akashic Records readings — your soul's original blueprint revealed</li>
+        <li>Guided soul journeys to unearth gifts you buried for safety</li>
+        <li>Release the conditioning that taught you to be small</li>
+        <li>8th Chakra activation — reconnecting to universal harmony</li>
+      </ul>
+    </div>
+
+    <div class="block-card b2">
+      <div class="block-num">Block II</div>
+      <h3>Alignment & Peace</h3>
+      <p>Now that you've met your true self, this block is about letting your inner world and outer world finally match. I'll reveal the structure and concept of your essence for this lifetime — a clear vision of what your soul is here to accomplish. Then we practice living from it.</p>
+      <ul>
+        <li>Your soul's blueprint for <em>this</em> lifetime — revealed and clarified</li>
+        <li>Align your inner truth with your external reality</li>
+        <li>Practice and expand your gifts through group collaboration</li>
+        <li>Individual manifestation sessions — private 1-on-1 with me to anchor your essence into your physical life</li>
+      </ul>
+    </div>
+
+    <div class="block-card b3">
+      <div class="block-num">Block III</div>
+      <h3>Completeness, Abundance & Knowing</h3>
+      <p>The final block is about never needing me again. You'll learn to access your own Akashic Records — your own guidance system for life. You'll trust your own powers completely. And you'll step into the wholeness that was always waiting for you.</p>
+      <ul>
+        <li>Learn to read YOUR Akashic Records — so you never need permission again</li>
+        <li>Cultivate unshakeable trust in your own knowing</li>
+        <li>Identify and release the last blockages through silence and introspection</li>
+        <li>Optional sacred medicine journey — deepening your connection before two days of profound stillness</li>
+      </ul>
+    </div>
+
+    <div class="cru-voice" style="text-align:center;border:none;padding:24px 0">
+      "This is the End and the Beginning — a rebirth into your most authentic self. Whether it leads to a career change or simply deepens the life you already love, this training will help you live with renewed purpose, clarity, and joy."
+    </div>
+  </div>
+</section>
+
+<!-- ═══ A NOTE FROM CRU ═══ -->
+<section class="letter bg2">
+  <div class="w">
+    <h2>A note about how I work</h2>
+    <p>I want to be honest with you about something.</p>
+
+    <div class="cru-voice">We are so trained not to give ourselves that we are awesome. I want every person who comes to me to become so full of themselves — not in an egotistic way, but in the way where you really know who you are, and you live from that place, and nothing can shake you.</div>
+
+    <p>I don't stand above my participants. Ever. If I'm above, then how can I be with you? We work best face to face — and everyone feels far more courageous to go somewhere that hurts or somewhere uncomfortable when they're not alone in it.</p>
+
+    <p>Between blocks, we have monthly Zoom calls. You are never left alone with your process. And if you cannot travel to Spain or Costa Rica, there is an online participation option — you can join the live sessions remotely.</p>
+
+    <p>Also: I prepare the food. Breakfast and lunch. Michelin-trained hands making meals with the same love I bring to your soul. Because nourishing is nourishing, whether it's a body or an energy field.</p>
+
+    <p style="font-family:var(--hand);font-size:24px;color:var(--rose);text-align:center;margin-top:24px">This is what I came here for — to remind everybody of who they really are. ✦</p>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section class="letter">
+  <div class="w">
+    <h2 style="text-align:center">What Happens When You Say Yes</h2>
+    <p style="text-align:center;font-family:var(--serif);font-size:18px;color:var(--muted);font-style:italic;margin-bottom:32px">In their own words.</p>
+
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <p>"I arrived carrying decades of weight I didn't even know was there. Cru doesn't just see your energy — she sees the original you, the one that existed before the world got its hands on you. Over the course of this year, I didn't just change. I remembered. And now I live from that place every single day."</p>
+      <div class="testi-name">Emilia Dewi</div>
+      <div class="testi-det">Group Ruby Graduate</div>
+    </div>
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <p>"I've done every certification. Every training. Every retreat you can imagine. None of it comes close. Cru doesn't teach you healing — she reminds you that you already are one. The moment she activated my 8th Chakra, something shifted that I cannot put into words. But I can tell you I'm not the same person I was a year ago."</p>
+      <div class="testi-name">Lia Long</div>
+      <div class="testi-det">Group Ruby Graduate · Now running her own healing practice</div>
+    </div>
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <p>"I came because I felt lost. I stayed because I found myself. Cru's ability to read your Akashic Records and show you things about your soul that you've never spoken aloud — it's unlike anything that exists. But what changed my life wasn't the readings. It was the love. The relentless, unconditional love she holds for every person in that room."</p>
+      <div class="testi-name">Radhé</div>
+      <div class="testi-det">Group Ruby Graduate</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VALUE STACK ═══ -->
+<section class="letter bg2">
+  <div class="w">
+    <h2 style="text-align:center">Everything That's Included</h2>
+
+    <div class="stack-item"><div class="name"><strong>Three 6-day immersive blocks</strong> in Spain & Costa Rica</div><div class="val">$9,000</div></div>
+    <div class="stack-item"><div class="name"><strong>Live Akashic Records readings</strong> — your soul's blueprint revealed</div><div class="val">$3,000</div></div>
+    <div class="stack-item"><div class="name"><strong>Private manifestation sessions</strong> — 1-on-1 with Cru</div><div class="val">$2,500</div></div>
+    <div class="stack-item"><div class="name"><strong>8th Chakra activation</strong> — universal alignment</div><div class="val">$1,500</div></div>
+    <div class="stack-item"><div class="name"><strong>Learn to read YOUR Akashic Records</strong> — a skill for life</div><div class="val">$3,000</div></div>
+    <div class="stack-item"><div class="name"><strong>Soul journeys, breathwork & yoga</strong> integrated throughout</div><div class="val">$2,000</div></div>
+    <div class="stack-item"><div class="name"><strong>Optional sacred medicine ceremony</strong> (Block III)</div><div class="val">$2,000</div></div>
+    <div class="stack-item"><div class="name"><strong>Michelin-trained chef meals</strong> by Cru (breakfast & lunch)</div><div class="val">$1,500</div></div>
+    <div class="stack-item"><div class="name"><strong>Monthly Zoom support</strong> between blocks</div><div class="val">$2,400</div></div>
+    <div class="stack-item"><div class="name"><strong>Online participation option</strong></div><div class="val">Included</div></div>
+
+    <div class="stack-total">
+      <div class="label">Total Value</div>
+      <div class="total">$26,900+</div>
+    </div>
+
+    <div class="price-box">
+      <p style="font-family:var(--serif);font-size:16px;color:var(--muted);margin-bottom:6px">Your investment for the full year</p>
+      <div class="price-actual">$14,000</div>
+      <p class="price-plan">Or: 6 payments of $2,500 · 3 payments of $5,000</p>
+      <p style="font-size:13px;color:var(--light);margin-top:6px">* Lodging and dinner at retreat locations arranged separately</p>
+    </div>
+
+    <div class="scarcity">
+      <h3>Group Sapphire 2026 — Now Enrolling</h3>
+      <p>Each cohort is kept intentionally small so I can work with every participant individually. When spots are filled, the next group opens.</p>
+    </div>
+
+    <div class="guarantee">
+      <h3>🌿 My Promise to You</h3>
+      <p>This isn't a transaction. It's a relationship. I don't have a protocol — I have a deep commitment to meeting you exactly where you are. If after Block I you feel this isn't aligned with your path, we'll talk, human to human, and find what is. I've never had a single participant regret walking through this door.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<div class="cta-wrap">
+  <a href="mailto:love@cru-essence.com?subject=Becoming%20Truly%20You%20—%20I%20Am%20Ready" class="cta-btn">Begin Your Application →</a>
+  <p class="cta-sub">I read every message personally — love@cru-essence.com</p>
+</div>
+
+<!-- ═══ FAQ ═══ -->
+<section class="letter">
+  <div class="w">
+    <h2 style="text-align:center">Questions You Might Be Holding</h2>
+    <div style="margin-top:32px">
+      <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Who is this for?</div><div class="faq-a"><p>Women and men who feel called to live from their truth. Whether you want to become a healer, deepen your own journey, or simply arrive at a place of peace — this is the space for it. No prior healing experience is needed. Your soul already knows the way.</p></div></div>
+      <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">I've done a lot of healing work already. Is this different?</div><div class="faq-a"><p>Most healing modalities give you tools. This gives you <em>yourself</em>. The difference is the depth of the Akashic Records work, the length of time (a full year), and the fact that I don't apply a protocol — I meet each person's soul individually. Every graduate I've worked with has said the same thing: "This was unlike anything I've ever experienced."</p></div></div>
+      <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Where do the blocks take place?</div><div class="faq-a"><p>Spain and Costa Rica. Training hours are 6 AM – 2 PM (Costa Rica) or 8 AM – 4 PM (Spain). Both locations were chosen for their energy, beauty, and capacity to hold this work.</p></div></div>
+      <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">What if I can't travel for all three blocks?</div><div class="faq-a"><p>There is an online participation option — you can join remotely alongside the live sessions. Many participants do a mix. Write to me and we'll figure out what works for your life.</p></div></div>
+      <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Is the medicine ceremony required?</div><div class="faq-a"><p>No. The sacred medicine journey in Block III is completely optional. It's offered the evening before two days of silence. The training is profoundly transformative with or without it.</p></div></div>
+      <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">How do I know if I'm ready?</div><div class="faq-a"><p>You're still reading. That's how you know. Something in you recognizes what this is. Trust that. And if you want to talk it through first — write to me. I read every message.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL CLOSE ═══ -->
+<section class="final">
+  <div class="w">
+    <h2>The Whole Purpose of Life<br>Is to <em>Live.</em></h2>
+    <p class="sub">Nothing brings more contentment and joy than living in the knowing and expression of your own truth. You are a precious gift to the grand symphony of creation.</p>
+
+    <a href="mailto:love@cru-essence.com?subject=Becoming%20Truly%20You%20—%20I%20Am%20Ready" class="cta-btn">I'm Ready →</a>
+    <p class="cta-sub">Group Sapphire 2026 · Limited Enrollment · love@cru-essence.com</p>
+    <p class="hand">You are loved. 🍓</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Cru Essence · <a href="https://cru-essence.com">cru-essence.com</a> · <a href="https://instagram.com/cruessence">@cruessence</a></p>
+  <p style="margin-top:8px;font-size:11px;max-width:600px;margin-left:auto;margin-right:auto">This page represents Cru's personal invitation. Results from healing work vary by individual. Testimonials shown reflect individual experiences.</p>
+</footer>
+
+</body>
+</html>
