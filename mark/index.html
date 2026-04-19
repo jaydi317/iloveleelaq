@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DHL Supply Chain — Indianapolis Site Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0b;
+    --surface: #121215;
+    --surface-2: #18181c;
+    --border: #24242a;
+    --border-strong: #2f2f37;
+    --text: #f2f2f4;
+    --text-dim: #8a8a94;
+    --text-faint: #55555f;
+    --dhl-yellow: #ffcc00;
+    --dhl-red: #d40511;
+    --danger: #ff4d5e;
+    --warning: #ffa630;
+    --success: #3fe0a5;
+    --info: #6fa8ff;
+  }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Geist', -apple-system, system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* Subtle grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: overlay;
+  }
+
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .serif { font-family: 'Instrument Serif', serif; }
+
+  /* ===== TOP BAR ===== */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(10, 10, 11, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .topbar::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--dhl-red) 0%, var(--dhl-yellow) 50%, var(--dhl-red) 100%);
+    opacity: 0.4;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .brand-mark {
+    width: 36px; height: 24px;
+    background: var(--dhl-yellow);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dhl-red);
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    font-family: 'Geist', sans-serif;
+  }
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  .brand-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .brand-name {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .topbar-meta {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    font-size: 12px;
+  }
+  .meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .meta-label { font-size: 9px; letter-spacing: 1.5px; color: var(--text-faint); text-transform: uppercase; }
+  .meta-value { font-weight: 500; color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+  .live-indicator {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 12px;
+    background: rgba(63, 224, 165, 0.08);
+    border: 1px solid rgba(63, 224, 165, 0.25);
+    border-radius: 3px;
+  }
+  .pulse {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 0 0 var(--success);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(63, 224, 165, 0.6); }
+    70% { box-shadow: 0 0 0 8px rgba(63, 224, 165, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(63, 224, 165, 0); }
+  }
+  .live-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--success);
+    font-weight: 600;
+  }
+
+  /* ===== MAIN LAYOUT ===== */
+  .container {
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 28px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ===== HERO: MORNING BRIEF ===== */
+  .brief {
+    background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%);
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+    padding: 36px 44px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .brief::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--dhl-yellow);
+  }
+  .brief-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 20px;
+  }
+  .brief-title {
+    font-family: 'Geist', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: var(--dhl-yellow);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .brief-timestamp {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+  .brief-greeting {
+    font-family: 'Instrument Serif', serif;
+    font-size: 34px;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+  .brief-greeting em { color: var(--dhl-yellow); font-style: italic; }
+  .brief-body {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--text-dim);
+    max-width: 920px;
+  }
+  .brief-body strong { color: var(--text); font-weight: 600; }
+  .brief-body .hot { color: var(--danger); font-weight: 600; }
+  .brief-body .save { color: var(--success); font-weight: 600; }
+  .brief-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  .btn {
+    padding: 10px 18px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text);
+    font-family: 'Geist', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .btn:hover { border-color: var(--text-dim); background: var(--surface-2); }
+  .btn-primary {
+    background: var(--dhl-yellow);
+    color: #000;
+    border-color: var(--dhl-yellow);
+    font-weight: 600;
+  }
+  .btn-primary:hover { background: #ffd733; border-color: #ffd733; }
+
+  /* ===== GRID ===== */
+  .grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  .grid-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  /* ===== PANELS ===== */
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .panel-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .panel-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .panel-title .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--dhl-yellow);
+  }
+  .panel-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-faint);
+    letter-spacing: 0.5px;
+  }
+  .panel-body { padding: 20px; flex: 1; }
+
+  /* ===== RETENTION RADAR (hero) ===== */
+  .radar .panel-title .dot { background: var(--danger); }
+  .radar-header-alert {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--danger);
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  .risk-row {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: start;
+  }
+  .risk-row:last-child { border-bottom: 0; padding-bottom: 0; }
+  .risk-row:first-child { padding-top: 0; }
+  .risk-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .risk-tenure {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-faint);
+    letter-spacing: 0.5px;
+  }
+  .risk-signals {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+  .risk-rec {
+    font-size: 11.5px;
+    color: var(--dhl-yellow);
+    margin-top: 8px;
+    font-weight: 500;
+  }
+  .risk-score-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+  .risk-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+  .risk-score-label {
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+  }
+  .risk-critical .risk-score { color: var(--danger); }
+  .risk-high .risk-score { color: var(--warning); }
+  .risk-medium .risk-score { color: var(--info); }
+  .risk-bar {
+    width: 70px;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 2px;
+  }
+  .risk-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+  }
+  .risk-critical .risk-bar-fill { background: var(--danger); width: 87%; }
+  .risk-critical-2 .risk-bar-fill { background: var(--danger); width: 74%; }
+  .risk-high .risk-bar-fill { background: var(--warning); width: 62%; }
+  .risk-high-2 .risk-bar-fill { background: var(--warning); width: 58%; }
+  .risk-medium .risk-bar-fill { background: var(--info); width: 41%; }
+
+  /* ===== PIPELINE FUNNEL ===== */
+  .funnel-stage {
+    display: grid;
+    grid-template-columns: 110px 1fr 60px;
+    gap: 12px;
+    align-items: center;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .funnel-stage:last-child { border-bottom: 0; padding-bottom: 0; }
+  .funnel-stage:first-child { padding-top: 0; }
+  .funnel-label { font-size: 12px; color: var(--text-dim); }
+  .funnel-bar {
+    height: 24px;
+    background: var(--surface-2);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+  .funnel-fill {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--dhl-yellow) 0%, rgba(255, 204, 0, 0.4) 100%);
+    border-radius: 2px;
+  }
+  .funnel-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: right;
+    color: var(--text);
+  }
+  .metrics-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .metric {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .metric-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.5px;
+  }
+  .metric-value .delta {
+    font-size: 11px;
+    margin-left: 4px;
+    font-weight: 500;
+  }
+  .metric-value .delta.up { color: var(--success); }
+  .metric-value .delta.down { color: var(--danger); }
+  .metric-label {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+  }
+
+  /* ===== OVERNIGHT FEED ===== */
+  .feed-item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+  .feed-item:last-child { border-bottom: 0; padding-bottom: 0; }
+  .feed-item:first-child { padding-top: 0; }
+  .feed-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.5px;
+  }
+  .feed-body { color: var(--text-dim); }
+  .feed-body strong { color: var(--text); font-weight: 500; }
+  .feed-body .tag-flag { color: var(--danger); }
+  .feed-body .tag-done { color: var(--success); }
+
+  /* ===== SHIFT COVERAGE ===== */
+  .shift-alert {
+    padding: 14px;
+    background: rgba(212, 5, 17, 0.08);
+    border: 1px solid rgba(212, 5, 17, 0.3);
+    border-radius: 3px;
+    margin-bottom: 16px;
+  }
+  .shift-alert-title {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--danger);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .shift-alert-body {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .shift-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 14px;
+  }
+  .shift-cell {
+    aspect-ratio: 1;
+    border-radius: 3px;
+    background: var(--surface-2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 2px;
+    border: 1px solid transparent;
+  }
+  .shift-cell-day {
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+  }
+  .shift-cell-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 3px;
+  }
+  .shift-ok { color: var(--success); }
+  .shift-warn .shift-cell-num { color: var(--warning); }
+  .shift-warn { background: rgba(255, 166, 48, 0.08); border-color: rgba(255, 166, 48, 0.25); }
+  .shift-crit .shift-cell-num { color: var(--danger); }
+  .shift-crit { background: rgba(212, 5, 17, 0.12); border-color: rgba(212, 5, 17, 0.4); }
+  .shift-suggestion {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .shift-suggestion strong { color: var(--dhl-yellow); font-weight: 500; }
+
+  /* ===== TODAY'S SCHEDULE ===== */
+  .schedule-item {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+  .schedule-item:last-child { border-bottom: 0; padding-bottom: 0; }
+  .schedule-item:first-child { padding-top: 0; }
+  .schedule-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--dhl-yellow);
+    font-weight: 500;
+  }
+  .schedule-title { font-size: 13px; color: var(--text); font-weight: 500; margin-bottom: 2px; }
+  .schedule-sub { font-size: 11.5px; color: var(--text-dim); }
+  .schedule-prep {
+    font-size: 10px;
+    color: var(--text-faint);
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+  .schedule-prep:hover { color: var(--dhl-yellow); border-color: var(--dhl-yellow); }
+
+  /* ===== NEW HIRE WATCH ===== */
+  .hire-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .hire-card {
+    padding: 12px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+  }
+  .hire-card-name {
+    font-size: 12.5px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .hire-card-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-faint);
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+  .hire-card-engagement {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 8px;
+  }
+  .eng-tick {
+    flex: 1;
+    height: 16px;
+    border-radius: 1px;
+    background: var(--surface);
+  }
+  .eng-tick.good { background: var(--success); opacity: 0.8; }
+  .eng-tick.ok { background: var(--warning); opacity: 0.7; }
+  .eng-tick.bad { background: var(--danger); opacity: 0.7; }
+  .hire-card-trend {
+    font-size: 10.5px;
+    color: var(--text-dim);
+  }
+  .hire-card-trend.up { color: var(--success); }
+  .hire-card-trend.down { color: var(--warning); }
+
+  /* ===== COMPLIANCE ===== */
+  .compliance-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .compliance-row:last-child { border-bottom: 0; padding-bottom: 0; }
+  .compliance-row:first-child { padding-top: 0; }
+  .comp-left { display: flex; flex-direction: column; gap: 2px; }
+  .comp-title { font-size: 12.5px; color: var(--text); }
+  .comp-sub { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-faint); letter-spacing: 0.5px; }
+  .comp-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .comp-critical { color: var(--danger); }
+  .comp-warning { color: var(--warning); }
+  .comp-ok { color: var(--success); }
+
+  /* ===== APPROVALS QUEUE ===== */
+  .approval {
+    padding: 14px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    margin-bottom: 10px;
+  }
+  .approval:last-child { margin-bottom: 0; }
+  .approval-type {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--dhl-yellow);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .approval-body { font-size: 12.5px; color: var(--text); margin-bottom: 10px; line-height: 1.5; }
+  .approval-actions { display: flex; gap: 6px; }
+  .approval-btn {
+    padding: 6px 12px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    border: 1px solid var(--border-strong);
+    background: transparent;
+    color: var(--text);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Geist', sans-serif;
+    font-weight: 500;
+    transition: all 0.15s ease;
+  }
+  .approval-btn:hover { border-color: var(--text-dim); }
+  .approval-btn.primary {
+    background: var(--dhl-yellow);
+    border-color: var(--dhl-yellow);
+    color: #000;
+    font-weight: 600;
+  }
+  .approval-btn.primary:hover { background: #ffd733; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-faint);
+    letter-spacing: 1px;
+  }
+  .footer-mockup {
+    color: var(--dhl-yellow);
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+
+  /* responsive */
+  @media (max-width: 1100px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+    .grid-row-2 { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .brief { padding: 24px; }
+    .brief-greeting { font-size: 24px; }
+    .container { padding: 16px; }
+    .topbar { padding: 12px 16px; flex-wrap: wrap; }
+    .topbar-meta { gap: 14px; }
+  }
+
+  /* entrance */
+  .fade-in {
+    animation: fadeIn 0.6s ease forwards;
+    opacity: 0;
+  }
+  @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+  .fade-in { transform: translateY(8px); }
+  .fade-in:nth-child(1) { animation-delay: 0.05s; }
+  .fade-in:nth-child(2) { animation-delay: 0.10s; }
+  .fade-in:nth-child(3) { animation-delay: 0.15s; }
+  .fade-in:nth-child(4) { animation-delay: 0.20s; }
+  .fade-in:nth-child(5) { animation-delay: 0.25s; }
+</style>
+</head>
+<body>
+
+<!-- ==================== TOP BAR ==================== -->
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">DHL</div>
+    <div class="brand-text">
+      <span class="brand-label">SUPPLY CHAIN</span>
+      <span class="brand-name">Indianapolis · Site INDY-7 · Plainfield DC</span>
+    </div>
+  </div>
+  <div class="topbar-meta">
+    <div class="meta-item">
+      <span class="meta-label">Operator</span>
+      <span class="meta-value">M. Wittenauer</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Headcount</span>
+      <span class="meta-value">847 / 890</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Local Time</span>
+      <span class="meta-value" id="clock">07:42:18 EST</span>
+    </div>
+    <div class="live-indicator">
+      <span class="pulse"></span>
+      <span class="live-text">AGENT ACTIVE</span>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== MAIN ==================== -->
+<main class="container">
+
+  <!-- ============ MORNING BRIEF ============ -->
+  <section class="brief fade-in">
+    <div class="brief-header">
+      <span class="brief-title">◆ Morning Brief · Generated 07:15 EST</span>
+      <span class="brief-timestamp">MON · APR 20 · 2026</span>
+    </div>
+    <h1 class="brief-greeting">Good morning, Mark. <em>Here's your building.</em></h1>
+    <p class="brief-body">
+      Overnight I screened <strong>34 new applicants</strong> — 8 advanced to your phone-screen queue. Your retention radar is lit: <span class="hot">Marcus Bell crossed the 80% quit-probability line at 04:22</span> — he's 58 days in, missed two shifts this week, declined overtime three times. I drafted a 10-minute face-to-face check-in script for you; one-click approve to put it on your calendar.
+      <br><br>
+      Thursday night coverage is short <strong>four heads</strong> on the Amazon pallet line. I've queued three part-timers and two rehirable alumni — pickup offer ready to send.
+      <br><br>
+      One save on the table: <span class="save">Ashley Thornton, 112 days, strong performer</span> — her pay-frustration score jumped Sunday. A 15-minute conversation today likely saves <strong>$4,200 in turnover cost</strong>. Your 9:00 AM standup deck is in the feed below. Let's get after it.
+    </p>
+    <div class="brief-actions">
+      <button class="btn btn-primary">Approve all recommended actions</button>
+      <button class="btn">Review one-by-one</button>
+      <button class="btn">Snooze 30 min</button>
+    </div>
+  </section>
+
+  <!-- ============ ROW 1: RADAR + PIPELINE + TODAY ============ -->
+  <section class="grid">
+
+    <!-- RETENTION RADAR (HERO) -->
+    <div class="panel radar fade-in">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot"></span>Retention Radar · 30-Day Forecast</div>
+        <span class="radar-header-alert">2 CRITICAL · 3 ELEVATED</span>
+      </div>
+      <div class="panel-body">
+
+        <div class="risk-row risk-critical">
+          <div>
+            <div class="risk-name">Marcus Bell <span class="risk-tenure">· DAY 58 · FORKLIFT OP · B-SHIFT</span></div>
+            <div class="risk-signals">Missed 2 shifts in 10 days · declined OT 3× this month · avg pick rate down 22% · no team-chat activity in 14d</div>
+            <div class="risk-rec">→ Face-to-face check-in today · script drafted</div>
+          </div>
+          <div class="risk-score-block">
+            <div class="risk-score">87%</div>
+            <div class="risk-score-label">Quit Risk</div>
+            <div class="risk-bar"><div class="risk-bar-fill"></div></div>
+          </div>
+        </div>
+
+        <div class="risk-row risk-critical-2">
+          <div>
+            <div class="risk-name">Jessica Ramirez <span class="risk-tenure">· DAY 42 · PICKER · A-SHIFT</span></div>
+            <div class="risk-signals">Late clock-in 4× this week · skipped team huddle Thu · exit-intent signal from onboarding chatbot</div>
+            <div class="risk-rec">→ Buddy reassignment · current buddy disengaged</div>
+          </div>
+          <div class="risk-score-block">
+            <div class="risk-score" style="color: var(--danger);">74%</div>
+            <div class="risk-score-label">Quit Risk</div>
+            <div class="risk-bar"><div class="risk-bar-fill"></div></div>
+          </div>
+        </div>
+
+        <div class="risk-row risk-high">
+          <div>
+            <div class="risk-name">David Chen <span class="risk-tenure">· DAY 75 · MATERIAL HANDLER · B-SHIFT</span></div>
+            <div class="risk-signals">Productivity stable · engagement-pulse flagged low psychological safety · supervisor turnover 2× in tenure</div>
+            <div class="risk-rec">→ Skip-level conversation this week</div>
+          </div>
+          <div class="risk-score-block">
+            <div class="risk-score">62%</div>
+            <div class="risk-score-label">Quit Risk</div>
+            <div class="risk-bar"><div class="risk-bar-fill"></div></div>
+          </div>
+        </div>
+
+        <div class="risk-row risk-high-2">
+          <div>
+            <div class="risk-name">Ashley Thornton <span class="risk-tenure">· DAY 112 · PICKER LEAD · A-SHIFT</span></div>
+            <div class="risk-signals">Top-quartile performer · pay-frustration signal ↑ Sunday · LinkedIn activity detected</div>
+            <div class="risk-rec">→ Retention conversation · comp review approved</div>
+          </div>
+          <div class="risk-score-block">
+            <div class="risk-score">58%</div>
+            <div class="risk-score-label">Quit Risk</div>
+            <div class="risk-bar"><div class="risk-bar-fill"></div></div>
+          </div>
+        </div>
+
+        <div class="risk-row risk-medium">
+          <div>
+            <div class="risk-name">Robert Kim <span class="risk-tenure">· DAY 29 · PACKER · A-SHIFT</span></div>
+            <div class="risk-signals">Positive signals overall · engagement trending down week-over-week · monitor</div>
+            <div class="risk-rec">→ Supervisor 1:1 recommended Friday</div>
+          </div>
+          <div class="risk-score-block">
+            <div class="risk-score">41%</div>
+            <div class="risk-score-label">Quit Risk</div>
+            <div class="risk-bar"><div class="risk-bar-fill"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- HIRING PIPELINE -->
+    <div class="panel fade-in">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot"></span>Hiring Pipeline</div>
+        <span class="panel-meta">23 OPEN REQS</span>
+      </div>
+      <div class="panel-body">
+        <div class="funnel-stage">
+          <span class="funnel-label">Applicants</span>
+          <div class="funnel-bar"><div class="funnel-fill" style="width: 100%;"></div></div>
+          <span class="funnel-count">247</span>
+        </div>
+        <div class="funnel-stage">
+          <span class="funnel-label">AI-Screened</span>
+          <div class="funnel-bar"><div class="funnel-fill" style="width: 73%;"></div></div>
+          <span class="funnel-count">181</span>
+        </div>
+        <div class="funnel-stage">
+          <span class="funnel-label">Phone Screen</span>
+          <div class="funnel-bar"><div class="funnel-fill" style="width: 32%;"></div></div>
+          <span class="funnel-count">78</span>
+        </div>
+        <div class="funnel-stage">
+          <span class="funnel-label">On-site Interview</span>
+          <div class="funnel-bar"><div class="funnel-fill" style="width: 17%;"></div></div>
+          <span class="funnel-count">42</span>
+        </div>
+        <div class="funnel-stage">
+          <span class="funnel-label">Offers Out</span>
+          <div class="funnel-bar"><div class="funnel-fill" style="width: 7%;"></div></div>
+          <span class="funnel-count">17</span>
+        </div>
+        <div class="funnel-stage">
+          <span class="funnel-label">Started WTD</span>
+          <div class="funnel-bar"><div class="funnel-fill" style="width: 3%;"></div></div>
+          <span class="funnel-count">7</span>
+        </div>
+
+        <div class="metrics-row">
+          <div class="metric">
+            <div class="metric-value">8.2<span class="delta up">−44%</span></div>
+            <div class="metric-label">Days to Hire</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">73%<span class="delta up">+18</span></div>
+            <div class="metric-label">Offer Accept</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">$287<span class="delta up">−61%</span></div>
+            <div class="metric-label">Cost / Hire</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TODAY'S SCHEDULE -->
+    <div class="panel fade-in">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot"></span>Today · Mon Apr 20</div>
+        <span class="panel-meta">5 ITEMS</span>
+      </div>
+      <div class="panel-body">
+        <div class="schedule-item">
+          <span class="schedule-time">09:00</span>
+          <div>
+            <div class="schedule-title">Leadership Standup</div>
+            <div class="schedule-sub">Ops + HR · 30 min · War room</div>
+          </div>
+          <span class="schedule-prep">AI PREP</span>
+        </div>
+        <div class="schedule-item">
+          <span class="schedule-time">10:30</span>
+          <div>
+            <div class="schedule-title">On-site Interviews × 3</div>
+            <div class="schedule-sub">Forklift OP · notes synced to applicant files</div>
+          </div>
+          <span class="schedule-prep">AI PREP</span>
+        </div>
+        <div class="schedule-item">
+          <span class="schedule-time">11:45</span>
+          <div>
+            <div class="schedule-title">Check-in: Marcus Bell</div>
+            <div class="schedule-sub">15 min · script ready · retention ask</div>
+          </div>
+          <span class="schedule-prep">AI PREP</span>
+        </div>
+        <div class="schedule-item">
+          <span class="schedule-time">14:00</span>
+          <div>
+            <div class="schedule-title">New-Hire Orientation</div>
+            <div class="schedule-sub">Welcome 4 new associates · RJP follow-up</div>
+          </div>
+          <span class="schedule-prep">AI PREP</span>
+        </div>
+        <div class="schedule-item">
+          <span class="schedule-time">16:30</span>
+          <div>
+            <div class="schedule-title">Supervisor Skip-Level × 3</div>
+            <div class="schedule-sub">D. Patel · L. Okafor · R. Sanchez</div>
+          </div>
+          <span class="schedule-prep">AI PREP</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ ROW 2: SHIFT COVERAGE + NEW HIRES + APPROVALS ============ -->
+  <section class="grid">
+
+    <!-- SHIFT COVERAGE -->
+    <div class="panel fade-in">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot" style="background: var(--warning);"></span>Shift Coverage · This Week</div>
+        <span class="panel-meta">B-SHIFT THURS FLAGGED</span>
+      </div>
+      <div class="panel-body">
+
+        <div class="shift-alert">
+          <div class="shift-alert-title">◆ COVERAGE GAP DETECTED</div>
+          <div class="shift-alert-body">Thursday B-shift (18:00–06:00) on the Amazon pallet line is trending short <strong>4 heads</strong>. Last call-out pattern predicts 2 additional no-shows.</div>
+        </div>
+
+        <div class="shift-grid">
+          <div class="shift-cell shift-ok"><div class="shift-cell-day">Mon</div><div class="shift-cell-num">✓</div></div>
+          <div class="shift-cell shift-ok"><div class="shift-cell-day">Tue</div><div class="shift-cell-num">✓</div></div>
+          <div class="shift-cell shift-warn"><div class="shift-cell-day">Wed</div><div class="shift-cell-num">−2</div></div>
+          <div class="shift-cell shift-crit"><div class="shift-cell-day">Thu</div><div class="shift-cell-num">−6</div></div>
+          <div class="shift-cell shift-warn"><div class="shift-cell-day">Fri</div><div class="shift-cell-num">−1</div></div>
+          <div class="shift-cell shift-ok"><div class="shift-cell-day">Sat</div><div class="shift-cell-num">✓</div></div>
+          <div class="shift-cell shift-ok"><div class="shift-cell-day">Sun</div><div class="shift-cell-num">✓</div></div>
+        </div>
+
+        <div class="shift-suggestion">
+          <strong>AI recommendation:</strong> 3 part-time associates available Thu · 2 rehirable alumni in good standing · offer drafted with 1.5× OT incentive. One-click to blast SMS to all 5.
+        </div>
+
+      </div>
+    </div>
+
+    <!-- NEW HIRE WATCH -->
+    <div class="panel fade-in">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot" style="background: var(--info);"></span>New Hire Watch · 0–90 Days</div>
+        <span class="panel-meta">34 ACTIVE</span>
+      </div>
+      <div class="panel-body">
+        <div class="hire-grid">
+
+          <div class="hire-card">
+            <div class="hire-card-name">Tyrone Jefferson</div>
+            <div class="hire-card-meta">DAY 14 · PICKER</div>
+            <div class="hire-card-engagement">
+              <span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick ok"></span>
+            </div>
+            <div class="hire-card-trend up">↑ Trending well · buddy strong</div>
+          </div>
+
+          <div class="hire-card">
+            <div class="hire-card-name">Samantha Boone</div>
+            <div class="hire-card-meta">DAY 21 · PACKER</div>
+            <div class="hire-card-engagement">
+              <span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick ok"></span><span class="eng-tick ok"></span><span class="eng-tick ok"></span><span class="eng-tick ok"></span><span class="eng-tick bad"></span>
+            </div>
+            <div class="hire-card-trend down">↓ Late 2× · check-in this week</div>
+          </div>
+
+          <div class="hire-card">
+            <div class="hire-card-name">Omar Aswad</div>
+            <div class="hire-card-meta">DAY 7 · MATERIAL H.</div>
+            <div class="hire-card-engagement">
+              <span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick good"></span>
+            </div>
+            <div class="hire-card-trend up">↑ Standout first week</div>
+          </div>
+
+          <div class="hire-card">
+            <div class="hire-card-name">Crystal Murphy</div>
+            <div class="hire-card-meta">DAY 67 · FORKLIFT OP</div>
+            <div class="hire-card-engagement">
+              <span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick ok"></span><span class="eng-tick good"></span><span class="eng-tick ok"></span><span class="eng-tick good"></span>
+            </div>
+            <div class="hire-card-trend">→ Steady · survey pending</div>
+          </div>
+
+          <div class="hire-card">
+            <div class="hire-card-name">DeAndre Wallace</div>
+            <div class="hire-card-meta">DAY 45 · PICKER</div>
+            <div class="hire-card-engagement">
+              <span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick ok"></span><span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick good"></span>
+            </div>
+            <div class="hire-card-trend up">↑ Promo candidate flagged</div>
+          </div>
+
+          <div class="hire-card">
+            <div class="hire-card-name">María Delgado</div>
+            <div class="hire-card-meta">DAY 83 · PACKER</div>
+            <div class="hire-card-engagement">
+              <span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick good"></span><span class="eng-tick good"></span>
+            </div>
+            <div class="hire-card-trend up">↑ 90-day conversion ready</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- APPROVALS QUEUE -->
+    <div class="panel fade-in">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot" style="background: var(--success);"></span>Awaiting Your Approval</div>
+        <span class="panel-meta">6 ITEMS · 2 URGENT</span>
+      </div>
+      <div class="panel-body">
+
+        <div class="approval">
+          <div class="approval-type">◆ URGENT · RETENTION</div>
+          <div class="approval-body">Comp-review letter drafted for Ashley Thornton · $1.85/hr increase + shift-lead promo path · aligned to budget</div>
+          <div class="approval-actions">
+            <button class="approval-btn primary">Approve · Send</button>
+            <button class="approval-btn">Edit</button>
+          </div>
+        </div>
+
+        <div class="approval">
+          <div class="approval-type">◆ URGENT · COVERAGE</div>
+          <div class="approval-body">SMS blast queued to 5 available part-timers + alumni for Thursday B-shift · 1.5× OT incentive</div>
+          <div class="approval-actions">
+            <button class="approval-btn primary">Approve · Send</button>
+            <button class="approval-btn">Edit</button>
+          </div>
+        </div>
+
+        <div class="approval">
+          <div class="approval-type">Job Posting · Forklift OP</div>
+          <div class="approval-body">Two A/B variants drafted — career-growth angle + stability angle. Ready to post to Indeed, LinkedIn, ZipRecruiter.</div>
+          <div class="approval-actions">
+            <button class="approval-btn primary">Approve · Post</button>
+            <button class="approval-btn">Review</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ ROW 3: OVERNIGHT FEED + COMPLIANCE ============ -->
+  <section class="grid-row-2">
+
+    <!-- OVERNIGHT FEED -->
+    <div class="panel fade-in">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot" style="background: var(--success);"></span>Agent Log · Overnight</div>
+        <span class="panel-meta">47 ACTIONS · 00:00 — 07:15</span>
+      </div>
+      <div class="panel-body">
+        <div class="feed-item">
+          <span class="feed-time">02:14</span>
+          <span class="feed-body"><span class="tag-done">✓</span> Screened <strong>34 new applicants</strong> against role profile · 8 advanced · 3 declined with auto-response</span>
+        </div>
+        <div class="feed-item">
+          <span class="feed-time">02:41</span>
+          <span class="feed-body"><span class="tag-done">✓</span> Sent RJP video to 12 new candidates · 9 viewed · 7 completed · 2 self-withdrew (good signal)</span>
+        </div>
+        <div class="feed-item">
+          <span class="feed-time">03:15</span>
+          <span class="feed-body"><span class="tag-done">✓</span> Auto-scheduled <strong>6 phone screens</strong> for Tue Apr 21 · invites confirmed via SMS</span>
+        </div>
+        <div class="feed-item">
+          <span class="feed-time">04:22</span>
+          <span class="feed-body"><span class="tag-flag">◆</span> <strong>Marcus Bell</strong> quit-probability crossed 80% threshold · flagged for intervention · supervisor notified</span>
+        </div>
+        <div class="feed-item">
+          <span class="feed-time">05:00</span>
+          <span class="feed-body"><span class="tag-done">✓</span> Generated coverage plan · Thursday B-shift · 5-person pickup roster assembled</span>
+        </div>
+        <div class="feed-item">
+          <span class="feed-time">05:47</span>
+          <span class="feed-body"><span class="tag-done">✓</span> Drafted outbound offers to <strong>3 eligible alumni</strong> (Hernandez · Collins · Park) pending your approval</span>
+        </div>
+        <div class="feed-item">
+          <span class="feed-time">06:30</span>
+          <span class="feed-body"><span class="tag-done">✓</span> Sent 90-day check-in survey to 4 qualifying hires · 2 responses in already</span>
+        </div>
+        <div class="feed-item">
+          <span class="feed-time">06:58</span>
+          <span class="feed-body"><span class="tag-done">✓</span> Updated training-matrix dashboard · 7 forklift recerts due next 60d · auto-scheduled</span>
+        </div>
+        <div class="feed-item">
+          <span class="feed-time">07:15</span>
+          <span class="feed-body"><span class="tag-done">✓</span> Compiled your morning brief + standup deck · meeting materials in shared drive</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPLIANCE -->
+    <div class="panel fade-in">
+      <div class="panel-header">
+        <div class="panel-title"><span class="dot" style="background: var(--warning);"></span>Compliance & Certifications</div>
+        <span class="panel-meta">AUTO-MONITORED</span>
+      </div>
+      <div class="panel-body">
+        <div class="compliance-row">
+          <div class="comp-left">
+            <span class="comp-title">I-9 Re-verifications Due</span>
+            <span class="comp-sub">NEXT 30 DAYS · AUTO-EMAILED</span>
+          </div>
+          <span class="comp-count comp-critical">3</span>
+        </div>
+        <div class="compliance-row">
+          <div class="comp-left">
+            <span class="comp-title">Forklift Certifications Expiring</span>
+            <span class="comp-sub">NEXT 60 DAYS · RECERTS SCHEDULED</span>
+          </div>
+          <span class="comp-count comp-warning">7</span>
+        </div>
+        <div class="compliance-row">
+          <div class="comp-left">
+            <span class="comp-title">Safety Training Overdue</span>
+            <span class="comp-sub">NEW HIRES · SMS REMINDERS SENT</span>
+          </div>
+          <span class="comp-count comp-warning">2</span>
+        </div>
+        <div class="compliance-row">
+          <div class="comp-left">
+            <span class="comp-title">OSHA-300 Incident Log</span>
+            <span class="comp-sub">YTD · NO OUTSTANDING FILINGS</span>
+          </div>
+          <span class="comp-count comp-ok">0</span>
+        </div>
+        <div class="compliance-row">
+          <div class="comp-left">
+            <span class="comp-title">Handbook Acknowledgments</span>
+            <span class="comp-sub">100% COMPLETE · 2026 REVISION</span>
+          </div>
+          <span class="comp-count comp-ok">847</span>
+        </div>
+        <div class="compliance-row">
+          <div class="comp-left">
+            <span class="comp-title">EEO-1 Filing Status</span>
+            <span class="comp-sub">AUTO-COMPILED · READY FOR REVIEW</span>
+          </div>
+          <span class="comp-count comp-ok">✓</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <span>COMMAND CENTER v1.0 · MOCKUP FOR DEMONSTRATION</span>
+    <span class="footer-mockup">◆ PROTOTYPE · INEEDJIMMY.COM</span>
+  </footer>
+
+</main>
+
+<script>
+  // Live clock
+  function updateClock() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} EST`;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
+
+</body>
+</html>
