@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Jimmy & Amy — Wedding Registry Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Cormorant Garant',Georgia,serif;background:#0f0f0f;color:#e8e0d4;min-height:100vh;-webkit-font-smoothing:antialiased}
+.header{background:linear-gradient(135deg,#1a1510,#2d2218,#1a1510);border-bottom:1px solid #3d3428;padding:28px 20px 24px;text-align:center}
+.header .date{font-family:Lato,sans-serif;font-size:10px;letter-spacing:4px;color:#a08c6e;text-transform:uppercase;margin-bottom:6px}
+.header h1{font-size:32px;font-weight:600;color:#f5efe6;letter-spacing:1px;margin-bottom:4px}
+.header .sub{font-size:16px;color:#c4b89a;font-style:italic}
+.header .stats{font-family:Lato,sans-serif;font-size:12px;color:#8a7d6b;margin-top:12px;line-height:1.6}
+.header .stats b{color:#c4b89a;font-weight:700;font-size:14px}
+.header .hint{font-family:Lato,sans-serif;font-size:10px;color:#6b6050;margin-top:8px}
+.controls{padding:16px 16px 8px;position:sticky;top:0;z-index:10;background:#0f0f0f;border-bottom:1px solid #252118}
+.search{width:100%;padding:10px 14px;border-radius:8px;border:1px solid #3d3428;background:#1a1510;color:#e8e0d4;font-size:14px;font-family:Lato,sans-serif;outline:none;margin-bottom:10px}
+.pills{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.pills::-webkit-scrollbar{display:none}
+.pill{padding:6px 10px;border-radius:20px;border:1px solid #3d3428;background:transparent;color:#8a7d6b;font-size:11px;font-family:Lato,sans-serif;white-space:nowrap;cursor:pointer;transition:all .2s}
+.pill.active{border-color:#c4b89a;background:#2d2218;color:#f5efe6}
+.filters{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.filters select{flex:1;padding:7px 8px;border-radius:6px;border:1px solid #3d3428;background:#1a1510;color:#c4b89a;font-size:11px;font-family:Lato,sans-serif;min-width:80px;outline:none}
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-bottom:4px}
+.toggle-btn{padding:5px 12px;border-radius:16px;border:1px solid #3d3428;background:transparent;color:#8a7d6b;font-size:11px;font-family:Lato,sans-serif;cursor:pointer}
+.toggle-btn.active{border-color:#c4b89a;background:#2d2218;color:#f5efe6}
+.count{font-family:Lato,sans-serif;font-size:11px;color:#6b6050}
+.items{padding:8px 16px 100px}
+.cat-header{display:flex;align-items:center;gap:10px;padding:20px 0 10px;border-bottom:1px solid #252118;margin-bottom:8px}
+.cat-header .icon{font-size:28px}
+.cat-header h2{font-size:18px;font-weight:600;color:#f5efe6}
+.cat-header .cnt{font-family:Lato,sans-serif;font-size:10px;color:#6b6050}
+.card{background:#161310;border:1px solid #252118;border-radius:12px;padding:14px 16px;margin-bottom:8px;cursor:pointer;transition:all .2s;position:relative}
+.card.checked{background:#1e1a12;border-color:#c4b89a}
+.checkbox{position:absolute;top:14px;right:14px;width:26px;height:26px;border-radius:6px;border:2px solid #3d3428;background:transparent;display:flex;align-items:center;justify-content:center;z-index:2;cursor:pointer;transition:all .2s;font-size:16px;font-weight:700;color:#0f0f0f}
+.checkbox.on{border-color:#c4b89a;background:#c4b89a}
+.card h3{font-size:15px;font-weight:600;color:#f5efe6;line-height:1.3;padding-right:36px}
+.price-row{display:flex;align-items:center;gap:8px;margin-top:6px}
+.price{font-family:Lato,sans-serif;font-size:16px;font-weight:700;color:#c4b89a}
+.badge{font-size:10px;padding:2px 8px;border-radius:10px;font-family:Lato,sans-serif;font-weight:700}
+.badge-must{background:#1a472a;color:#4ade80;border:1px solid #166534}
+.badge-nice{background:#1e3a5f;color:#60a5fa;border:1px solid #1e40af}
+.badge-splurge{background:#4a1942;color:#c084fc;border:1px solid #6b21a8}
+.note{font-family:Lato,sans-serif;font-size:12px;color:#9a8e7c;margin:8px 0 6px;line-height:1.5}
+.stores{display:flex;flex-wrap:wrap;gap:4px}
+.store-tag{font-size:10px;padding:2px 8px;border-radius:8px;background:#1a1510;border:1px solid #2d2218;color:#6b6050;font-family:Lato,sans-serif}
+.actions{margin-top:12px;display:flex;gap:8px;border-top:1px solid #252118;padding-top:12px}
+.btn-photos{flex:1;padding:10px 8px;border-radius:8px;border:1px solid #3d3428;background:#1a1510;color:#c4b89a;font-size:13px;font-family:Lato,sans-serif;cursor:pointer;font-weight:700}
+.btn-shop{flex:1;padding:10px 8px;border-radius:8px;border:1px solid #c4b89a;background:#2d2218;color:#f5efe6;font-size:13px;font-family:Lato,sans-serif;cursor:pointer;font-weight:700}
+.empty{text-align:center;padding:40px 20px;color:#6b6050}
+.empty .star{font-size:32px;margin-bottom:8px}
+.empty p{font-family:Lato,sans-serif;font-size:14px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="date">September 19, 2026</div>
+  <h1>Jimmy & Amy</h1>
+  <div class="sub">Wedding Registry Guide</div>
+  <div class="stats"><b id="selCount">0</b> items selected · <b id="selValue">$0</b> total value</div>
+  <div class="hint">Tap item to expand · Tap ✓ to select · Tap 📷 for photos · Tap 🛒 to shop</div>
+</div>
+
+<div class="controls">
+  <input class="search" type="text" placeholder="Search items..." id="searchBox">
+  <div class="pills" id="catPills"></div>
+  <div class="filters">
+    <select id="storeFilter"></select>
+    <select id="priceFilter"></select>
+    <select id="priorityFilter"></select>
+  </div>
+  <div class="toolbar">
+    <button class="toggle-btn" id="toggleSel">☆ Show Selected</button>
+    <span class="count" id="filteredCount">0 items</span>
+  </div>
+</div>
+
+<div class="items" id="itemList"></div>
+
+<script>
+const CATEGORIES=[{n:"All",i:"✦"},{n:"Kitchen Essentials",i:"🔪"},{n:"Cookware & Bakeware",i:"🍳"},{n:"Small Appliances",i:"⚡"},{n:"Dining & Entertaining",i:"🍽️"},{n:"Barware",i:"🥃"},{n:"Bedroom & Bath",i:"🛏️"},{n:"Home Decor",i:"🏡"},{n:"Cleaning & Organization",i:"✨"},{n:"Outdoor & Travel",i:"✈️"},{n:"Tech & Smart Home",i:"📱"},{n:"Experience Funds",i:"🎁"}];
+const STORES=["All","Macy's","Amazon","Crate & Barrel","Target","Williams Sonoma","Sur La Table"];
+const PRICES=[{l:"All Prices",a:0,b:99999},{l:"Under $25",a:0,b:25},{l:"$25-$50",a:25,b:50},{l:"$50-$100",a:50,b:100},{l:"$100-$250",a:100,b:250},{l:"$250-$500",a:250,b:500},{l:"$500+",a:500,b:99999}];
+const I=[
+{id:1,n:"8\" Chef's Knife (Wusthof Classic)",c:"Kitchen Essentials",p:170,s:["Macy's","Amazon","Williams Sonoma","Sur La Table"],pr:"Must-Have",t:"The single most important kitchen tool. Wusthof Classic is the gold standard."},
+{id:2,n:"Knife Sharpener (Chef'sChoice)",c:"Kitchen Essentials",p:40,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Keeps your chef's knife actually sharp. Use every few weeks."},
+{id:3,n:"Cutting Board Set (Epicurean 3-pc)",c:"Kitchen Essentials",p:55,s:["Macy's","Amazon","Crate & Barrel"],pr:"Must-Have",t:"Non-porous, dishwasher safe. Different sizes for different tasks."},
+{id:4,n:"Stainless Mixing Bowl Set (7-pc)",c:"Kitchen Essentials",p:35,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Must-Have",t:"Prep, marinate, serve. You'll use these daily."},
+{id:5,n:"Measuring Cup + Spoon Set (OXO)",c:"Kitchen Essentials",p:25,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Must-Have",t:"Magnetic stainless steel. Won't rust or bend."},
+{id:6,n:"Silicone Spatula Set (GIR 5-pc)",c:"Kitchen Essentials",p:50,s:["Amazon","Sur La Table","Crate & Barrel"],pr:"Must-Have",t:"One-piece silicone, no cracks for bacteria. Heat-safe to 550F."},
+{id:7,n:"Wooden Spoon Set (Olive Wood)",c:"Kitchen Essentials",p:30,s:["Macy's","Amazon","Crate & Barrel"],pr:"Nice-to-Have",t:"Beautiful and functional. Hand wash only."},
+{id:8,n:"Tongs 12\" (OXO Good Grips)",c:"Kitchen Essentials",p:15,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Must-Have",t:"Lock-close, silicone tips. The kitchen multi-tool."},
+{id:9,n:"Digital Kitchen Scale (OXO)",c:"Kitchen Essentials",p:55,s:["Macy's","Amazon","Crate & Barrel"],pr:"Nice-to-Have",t:"Essential for baking precision and meal prep."},
+{id:10,n:"Instant-Read Thermometer (ThermoWorks)",c:"Kitchen Essentials",p:35,s:["Amazon","Sur La Table"],pr:"Must-Have",t:"Never overcook meat again. 1-second readings."},
+{id:11,n:"Colander (OXO Stainless Steel)",c:"Kitchen Essentials",p:25,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Sturdy, doesn't tip. Small holes for orzo/quinoa."},
+{id:12,n:"Glass Measuring Cup Set (Pyrex 3-pc)",c:"Kitchen Essentials",p:20,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"1, 2, and 4 cup sizes. Microwave safe."},
+{id:13,n:"Can Opener (OXO Smooth Edge)",c:"Kitchen Essentials",p:18,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Smooth edge, no sharp lids. A small luxury."},
+{id:14,n:"Pepper Mill (Peugeot Paris)",c:"Kitchen Essentials",p:50,s:["Macy's","Amazon","Williams Sonoma","Sur La Table"],pr:"Nice-to-Have",t:"French-made, lifetime mechanism. Gorgeous on the table."},
+{id:15,n:"Kitchen Shears (Shun)",c:"Kitchen Essentials",p:40,s:["Macy's","Amazon","Williams Sonoma"],pr:"Nice-to-Have",t:"Break-apart for cleaning. Cuts herbs, bones, packaging."},
+{id:16,n:"Microplane Zester/Grater",c:"Kitchen Essentials",p:15,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Must-Have",t:"Citrus zest, parmesan, garlic, ginger. Tiny tool, huge impact."},
+{id:17,n:"Vegetable Peeler (OXO Y-Peeler)",c:"Kitchen Essentials",p:10,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Simple, sharp, comfortable. Replace yearly."},
+{id:18,n:"Salad Spinner (OXO)",c:"Kitchen Essentials",p:30,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Nice-to-Have",t:"Pump mechanism, non-slip base. Makes salads better."},
+{id:19,n:"Stainless Steel Ladle",c:"Kitchen Essentials",p:15,s:["Macy's","Amazon","Crate & Barrel"],pr:"Must-Have",t:"Heavy-gauge, hooked handle. Soups, sauces, batters."},
+{id:20,n:"Whisk Set (Balloon + Flat)",c:"Kitchen Essentials",p:20,s:["Macy's","Amazon","Crate & Barrel"],pr:"Must-Have",t:"Balloon for eggs/cream, flat for pan sauces."},
+{id:21,n:"Le Creuset Dutch Oven 5.5 qt",c:"Cookware & Bakeware",p:380,s:["Macy's","Amazon","Williams Sonoma","Crate & Barrel","Sur La Table"],pr:"Must-Have",t:"The king of cookware. Soups, braises, bread. Lasts a lifetime. Pick your color!"},
+{id:22,n:"All-Clad D3 Stainless 10-Piece Set",c:"Cookware & Bakeware",p:700,s:["Macy's","Amazon","Williams Sonoma","Sur La Table"],pr:"Splurge",t:"Professional-grade. Even heating, oven-safe. The forever set."},
+{id:23,n:"Caraway Ceramic Nonstick Set (12-pc)",c:"Cookware & Bakeware",p:395,s:["Amazon","Crate & Barrel"],pr:"Must-Have",t:"Non-toxic ceramic, gorgeous colors, comes with storage. Popular 2026."},
+{id:24,n:"Cast Iron Skillet 12\" (Lodge)",c:"Cookware & Bakeware",p:35,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Pre-seasoned, indestructible. Steaks, cornbread, pizza. $35 lifetime."},
+{id:25,n:"Nonstick Fry Pan 12\" (Calphalon)",c:"Cookware & Bakeware",p:60,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Stack-friendly, dishwasher safe. Weeknight workhorse."},
+{id:26,n:"Stainless Saucepan 3 qt (All-Clad)",c:"Cookware & Bakeware",p:160,s:["Macy's","Amazon","Williams Sonoma"],pr:"Must-Have",t:"Sauces, grains, reheating. You'll use this daily."},
+{id:27,n:"Stockpot 8 qt (Cuisinart)",c:"Cookware & Bakeware",p:80,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Pasta, big soups, stock. Heavy-gauge stainless."},
+{id:28,n:"Enameled Cast Iron Braiser (Staub)",c:"Cookware & Bakeware",p:280,s:["Macy's","Amazon","Williams Sonoma","Sur La Table"],pr:"Splurge",t:"Shallow + wide. One-pot meals. Table-worthy."},
+{id:29,n:"Sheet Pan Set (Nordic Ware 3-pack)",c:"Cookware & Bakeware",p:40,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Must-Have",t:"Won't warp. Roasting, sheet-pan dinners, baking."},
+{id:30,n:"9x13 Baking Dish (Pyrex)",c:"Cookware & Bakeware",p:15,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Casseroles, brownies, lasagna. Oven to table."},
+{id:31,n:"Muffin Pan 12-cup (USA Pan)",c:"Cookware & Bakeware",p:20,s:["Amazon","Crate & Barrel","Sur La Table"],pr:"Nice-to-Have",t:"Aluminized steel, silicone coating. Great for egg cups."},
+{id:32,n:"Cooling Rack (fits sheet pan)",c:"Cookware & Bakeware",p:15,s:["Amazon","Target"],pr:"Must-Have",t:"Oven-safe. Elevates food for even cooking + cooling."},
+{id:33,n:"Pie Dish (Emile Henry)",c:"Cookware & Bakeware",p:40,s:["Macy's","Amazon","Williams Sonoma"],pr:"Nice-to-Have",t:"Ceramic, beautiful for the table. Easy-grip handles."},
+{id:34,n:"Loaf Pan (USA Pan)",c:"Cookware & Bakeware",p:15,s:["Amazon","Crate & Barrel"],pr:"Nice-to-Have",t:"Banana bread, meatloaf, homemade bread."},
+{id:35,n:"Round Cake Pans 9\" (set of 2)",c:"Cookware & Bakeware",p:25,s:["Macy's","Amazon","Target"],pr:"Nice-to-Have",t:"Birthday cakes, layer cakes. Get two matching."},
+{id:36,n:"Roasting Pan with Rack (Calphalon)",c:"Cookware & Bakeware",p:90,s:["Macy's","Amazon","Crate & Barrel"],pr:"Must-Have",t:"Thanksgiving turkey, Sunday roasts, whole chickens."},
+{id:37,n:"Wok 14\" Carbon Steel",c:"Cookware & Bakeware",p:45,s:["Amazon"],pr:"Nice-to-Have",t:"Real stir-frying heat. Seasons like cast iron."},
+{id:38,n:"Grill Pan (Lodge Cast Iron)",c:"Cookware & Bakeware",p:30,s:["Macy's","Amazon","Target"],pr:"Nice-to-Have",t:"Indoor grilling with real char marks."},
+{id:39,n:"Silicone Baking Mats (3-pack)",c:"Cookware & Bakeware",p:15,s:["Amazon","Target"],pr:"Must-Have",t:"Replace parchment forever. Nonstick, reusable."},
+{id:40,n:"Splatter Screen 13\"",c:"Cookware & Bakeware",p:12,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Keeps grease off stove. Tiny price, big impact."},
+{id:41,n:"Saute Pan with Lid 5 qt (Calphalon)",c:"Cookware & Bakeware",p:80,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Deep sides for curries, stir-fry, one-pot meals."},
+{id:42,n:"Tea Kettle (Le Creuset Classic)",c:"Cookware & Bakeware",p:100,s:["Macy's","Amazon","Williams Sonoma","Crate & Barrel"],pr:"Nice-to-Have",t:"Color-match your Dutch oven. Whistles when ready."},
+{id:43,n:"Pizza Stone 14\"",c:"Cookware & Bakeware",p:35,s:["Macy's","Amazon","Crate & Barrel"],pr:"Nice-to-Have",t:"Crispy homemade pizza. Also bakes bread."},
+{id:46,n:"KitchenAid Artisan Stand Mixer 5 qt",c:"Small Appliances",p:380,s:["Macy's","Amazon","Target","Williams Sonoma","Crate & Barrel"],pr:"Must-Have",t:"THE wedding gift. Baking, pasta, grinding. Pick your color!"},
+{id:47,n:"Breville Barista Express Espresso",c:"Small Appliances",p:600,s:["Macy's","Amazon","Williams Sonoma","Crate & Barrel","Sur La Table"],pr:"Splurge",t:"Built-in grinder. Cafe-quality lattes. Saves $5/day."},
+{id:48,n:"Vitamix E310 Blender",c:"Small Appliances",p:350,s:["Macy's","Amazon","Williams Sonoma","Crate & Barrel"],pr:"Must-Have",t:"Smoothies, soups, sauces, nut butters. 10-year warranty."},
+{id:49,n:"Instant Pot Duo 6 qt",c:"Small Appliances",p:90,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Pressure cooker, slow cooker, rice cooker, steamer in one."},
+{id:50,n:"Air Fryer (Ninja AF101)",c:"Small Appliances",p:100,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Crispy fries, wings, veggies with almost no oil."},
+{id:51,n:"Cuisinart 14-Cup Food Processor",c:"Small Appliances",p:200,s:["Macy's","Amazon","Williams Sonoma","Crate & Barrel"],pr:"Must-Have",t:"Chops, slices, shreds, purees. Saves 30+ min prep."},
+{id:52,n:"Breville Smart Oven Air",c:"Small Appliances",p:350,s:["Macy's","Amazon","Williams Sonoma","Crate & Barrel"],pr:"Splurge",t:"Convection + air fryer + dehydrator. Replaces 3 appliances."},
+{id:53,n:"Nespresso Vertuo Plus",c:"Small Appliances",p:180,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Nice-to-Have",t:"Single-serve, cafe crema. Quick morning coffee."},
+{id:54,n:"Toaster 4-Slice (Breville Die-Cast)",c:"Small Appliances",p:180,s:["Macy's","Amazon","Williams Sonoma"],pr:"Nice-to-Have",t:"'A Bit More' button, auto-lift. Ends toaster frustration."},
+{id:55,n:"Electric Kettle (Fellow Stagg EKG)",c:"Small Appliances",p:165,s:["Amazon","Crate & Barrel","Williams Sonoma"],pr:"Nice-to-Have",t:"Variable temp, pour-over spout, gorgeous design."},
+{id:56,n:"Immersion Blender (Breville)",c:"Small Appliances",p:100,s:["Macy's","Amazon","Williams Sonoma"],pr:"Must-Have",t:"Blend soups IN the pot. Also smoothies, sauces."},
+{id:57,n:"Slow Cooker 6 qt (Crock-Pot)",c:"Small Appliances",p:50,s:["Macy's","Amazon","Target"],pr:"Nice-to-Have",t:"Set it and forget it. Dump meals for busy nights."},
+{id:58,n:"Rice Cooker (Zojirushi Neuro Fuzzy)",c:"Small Appliances",p:190,s:["Macy's","Amazon","Sur La Table"],pr:"Nice-to-Have",t:"Perfect rice every time. Also porridge, cake, steam."},
+{id:59,n:"Waffle Maker (Breville Smart Pro)",c:"Small Appliances",p:200,s:["Macy's","Amazon","Williams Sonoma"],pr:"Nice-to-Have",t:"Belgian waffles with browning control. Sunday mornings."},
+{id:60,n:"Sous Vide Cooker (Anova)",c:"Small Appliances",p:150,s:["Amazon","Williams Sonoma","Sur La Table"],pr:"Nice-to-Have",t:"Restaurant-quality steaks, chicken, salmon."},
+{id:61,n:"Ice Cream Maker (Cuisinart)",c:"Small Appliances",p:70,s:["Macy's","Amazon","Target"],pr:"Nice-to-Have",t:"Homemade ice cream, sorbet in 20 min."},
+{id:62,n:"Milk Frother (Nespresso Aeroccino)",c:"Small Appliances",p:100,s:["Macy's","Amazon","Target"],pr:"Nice-to-Have",t:"Hot or cold froth. Pair with any coffee machine."},
+{id:63,n:"SodaStream Sparkling Water Maker",c:"Small Appliances",p:100,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Nice-to-Have",t:"Fresh sparkling water anytime. Eco-friendly."},
+{id:64,n:"Ooni Koda 12 Pizza Oven",c:"Small Appliances",p:400,s:["Amazon","Crate & Barrel","Sur La Table"],pr:"Splurge",t:"900F, 60-second Neapolitan pizza. Game-changer."},
+{id:65,n:"Hand Mixer 9-Speed (KitchenAid)",c:"Small Appliances",p:70,s:["Macy's","Amazon","Target"],pr:"Nice-to-Have",t:"Quick whipping. Easier than pulling out the stand mixer."},
+{id:71,n:"Everyday Dinnerware Set (16-pc)",c:"Dining & Entertaining",p:80,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Must-Have",t:"Plates, salad plates, bowls, mugs. Durable, microwave safe."},
+{id:72,n:"Formal Dinnerware Set (40-pc, svc for 8)",c:"Dining & Entertaining",p:300,s:["Macy's","Crate & Barrel","Williams Sonoma"],pr:"Nice-to-Have",t:"Holidays and dinner parties. Pick a pattern for 20 years."},
+{id:73,n:"Everyday Flatware Set (20-pc)",c:"Dining & Entertaining",p:50,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Must-Have",t:"Forks, knives, spoons. 18/10 stainless won't pit."},
+{id:74,n:"Formal Flatware Set (45-pc, svc for 8)",c:"Dining & Entertaining",p:200,s:["Macy's","Crate & Barrel","Williams Sonoma"],pr:"Nice-to-Have",t:"Includes serving pieces and steak knives."},
+{id:75,n:"Steak Knife Set 8-pc (Henckels)",c:"Dining & Entertaining",p:80,s:["Macy's","Amazon","Williams Sonoma"],pr:"Must-Have",t:"Serrated, full-tang. Changes the dining experience."},
+{id:76,n:"Water Glasses (Libbey 16oz, set of 8)",c:"Dining & Entertaining",p:25,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Heavy base, dishwasher safe. Simple and classic."},
+{id:77,n:"Wine Glasses Red (Riedel, set of 4)",c:"Dining & Entertaining",p:60,s:["Macy's","Amazon","Crate & Barrel","Williams Sonoma"],pr:"Must-Have",t:"Wide bowl for breathing. Stem or stemless, your call."},
+{id:78,n:"Wine Glasses White (Riedel, set of 4)",c:"Dining & Entertaining",p:60,s:["Macy's","Amazon","Crate & Barrel","Williams Sonoma"],pr:"Nice-to-Have",t:"Narrower bowl preserves temperature and aroma."},
+{id:79,n:"Champagne Flutes (Waterford, set of 4)",c:"Dining & Entertaining",p:120,s:["Macy's","Williams Sonoma"],pr:"Nice-to-Have",t:"Lead-free crystal. Anniversary toasts."},
+{id:80,n:"Coffee Mug Set (ceramic, set of 6)",c:"Dining & Entertaining",p:35,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Must-Have",t:"14-16oz, microwave safe. Morning ritual vessels."},
+{id:81,n:"Serving Platter (large oval)",c:"Dining & Entertaining",p:50,s:["Macy's","Amazon","Crate & Barrel"],pr:"Must-Have",t:"Turkey, charcuterie, appetizers. Endlessly useful."},
+{id:82,n:"Serving Bowl (large ceramic)",c:"Dining & Entertaining",p:40,s:["Macy's","Amazon","Crate & Barrel"],pr:"Must-Have",t:"Salads, pasta, fruit. Kitchen to table."},
+{id:83,n:"Charcuterie Board (acacia wood)",c:"Dining & Entertaining",p:45,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Nice-to-Have",t:"Date night, entertaining. Engraving available."},
+{id:84,n:"Cheese Knife Set (4-pc)",c:"Dining & Entertaining",p:30,s:["Macy's","Amazon","Crate & Barrel","Williams Sonoma"],pr:"Nice-to-Have",t:"Different knives for soft, hard, crumbly cheese."},
+{id:85,n:"Cake Stand (marble or ceramic)",c:"Dining & Entertaining",p:50,s:["Macy's","Amazon","Crate & Barrel"],pr:"Nice-to-Have",t:"Desserts, fruit display, counter decor."},
+{id:86,n:"Salt & Pepper Shaker Set",c:"Dining & Entertaining",p:25,s:["Macy's","Amazon","Crate & Barrel"],pr:"Must-Have",t:"Match your dinnerware aesthetic."},
+{id:87,n:"Cloth Napkin Set (linen, 8-pack)",c:"Dining & Entertaining",p:40,s:["Macy's","Crate & Barrel","Williams Sonoma"],pr:"Nice-to-Have",t:"Eco-friendly, elegant. Machine washable."},
+{id:88,n:"Trivets (set of 3, silicone)",c:"Dining & Entertaining",p:20,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Protect your table from hot pots and pans."},
+{id:89,n:"Pitcher (glass, 80 oz)",c:"Dining & Entertaining",p:25,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Must-Have",t:"Water, iced tea, lemonade, sangria."},
+{id:90,n:"Pasta Bowls (set of 4)",c:"Dining & Entertaining",p:45,s:["Macy's","Amazon","Crate & Barrel"],pr:"Nice-to-Have",t:"Wide, shallow for pasta, risotto, stew."},
+{id:91,n:"Food Storage Container Set (glass, 18-pc)",c:"Dining & Entertaining",p:50,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Must-Have",t:"Pyrex glass. Meal prep, leftovers. Leak-proof lids."},
+{id:92,n:"Cereal/Soup Bowls (set of 6)",c:"Dining & Entertaining",p:30,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Must-Have",t:"Deep enough for cereal, soup, oatmeal."},
+{id:93,n:"Candle Holders (set of 2)",c:"Dining & Entertaining",p:40,s:["Macy's","Amazon","Crate & Barrel"],pr:"Nice-to-Have",t:"Taper candles for dinner ambiance."},
+{id:101,n:"Bar Cart (gold or brass frame)",c:"Barware",p:150,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Nice-to-Have",t:"Two-tier rolling cart. Statement piece."},
+{id:102,n:"Cocktail Shaker Set (Boston style)",c:"Barware",p:35,s:["Macy's","Amazon","Crate & Barrel"],pr:"Nice-to-Have",t:"Shaker, jigger, strainer, muddler, spoon."},
+{id:103,n:"Whiskey Glasses (Waterford, set of 4)",c:"Barware",p:80,s:["Macy's","Amazon","Williams Sonoma"],pr:"Nice-to-Have",t:"Lead-free crystal, heavy base. For bourbon."},
+{id:104,n:"Highball Glasses (set of 6)",c:"Barware",p:35,s:["Macy's","Amazon","Crate & Barrel"],pr:"Must-Have",t:"Cocktails, sparkling water, iced drinks."},
+{id:105,n:"Crystal Decanter",c:"Barware",p:75,s:["Macy's","Amazon","Crate & Barrel","Williams Sonoma"],pr:"Nice-to-Have",t:"Wine or whiskey. Aerates and looks stunning."},
+{id:106,n:"Ice Bucket with Tongs",c:"Barware",p:45,s:["Macy's","Amazon","Crate & Barrel"],pr:"Nice-to-Have",t:"Stainless, insulated. Entertaining essential."},
+{id:107,n:"Coaster Set (marble, 6-pack)",c:"Barware",p:25,s:["Macy's","Amazon","Crate & Barrel"],pr:"Must-Have",t:"Protect furniture. Get absorbent ones."},
+{id:108,n:"Ice Mold Set (sphere + cube)",c:"Barware",p:15,s:["Amazon","Target","Crate & Barrel"],pr:"Nice-to-Have",t:"Slow-melting ice for whiskey and cocktails."},
+{id:109,n:"Corkscrew (Pulltap's Double-Hinged)",c:"Barware",p:12,s:["Amazon","Sur La Table"],pr:"Must-Have",t:"The one sommeliers use. $12. Lasts forever."},
+{id:116,n:"Sheet Set King (Brooklinen Sateen)",c:"Bedroom & Bath",p:180,s:["Amazon","Crate & Barrel"],pr:"Must-Have",t:"Luxe sateen or crisp percale. Register for 2 sets."},
+{id:117,n:"Duvet Cover + Shams (Parachute)",c:"Bedroom & Bath",p:220,s:["Amazon","Crate & Barrel"],pr:"Must-Have",t:"Linen or cotton. Bedroom centerpiece."},
+{id:118,n:"Down Comforter (all-season)",c:"Bedroom & Bath",p:250,s:["Macy's","Amazon","Crate & Barrel"],pr:"Must-Have",t:"All-season weight for Indiana weather."},
+{id:119,n:"Sleeping Pillows (2-pack, down alt.)",c:"Bedroom & Bath",p:80,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Must-Have",t:"Medium firmness. Hypoallergenic."},
+{id:120,n:"Throw Blanket (Barefoot Dreams)",c:"Bedroom & Bath",p:100,s:["Macy's","Amazon"],pr:"Nice-to-Have",t:"The viral cozy blanket. Insanely soft."},
+{id:121,n:"Bath Towel Set (6-pc, Turkish cotton)",c:"Bedroom & Bath",p:120,s:["Macy's","Amazon","Crate & Barrel"],pr:"Must-Have",t:"700GSM. Thick, absorbent, hotel-quality."},
+{id:122,n:"Hand Towel Set (4-pc)",c:"Bedroom & Bath",p:40,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Must-Have",t:"Match your bath towels."},
+{id:123,n:"Bath Mat (Parachute tufted)",c:"Bedroom & Bath",p:45,s:["Amazon","Crate & Barrel"],pr:"Must-Have",t:"Thick, absorbent, non-slip. Machine washable."},
+{id:124,n:"Bathrobe Set (2 robes, waffle)",c:"Bedroom & Bath",p:100,s:["Macy's","Amazon","Crate & Barrel"],pr:"Nice-to-Have",t:"His and hers. Monogramming available."},
+{id:125,n:"Towel Warmer (freestanding)",c:"Bedroom & Bath",p:120,s:["Amazon","Crate & Barrel"],pr:"Splurge",t:"Warm towels after every shower. Pure luxury."},
+{id:126,n:"White Noise Machine (Hatch Restore)",c:"Bedroom & Bath",p:130,s:["Amazon","Target"],pr:"Nice-to-Have",t:"Sunrise alarm + white noise + meditation."},
+{id:127,n:"Weighted Blanket (15-20 lb)",c:"Bedroom & Bath",p:80,s:["Macy's","Amazon","Target"],pr:"Nice-to-Have",t:"Reduces anxiety, improves sleep. Great for ADHD."},
+{id:128,n:"Blackout Curtains (pair)",c:"Bedroom & Bath",p:60,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Total darkness for deep sleep. Energy savings."},
+{id:129,n:"Vanity Mirror (lighted, 10x)",c:"Bedroom & Bath",p:55,s:["Macy's","Amazon","Target"],pr:"Nice-to-Have",t:"LED, rechargeable, adjustable brightness."},
+{id:130,n:"Jewelry Box / Organizer",c:"Bedroom & Bath",p:50,s:["Macy's","Amazon"],pr:"Nice-to-Have",t:"Velvet-lined. For Amy's rings and accessories."},
+{id:141,n:"Picture Frame Set (gallery wall, 10-pc)",c:"Home Decor",p:50,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Must-Have",t:"Wedding photo wall. Various sizes."},
+{id:142,n:"Decorative Vase (ceramic, large)",c:"Home Decor",p:50,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Nice-to-Have",t:"Fresh flowers or branches. Statement piece."},
+{id:143,n:"Candle Set (Diptyque or Voluspa)",c:"Home Decor",p:75,s:["Macy's","Amazon","Crate & Barrel"],pr:"Nice-to-Have",t:"Luxury scented candles. Transform ambiance."},
+{id:144,n:"Area Rug (5x7 or 8x10)",c:"Home Decor",p:300,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Nice-to-Have",t:"Anchors the room. Go neutral for versatility."},
+{id:145,n:"Throw Blanket for Sofa (chunky knit)",c:"Home Decor",p:70,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Nice-to-Have",t:"Cozy statement piece for the couch."},
+{id:146,n:"Decorative Tray (coffee table)",c:"Home Decor",p:35,s:["Macy's","Amazon","Crate & Barrel"],pr:"Nice-to-Have",t:"Corral remotes, candles, small items."},
+{id:147,n:"Door Mat (personalized)",c:"Home Decor",p:30,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"First impression of your home."},
+{id:148,n:"Floating Shelves (set of 3)",c:"Home Decor",p:40,s:["Amazon","Target"],pr:"Nice-to-Have",t:"Display photos, plants, small objects."},
+{id:149,n:"Table Lamp (accent, pair)",c:"Home Decor",p:100,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Nice-to-Have",t:"USB charging ports. Function meets design."},
+{id:150,n:"Blanket Ladder (wood)",c:"Home Decor",p:55,s:["Macy's","Amazon","Target"],pr:"Nice-to-Have",t:"Display throw blankets. Decorative + functional."},
+{id:161,n:"Dyson V15 Cordless Vacuum",c:"Cleaning & Organization",p:650,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Laser reveals hidden dust. Powerful, cordless."},
+{id:162,n:"Robot Vacuum (iRobot Roomba)",c:"Cleaning & Organization",p:350,s:["Macy's","Amazon","Target"],pr:"Nice-to-Have",t:"Auto-cleans while you work. Home Assistant compatible!"},
+{id:163,n:"Steamer (Rowenta)",c:"Cleaning & Organization",p:100,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Faster + easier than ironing."},
+{id:164,n:"Laundry Basket Set (2-pack)",c:"Cleaning & Organization",p:35,s:["Amazon","Target"],pr:"Must-Have",t:"Darks and lights. Pop flat when not in use."},
+{id:165,n:"Trash Can (auto sensor lid)",c:"Cleaning & Organization",p:60,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Touchless, odor-blocking. Stainless looks premium."},
+{id:166,n:"Carpet Cleaner (Bissell Little Green)",c:"Cleaning & Organization",p:120,s:["Macy's","Amazon","Target"],pr:"Nice-to-Have",t:"Spot-cleans spills, pet messes, car seats."},
+{id:167,n:"Closet Organizer System",c:"Cleaning & Organization",p:100,s:["Amazon","Target"],pr:"Nice-to-Have",t:"Maximize closet space. Shelves, hanging, shoes."},
+{id:168,n:"Spice Rack (rotating)",c:"Cleaning & Organization",p:30,s:["Macy's","Amazon","Target"],pr:"Nice-to-Have",t:"See every spice at a glance."},
+{id:176,n:"Luggage Set 3-piece (Away or Samsonite)",c:"Outdoor & Travel",p:600,s:["Macy's","Amazon"],pr:"Must-Have",t:"Carry-on + checked + weekender. Honeymoon-ready."},
+{id:177,n:"Packing Cubes (6-pack)",c:"Outdoor & Travel",p:25,s:["Amazon","Target"],pr:"Must-Have",t:"Compress + organize. Life-changing for packing."},
+{id:178,n:"Noise-Canceling Headphones (Sony XM5)",c:"Outdoor & Travel",p:350,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Flights, focus work. Best-in-class."},
+{id:179,n:"Portable Charger 20K (Anker)",c:"Outdoor & Travel",p:40,s:["Amazon","Target"],pr:"Must-Have",t:"Charges phone 4-5 times. Travel essential."},
+{id:180,n:"YETI Cooler (Roadie 24)",c:"Outdoor & Travel",p:250,s:["Amazon"],pr:"Nice-to-Have",t:"Keeps ice for days. Tailgating, beach, camping."},
+{id:181,n:"Outdoor Speaker (JBL Charge 5)",c:"Outdoor & Travel",p:150,s:["Macy's","Amazon","Target"],pr:"Nice-to-Have",t:"Waterproof, 20-hour battery."},
+{id:182,n:"Grill (Weber Spirit 3-burner)",c:"Outdoor & Travel",p:450,s:["Amazon","Target"],pr:"Splurge",t:"Gas grill. Weekend cookouts become your thing."},
+{id:183,n:"Fire Pit (Solo Stove Bonfire)",c:"Outdoor & Travel",p:350,s:["Amazon","Target"],pr:"Splurge",t:"Smokeless. Backyard gathering centerpiece."},
+{id:184,n:"Insulated Water Bottles 2-pack (Hydro Flask)",c:"Outdoor & Travel",p:70,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Hot 12 hrs, cold 24 hrs. His and hers."},
+{id:185,n:"Outdoor String Lights (48ft LED)",c:"Outdoor & Travel",p:30,s:["Amazon","Target"],pr:"Nice-to-Have",t:"Transform your patio/deck. Weatherproof."},
+{id:186,n:"Travel Adapter (universal, USB-C)",c:"Outdoor & Travel",p:25,s:["Amazon","Target"],pr:"Must-Have",t:"150+ countries. USB-C fast charge."},
+{id:187,n:"Patio Bistro Set (3-piece)",c:"Outdoor & Travel",p:250,s:["Macy's","Amazon","Target"],pr:"Nice-to-Have",t:"Small table + 2 chairs. Morning coffee outside."},
+{id:196,n:"Sonos Era 100 Speaker",c:"Tech & Smart Home",p:250,s:["Macy's","Amazon","Target","Crate & Barrel"],pr:"Must-Have",t:"WiFi multi-room audio. Works with Home Assistant."},
+{id:197,n:"Smart Display (Echo Show 15)",c:"Tech & Smart Home",p:250,s:["Amazon","Target"],pr:"Nice-to-Have",t:"Kitchen calendar, recipes, video calls."},
+{id:198,n:"Apple TV 4K",c:"Tech & Smart Home",p:130,s:["Macy's","Amazon","Target"],pr:"Nice-to-Have",t:"Streaming hub. Works with HomeKit."},
+{id:199,n:"Smart Plug Set (4-pack)",c:"Tech & Smart Home",p:25,s:["Amazon","Target"],pr:"Must-Have",t:"Automate lamps, fans, coffee. Home Assistant."},
+{id:200,n:"Video Doorbell (Ring or Nest)",c:"Tech & Smart Home",p:200,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"See who's at the door. Package alerts."},
+{id:201,n:"Smart Lock (August Wi-Fi)",c:"Tech & Smart Home",p:230,s:["Amazon","Target"],pr:"Nice-to-Have",t:"Keyless entry, auto-lock, guest codes."},
+{id:202,n:"Wireless Charging Station (3-in-1)",c:"Tech & Smart Home",p:50,s:["Macy's","Amazon","Target"],pr:"Must-Have",t:"Phone + watch + earbuds. Clean nightstand."},
+{id:203,n:"Soundbar (Sonos Beam Gen 2)",c:"Tech & Smart Home",p:450,s:["Macy's","Amazon","Target"],pr:"Splurge",t:"Dolby Atmos. Transforms TV audio."},
+{id:204,n:"Smart Light Bulbs (Philips Hue Starter)",c:"Tech & Smart Home",p:150,s:["Macy's","Amazon","Target"],pr:"Nice-to-Have",t:"16 million colors. Home Assistant ready."},
+{id:205,n:"Digital Photo Frame (Aura Carver)",c:"Tech & Smart Home",p:160,s:["Macy's","Amazon","Target"],pr:"Nice-to-Have",t:"Auto-display wedding photos. Family adds remotely."},
+{id:206,n:"Smart Thermostat (Ecobee)",c:"Tech & Smart Home",p:190,s:["Amazon","Target"],pr:"Nice-to-Have",t:"Room sensors, saves energy. Home Assistant ready."},
+{id:207,n:"Surge Protector 12-outlet (Belkin)",c:"Tech & Smart Home",p:30,s:["Amazon","Target"],pr:"Must-Have",t:"Protect electronics. USB ports included."},
+{id:211,n:"Honeymoon Fund",c:"Experience Funds",p:0,s:["Macy's"],pr:"Must-Have",t:"Let guests contribute to your honeymoon!"},
+{id:212,n:"Date Night Fund",c:"Experience Funds",p:0,s:["Macy's"],pr:"Nice-to-Have",t:"Contributions toward dinners, concerts, shows."},
+{id:213,n:"Home Improvement Fund",c:"Experience Funds",p:0,s:["Macy's"],pr:"Nice-to-Have",t:"Furniture, renovations for your Fishers home."},
+{id:214,n:"Cooking Class (Sur La Table couples)",c:"Experience Funds",p:100,s:["Sur La Table"],pr:"Nice-to-Have",t:"2.5-hour hands-on class. Pasta, sushi, date night."},
+{id:215,n:"Spa Day (couples massage)",c:"Experience Funds",p:200,s:["Amazon"],pr:"Nice-to-Have",t:"Post-wedding relaxation."},
+{id:216,n:"Concert / Event Tickets Fund",c:"Experience Funds",p:0,s:["Macy's"],pr:"Nice-to-Have",t:"Let guests fund live experiences together."},
+{id:217,n:"Photo Session (post-wedding)",c:"Experience Funds",p:300,s:["Amazon"],pr:"Nice-to-Have",t:"Professional photos of your newlywed chapter."},
+{id:218,n:"Subscription Box (wine, coffee, meal kit)",c:"Experience Funds",p:50,s:["Amazon"],pr:"Nice-to-Have",t:"Gift that keeps giving. 3 or 6 month plans."},
+{id:219,n:"Charity Donation Fund",c:"Experience Funds",p:0,s:["Macy's"],pr:"Nice-to-Have",t:"Let guests donate to a cause in your name."}
+];
+
+let selCat="All",selStore="All",selPrice=0,selPriority="All",showSel=false,expanded=null;
+const checked=new Set();
+const catMap={};CATEGORIES.forEach(c=>catMap[c.n]=c.i);
+
+function init(){
+  const cp=document.getElementById("catPills");
+  CATEGORIES.forEach(c=>{const b=document.createElement("button");b.className="pill"+(c.n==="All"?" active":"");b.textContent=c.i+" "+(c.n==="All"?"All":c.n.split(" ")[0]);b.onclick=()=>{selCat=c.n;document.querySelectorAll(".pill").forEach(p=>p.classList.remove("active"));b.classList.add("active");render()};cp.appendChild(b)});
+  const sf=document.getElementById("storeFilter");
+  STORES.forEach(s=>{const o=document.createElement("option");o.value=s;o.textContent=s;sf.appendChild(o)});
+  sf.onchange=()=>{selStore=sf.value;render()};
+  const pf=document.getElementById("priceFilter");
+  PRICES.forEach((p,i)=>{const o=document.createElement("option");o.value=i;o.textContent=p.l;pf.appendChild(o)});
+  pf.onchange=()=>{selPrice=+pf.value;render()};
+  const prf=document.getElementById("priorityFilter");
+  ["All","Must-Have","Nice-to-Have","Splurge"].forEach(p=>{const o=document.createElement("option");o.value=p;o.textContent=p==="All"?"All Priority":p;prf.appendChild(o)});
+  prf.onchange=()=>{selPriority=prf.value;render()};
+  document.getElementById("searchBox").oninput=()=>render();
+  document.getElementById("toggleSel").onclick=function(){showSel=!showSel;this.className="toggle-btn"+(showSel?" active":"");this.textContent=showSel?"★ Selected Only":"☆ Show Selected";render()};
+  render();
+}
+
+function filter(){
+  const q=document.getElementById("searchBox").value.toLowerCase();
+  const pr=PRICES[selPrice];
+  return I.filter(item=>{
+    if(selCat!=="All"&&item.c!==selCat)return false;
+    if(selStore!=="All"&&!item.s.includes(selStore))return false;
+    if(item.p<pr.a||item.p>pr.b)return false;
+    if(selPriority!=="All"&&item.pr!==selPriority)return false;
+    if(showSel&&!checked.has(item.id))return false;
+    if(q&&!item.n.toLowerCase().includes(q)&&!item.t.toLowerCase().includes(q))return false;
+    return true;
+  });
+}
+
+function updateStats(){
+  let v=0;checked.forEach(id=>{const item=I.find(x=>x.id===id);if(item)v+=item.p});
+  document.getElementById("selCount").textContent=checked.size;
+  document.getElementById("selValue").textContent="$"+v.toLocaleString();
+}
+
+function badgeClass(pr){return pr==="Must-Have"?"badge badge-must":pr==="Splurge"?"badge badge-splurge":"badge badge-nice"}
+
+function render(){
+  const items=filter();
+  const list=document.getElementById("itemList");
+  list.innerHTML="";
+  document.getElementById("filteredCount").textContent=items.length+" items";
+  let curCat=null;
+  items.forEach(item=>{
+    if(item.c!==curCat){
+      curCat=item.c;
+      const h=document.createElement("div");h.className="cat-header";
+      h.innerHTML=`<span class="icon">${catMap[curCat]||""}</span><div><h2>${curCat}</h2><span class="cnt">${I.filter(x=>x.c===curCat).length} items</span></div>`;
+      list.appendChild(h);
+    }
+    const card=document.createElement("div");
+    card.className="card"+(checked.has(item.id)?" checked":"");
+    const isExp=expanded===item.id;
+    card.innerHTML=`
+      <div class="checkbox${checked.has(item.id)?" on":""}" data-id="${item.id}">${checked.has(item.id)?"✓":""}</div>
+      <h3>${item.n}</h3>
+      <div class="price-row">
+        <span class="price">${item.p===0?"Any Amount":"$"+item.p}</span>
+        <span class="${badgeClass(item.pr)}">${item.pr}</span>
+      </div>
+      <p class="note">${item.t}</p>
+      <div class="stores">${item.s.map(s=>`<span class="store-tag">${s}</span>`).join("")}</div>
+      ${isExp?`<div class="actions">
+        <button class="btn-photos" data-q="${encodeURIComponent(item.n)}">📷 See Photos</button>
+        <button class="btn-shop" data-q="${encodeURIComponent(item.n)}">🛒 Shop & Compare</button>
+      </div>`:""}
+    `;
+    card.onclick=(e)=>{
+      if(e.target.closest(".checkbox")){e.stopPropagation();const id=item.id;checked.has(id)?checked.delete(id):checked.add(id);updateStats();render();return}
+      if(e.target.closest(".btn-photos")){e.stopPropagation();window.open("https://www.google.com/search?tbm=isch&q="+e.target.closest(".btn-photos").dataset.q,"_blank");return}
+      if(e.target.closest(".btn-shop")){e.stopPropagation();window.open("https://www.google.com/search?tbm=shop&q="+e.target.closest(".btn-shop").dataset.q,"_blank");return}
+      expanded=expanded===item.id?null:item.id;render();
+    };
+    list.appendChild(card);
+  });
+  if(items.length===0){list.innerHTML=`<div class="empty"><div class="star">✦</div><p>No items match your filters</p></div>`}
+  updateStats();
+}
+
+document.addEventListener("DOMContentLoaded",init);
+</script>
+</body>
+</html>
